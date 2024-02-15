@@ -1,10 +1,10 @@
 # CG 2023/2024
 
-## Group T0xG0y
+## Group T11G09
 | Name             | Number    | E-Mail             |
 | ---------------- | --------- | ------------------ |
-| John Doe         | 201901010 | ...                |
-| Jane Doe         | 201901011 | ...                |
+| Daniel Carneiro  | 202108832 | up202108832@up.pt  |
+| Luís Du          | 202105385 | up202105385@up.pt  |
 
 ----
 
