@@ -17,8 +17,11 @@
 ![Screenshot 3](screenshots/cg-t11g09-tp1-1.2.png)
 <p align="center">Figure 3: MyParallelogram</p>
 
-![Screenshot 4](screenshots/cg-t11g09-tp1-2.1.png)
-<p align="center">Figure 4: MyTriangleSmall</p>
+![Screenshot 4](screenshots/cg-t11g09-tp1-1.3.png)
+<p align="center">Figure 4: MyParallelogram Back Side</p>
 
-![Screenshot 5](screenshots/cg-t11g09-tp1-2.2.png)
-<p align="center">Figure 5: MyTriangleBig</p>
+![Screenshot 5](screenshots/cg-t11g09-tp1-2.1.png)
+<p align="center">Figure 5: MyTriangleSmall</p>
+
+![Screenshot 6](screenshots/cg-t11g09-tp1-2.2.png)
+<p align="center">Figure 6: MyTriangleBig</p>
