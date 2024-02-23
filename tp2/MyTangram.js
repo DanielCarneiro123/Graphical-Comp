@@ -19,7 +19,11 @@ export class MyTangram extends CGFobject {
 
         /* Diamond */
 
+        this.scene.setAmbient(0.0, 1.0, 0.0, 1.0);
+        this.scene.setDiffuse(0.0, 1.0, 0.0, 1.0);
+
         /* Rotate 30 degrees around z */
+        
         var deg2rad = Math.PI/180.0;
         var a_rad = 30.0 * deg2rad;
         var cos_a = Math.cos(a_rad);

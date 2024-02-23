@@ -1,5 +1,6 @@
 import { CGFscene, CGFcamera, CGFaxis } from "../lib/CGF.js";
 import { MyTangram } from "./MyTangram.js";
+import { MyUnitCube } from "./MyUnitCube.js";
 
 /**
  * MyScene
@@ -26,6 +27,7 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.tangram = new MyTangram(this);
+    this.unitCube = new MyUnitCube(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -48,8 +50,8 @@ export class MyScene extends CGFscene {
     );
   }
   setDefaultAppearance() {
-    this.setAmbient(0.0, 1.0, 0.0, 1.0);
-    this.setDiffuse(0.0, 1.0, 0.0, 1.0);
+    this.setAmbient(0.75, 0.75, 0.75, 1.0);
+    this.setDiffuse(0.75, 0.75, 0.75, 1.0);
     this.setSpecular(0.0, 0.0, 0.0, 1.0);
     this.setShininess(10.0);
   }
@@ -76,9 +78,20 @@ export class MyScene extends CGFscene {
       0.0, 0.0, 0.0, 1.0,
     ];
 
+  
     this.multMatrix(sca);
-    
+
+    this.pushMatrix();
+    this.translate(5.0, -5.0, 0.0);
+
+    /* Unit cube */
+    this.pushMatrix();
+    this.translate(0.0, 0.0, -5.01);
+    this.scale(10.0, 10.0, 10.0);
+    this.unitCube.display();
+    this.popMatrix();
+
     this.tangram.display();
-   
+    this.popMatrix();
   }
 }
