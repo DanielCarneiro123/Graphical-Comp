@@ -60,7 +60,7 @@ export class MyTangram extends CGFobject {
         this.scene.translate(-2.8, -0.77, 0.0);
         var angle = 225.0 * deg2rad;
         this.scene.rotate(angle, 0.0, 0.0, 1.0);
-        this.scene.scale(1.5, 1.5, 1.0)
+        this.scene.scale(1.5, 1.5, 1.0);
         this.triangle.display();
 
         this.scene.popMatrix();
