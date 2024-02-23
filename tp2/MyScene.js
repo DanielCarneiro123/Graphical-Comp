@@ -1,6 +1,7 @@
 import { CGFscene, CGFcamera, CGFaxis } from "../lib/CGF.js";
 import { MyTangram } from "./MyTangram.js";
 import { MyUnitCube } from "./MyUnitCube.js";
+import { MyUnitCubeQuad } from "./MyUnitCubeQuad.js";
 
 /**
  * MyScene
@@ -27,6 +28,7 @@ export class MyScene extends CGFscene {
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.tangram = new MyTangram(this);
+    this.unitCubeQuad = new MyUnitCubeQuad(this);
     this.unitCube = new MyUnitCube(this);
 
     //Objects connected to MyInterface
@@ -86,14 +88,16 @@ export class MyScene extends CGFscene {
     var angle = 270.0 * Math.PI/180.0;
     this.rotate(angle, 1.0, 0.0, 0.0);
 
-    /* Unit cube */
+    /* Unit cube */ 
     this.pushMatrix();
     this.translate(0.0, 0.0, -5.01);
     this.scale(10.0, 10.0, 10.0);
-    this.unitCube.display();
+    this.unitCubeQuad.display();
     this.popMatrix();
 
     this.tangram.display();
+    
     this.popMatrix();
+
   }
 }
