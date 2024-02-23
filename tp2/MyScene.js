@@ -82,7 +82,9 @@ export class MyScene extends CGFscene {
     this.multMatrix(sca);
 
     this.pushMatrix();
-    this.translate(5.0, -5.0, 0.0);
+    this.translate(5.0, 0.0, 5.0);
+    var angle = 270.0 * Math.PI/180.0;
+    this.rotate(angle, 1.0, 0.0, 0.0);
 
     /* Unit cube */
     this.pushMatrix();
