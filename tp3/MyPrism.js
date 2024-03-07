@@ -1,6 +1,6 @@
 import {CGFobject} from '../lib/CGF.js';
 /**
- * MyDiamond
+ * MyPrism
  * @constructor
  * @param scene - Reference to MyScene object
  */
@@ -18,7 +18,37 @@ export class MyPrism extends CGFobject {
         this.normals = [];
         let indexOffset = 0;
         var angle = (2 * Math.PI) / this.slices;
-    
+
+        for (let i = 0; i < this.slices; i++) {
+            var x1 = Math.cos(i * angle); 
+            var y1 = Math.sin(i * angle); 
+            var x2 = Math.cos((i+1) * angle); 
+            var y2 = Math.sin((i+1) * angle); 
+            this.vertices.push(
+                0, 0, 0,
+                x1, y1, 0,
+                x2, y2, 0,
+                0, 0, 1,
+                x1, y1, 1,
+                x2, y2, 1
+            );
+            this.indices.push(
+                indexOffset + 2, indexOffset + 1, indexOffset,
+                indexOffset + 3, indexOffset + 4, indexOffset + 5
+            );
+            
+            indexOffset += 6
+
+            this.normals.push(
+                0, 0, -1,
+                0, 0, -1,
+                0, 0, -1,
+                0, 0, 1,
+                0, 0, 1,
+                0, 0 , 1
+            )
+        }
+
         for (let i = 0; i < this.slices; i++) {
             var x1 = Math.cos(i * angle); 
             var y1 = Math.sin(i * angle); 
@@ -59,4 +89,3 @@ export class MyPrism extends CGFobject {
     }
     
 }
-
