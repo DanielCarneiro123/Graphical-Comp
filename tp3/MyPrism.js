@@ -59,7 +59,6 @@ export class MyPrism extends CGFobject {
             for (let j = 0 ; j < this.stacks ; j++) {
                 let x = Math.cos((i+0.5)* angle);
                 let y = Math.sin((i+0.5)*angle);
-                let size = Math.sqrt(x*x + y*y);
     
                 this.vertices.push(
                     x1, y1, increment * j,
@@ -74,10 +73,10 @@ export class MyPrism extends CGFobject {
                 );
     
                 this.normals.push(
-                    x/size, y/size, 0,
-                    x/size, y/size, 0,
-                    x/size, y/size, 0,
-                    x/size, y/size, 0
+                    x, y, 0,
+                    x, y, 0,
+                    x, y, 0,
+                    x, y, 0
                 );
     
                 indexOffset += 4; 
