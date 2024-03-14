@@ -28,7 +28,8 @@ export class MyTangram extends CGFobject {
         /* Diamond */
 
         /* Rotate 30 degrees around z */
-        
+        this.scene.tangramMaterial.apply();
+
         var deg2rad = Math.PI/180.0;
         var a_rad = 30.0 * deg2rad;
         var cos_a = Math.cos(a_rad);
@@ -53,7 +54,6 @@ export class MyTangram extends CGFobject {
         this.scene.multMatrix(translation);
         this.scene.multMatrix(rotation);
 
-        this.scene.diamondMaterial.apply();
         this.diamond.display();
         this.scene.popMatrix();
 
@@ -129,7 +129,6 @@ export class MyTangram extends CGFobject {
         this.scene.translate(-0.1, -0.77, 0.0);
         var angle = 90.0 * deg2rad;
         this.scene.rotate(angle, 0.0, 0.0, 1.0);
-        this.scene.diamondMaterial.apply();
         this.parallelogram.display();
         
         this.scene.popMatrix();
