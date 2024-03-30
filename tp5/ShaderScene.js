@@ -105,8 +105,9 @@ export class ShaderScene extends CGFscene {
 		this.testShaders[9].setUniformsValues({ timeFactor: 0 });
 		this.testShaders[10].setUniformsValues({ timeFactor: 0 });
 
-		this.testShaders[11].setUniformsValues({ uSampler3: 2});
-		this.testShaders[11].setUniformsValues({ uSampler2: 3});
+		this.testShaders[11].setUniformsValues({ waterTex: 2});
+		this.testShaders[11].setUniformsValues({ waterMap: 3});
+		this.testShaders[11].setUniformsValues({ timeFactor: 0 });
 
 
 		// Shaders interface variables
@@ -213,6 +214,8 @@ export class ShaderScene extends CGFscene {
 			this.testShaders[9].setUniformsValues({ timeFactor: t / 100 % 100 });
 		if (this.selectedExampleShader == 10)
 			this.testShaders[10].setUniformsValues({ timeFactor: t / 100 % 100 });
+		if (this.selectedExampleShader == 11)
+			this.testShaders[11].setUniformsValues({ timeFactor: t / 5000 % 5000 });
 
 	}
 
