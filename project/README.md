@@ -11,3 +11,6 @@ No primeiro exercício, criamos uma nova classe `MySphere.js` que cria uma esfer
 A esfera tem um número variável de slices e de stacks, este último correspondendo ao número de divisões angulares, desde a linha de equador até aos pólos.
 
 Na função `initBuffers()`, começamos por criar todos os vértices (assim como as respetivas normal e coordenadas de textura), seguida da criação dos índices, tendo em consideração o pormenor de que ao redor dos pólos, a stack é formada por triângulos em vez de quadriláteros. 
+
+![Earth](screenshots/project-t11g09-1.1.png)
+<p align="center">Figure 1: Sphere with Earth texture</p>
