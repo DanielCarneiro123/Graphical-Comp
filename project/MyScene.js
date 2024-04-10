@@ -60,7 +60,7 @@ export class MyScene extends CGFscene {
       1.0,
       0.1,
       1000,
-      vec3.fromValues(4, 4, 4),
+      vec3.fromValues(5, 5, 5),
       vec3.fromValues(0, 0, 0)
     );
   }
@@ -96,6 +96,7 @@ export class MyScene extends CGFscene {
 
     this.pushMatrix();
     this.earthAppearance.apply();
+    this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
     this.sphere.display();
     this.popMatrix();
 
