@@ -45,19 +45,34 @@ export class MySphere extends CGFobject {
             this.texCoords.push(i / this.slices, 1);
         }
 
+
         /* Indices */
         let offset = (2 * this.stacks) + 1; 
-        console.log(offset)  
+        let indexA, indexB, indexC, indexD;
+
         for (let i = 1; i <= this.slices; i++) {
-            for (let j = 0; j < offset - 1; j++) {
-                let indexA = i * offset + j;
-                let indexB = indexA + 1;
-                let indexC = indexA - offset;
-                let indexD = indexC + 1;
+
+            // North Pole Triangles
+            indexA = i * offset + 1; 
+            indexB = (i - 1) * offset;
+            indexC = indexB + 1; 
+            this.indices.push(indexB, indexC, indexA);
+
+            // Quadrilaterals
+            for (let j = 1; j < offset - 2; j++) { 
+                indexA = i * offset + j;
+                indexB = indexA + 1;
+                indexC = indexA - offset;
+                indexD = indexC + 1;
                 this.indices.push(indexA, indexC, indexB, indexC, indexD, indexB);
             } 
-        }
 
+            // South Pole Triangles
+            indexA = (i + 1) * offset - 2; 
+            indexB = indexA + 1; 
+            indexC = indexA - offset;
+            this.indices.push(indexA, indexC, indexB);
+        }
 
         this.primitiveType = this.scene.gl.TRIANGLES;
         this.initGLBuffers();
