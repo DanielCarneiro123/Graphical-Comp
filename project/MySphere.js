@@ -1,10 +1,12 @@
 import {CGFobject} from '../lib/CGF.js';
 
 export class MySphere extends CGFobject {
-    constructor(scene, slices, stacks) {
+    constructor(scene, slices, stacks, radius = 1, panorama = false) {
         super(scene);
         this.slices = slices;
         this.stacks = stacks;
+        this.radius = radius;
+        this.panorama = panorama ? -1 : 1;
         this.initBuffers();
     }   
 
@@ -21,8 +23,8 @@ export class MySphere extends CGFobject {
         for (let i = 0; i <= this.slices; i++) {
 
             /* North Pole */
-            this.vertices.push(0, 1, 0);
-            this.normals.push(0, 1, 0);
+            this.vertices.push(0, this.radius, 0);
+            this.normals.push(0, this.panorama, 0);
             this.texCoords.push(i / this.slices, 0);
 
             for (let j = 1; j < 2 * this.stacks; j++) {
@@ -34,14 +36,14 @@ export class MySphere extends CGFobject {
                 let x = Math.sin(polarAngle) * Math.sin(azumithAngle);
                 let y = Math.cos(polarAngle);
                 
-                this.vertices.push(x, y, z);
-                this.normals.push(x, y, z);
+                this.vertices.push(this.radius * x, this.radius * y, this.radius * z);
+                this.normals.push(this.panorama * x, this.panorama * y, this.panorama * z);
                 this.texCoords.push(i / this.slices, j / (2 * this.stacks));
             }
 
             /* South Pole */
-            this.vertices.push(0, -1, 0);
-            this.normals.push(0, -1, 0);
+            this.vertices.push(0, -1 * this.radius, 0);
+            this.normals.push(0, -1 * this.panorama, 0);
             this.texCoords.push(i / this.slices, 1);
         }
 
@@ -56,7 +58,11 @@ export class MySphere extends CGFobject {
             indexA = i * offset + 1; 
             indexB = (i - 1) * offset;
             indexC = indexB + 1; 
-            this.indices.push(indexB, indexC, indexA);
+            if (this.panorama === -1) {
+                this.indices.push(indexA, indexC, indexB);
+            } else {
+                this.indices.push(indexB, indexC, indexA);
+            }
 
             // Quadrilaterals
             for (let j = 1; j < offset - 2; j++) { 
@@ -64,14 +70,22 @@ export class MySphere extends CGFobject {
                 indexB = indexA + 1;
                 indexC = indexA - offset;
                 indexD = indexC + 1;
-                this.indices.push(indexA, indexC, indexB, indexC, indexD, indexB);
+                if (this.panorama === -1) {
+                    this.indices.push(indexB, indexC, indexA, indexB, indexD, indexC);
+                } else {
+                    this.indices.push(indexA, indexC, indexB, indexC, indexD, indexB);
+                }
             } 
 
             // South Pole Triangles
             indexA = (i + 1) * offset - 2; 
             indexB = indexA + 1; 
             indexC = indexA - offset;
-            this.indices.push(indexA, indexC, indexB);
+            if (this.panorama === -1) {
+                this.indices.push(indexB, indexC, indexA);
+            } else {
+                this.indices.push(indexA, indexC, indexB);
+            }
         }
 
         this.primitiveType = this.scene.gl.TRIANGLES;
