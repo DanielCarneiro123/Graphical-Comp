@@ -1,5 +1,5 @@
-import { CGFobject, CGFappearance } from '../../lib/CGF.js';
-import { MySphere } from "./MySphere.js";
+import { CGFobject, CGFappearance } from '../../../../lib/CGF.js';
+import { MySphere } from "../../../polygons/MySphere.js";
 
 export class MyReceptacle extends CGFobject {
     constructor(scene, radius) {

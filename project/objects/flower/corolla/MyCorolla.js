@@ -1,4 +1,4 @@
-import { CGFobject, CGFappearance } from '../../lib/CGF.js';
+import { CGFobject, CGFappearance } from '../../../../lib/CGF.js';
 import { MyPetal } from "./MyPetal.js";
 import { MyReceptacle } from './MyReceptacle.js';
 
@@ -37,6 +37,7 @@ export class MyCorolla extends CGFobject {
 
         appearance.setDiffuse(this.receptacleColor[0], this.receptacleColor[1], this.receptacleColor[2], 1); 
         appearance.apply();
+
         this.receptacle.display();
 
         this.scene.popMatrix()

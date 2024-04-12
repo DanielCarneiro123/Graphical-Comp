@@ -1,8 +1,8 @@
 import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } from "../lib/CGF.js";
-import { MyPlane } from "./MyPlane.js";
-import { MySphere } from "./MySphere.js";
-import { MyPanorama } from "./MyPanorama.js";
-import { MyFlower } from "./MyFlower.js";
+import { MyPlane } from "./polygons/MyPlane.js";
+import { MySphere } from "./polygons/MySphere.js";
+import { MyPanorama } from "./objects/MyPanorama.js";
+import { MyFlower } from "./objects/flower/MyFlower.js";
 
 
 /**
@@ -45,7 +45,7 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this,30);
     this.sphere = new MySphere(this, 50, 50);
     this.panorama = new MyPanorama(this, this.panoramaImage)
-    this.flower = new MyFlower(this, 7, 2, 1, 0.5, 5, vec3.fromValues(1, 0, 0), vec3.fromValues(0, 0, 1), vec3.fromValues(0, 1, 0));
+    this.flower = new MyFlower(this, 7, 2, 1, 0.3, 5, vec3.fromValues(1, 0, 0), vec3.fromValues(0, 0, 1), vec3.fromValues(0, 1, 0));
 
     //Objects connected to MyInterface
     this.displayAxis = true;

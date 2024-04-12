@@ -1,5 +1,5 @@
-import { CGFobject, CGFappearance } from '../../lib/CGF.js';
-import { MyCorolla } from "./MyCorolla.js";
+import { CGFobject, CGFappearance } from '../../../lib/CGF.js';
+import { MyCorolla } from "./corolla/MyCorolla.js";
 import { MyStem } from "./MyStem.js";
 
 
@@ -7,7 +7,8 @@ export class MyFlower extends CGFobject {
     constructor(scene, nrPetals, corollaRadius, receptacleRadius, stemRadius, stemHeight, petalColor, receptacleColor, stemColor) {
         super(scene)
         this.corolla = new MyCorolla(this.scene, nrPetals, corollaRadius, receptacleRadius, petalColor, receptacleColor)
-        this.stem = new MyStem(this.scene, 20, stemRadius, stemHeight, stemColor)
+        this.stem = new MyStem(this.scene, 20, stemRadius, stemHeight)
+        this.stemColor = stemColor
     }
 
     display() {
