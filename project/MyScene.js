@@ -4,7 +4,6 @@ import { MySphere } from "./polygons/MySphere.js";
 import { MyPanorama } from "./objects/MyPanorama.js";
 import { MyFlower } from "./objects/flower/MyFlower.js";
 
-
 /**
  * MyScene
  * @constructor
@@ -39,13 +38,12 @@ export class MyScene extends CGFscene {
     this.earthAppearance.setTexture(this.earth);
     this.earthAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
-
     //Initialize scene objects
     this.axis = new CGFaxis(this);
     this.plane = new MyPlane(this,30);
     this.sphere = new MySphere(this, 50, 50);
     this.panorama = new MyPanorama(this, this.panoramaImage)
-    this.flower = new MyFlower(this, 7, 2, 1, 0.3, 5, vec3.fromValues(1, 0, 0), vec3.fromValues(0, 0, 1), vec3.fromValues(0, 1, 0));
+    this.flower = new MyFlower(this, 15, 3, 1, 0.3, 5, [1, 0, 0], [0, 0, 1], [0, 1, 0], 45, 50, 10);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
