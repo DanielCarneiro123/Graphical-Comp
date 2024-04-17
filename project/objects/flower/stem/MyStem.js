@@ -1,5 +1,6 @@
-import {CGFobject, CGFappearance} from '../../../lib/CGF.js';
-import { MyCylinder } from "../../polygons/MyCylinder.js";
+import {CGFobject, CGFappearance} from '../../../../lib/CGF.js';
+import { MyCylinder } from "../../../polygons/MyCylinder.js";
+import { MyLeaf } from './MyLeaf.js';
 
 export class MyStem extends CGFobject {
     constructor(scene, slices, cylinderNumber, radius, height, minHeight, maxHeight) {
@@ -11,7 +12,9 @@ export class MyStem extends CGFobject {
         this.initMaterials();
         this.initHeights(cylinderNumber, height, minHeight, maxHeight);
         this.initMisallignments(cylinderNumber, radius);
+        this.initLeafPositions(cylinderNumber);
         this.initCylinders(cylinderNumber, radius);
+        this.leaf = new MyLeaf(this.scene)
     }   
 
     initHeights(cylinderNumber, height, minHeight, maxHeight) {
@@ -42,9 +45,21 @@ export class MyStem extends CGFobject {
         console.log(this.missallignments)
     }
 
+    initLeafPositions(cylinderNumber) {
+        this.leafPositions = []
+        for (let i = 0; i < cylinderNumber; i++) {
+            let randomAngleX = Math.random() * 2 * Math.PI;
+            let randomAngleY = Math.random() * Math.PI - Math.PI/2;
+            if (i % 2 == 0) randomAngleY += Math.PI;
+            this.leafPositions.push([randomAngleX, randomAngleY])
+        }
+
+        console.log(this.leafPositions)
+    }
+
+
     initCylinders(cylinderNumber) {
         this.cylinders = []
-
         for (let i = 0; i < cylinderNumber; i++) {
             this.cylinders.push(new MyCylinder(this.scene, this.slices, 20, this.missallignments[i]))
         }
@@ -74,24 +89,36 @@ export class MyStem extends CGFobject {
 
     display() {
 
-
         
         let offset = [0, 0, 0];
         for (let i = 0; i < this.cylinderNumber; i++) {
+
             this.scene.pushMatrix();
                 this.scene.scale(this.radius, 1, this.radius)
                 this.scene.pushMatrix();
                     this.stemAppearance.apply();
                     this.scene.translate(...offset);
                     this.scene.scale(1, this.heights[i], 1);
-
                     this.cylinders[i].display();
                     offset = [offset[0] + this.missallignments[i][0], offset[1] + this.heights[i], offset[2] + this.missallignments[i][2]];
-                    console.log(offset)
                 this.scene.popMatrix();
             this.scene.popMatrix();
+
         }
-               
+
+        let height = this.heights[0];
+        
+        for (let i = 0; i < this.leafPositions.length; i++) {
+            this.scene.pushMatrix();
+                this.scene.scale(0.7, 0.5, 0.5)
+                this.scene.translate(0, height, 0);
+                this.scene.rotate(this.leafPositions[i][1], 0, 1, 0);
+                this.scene.translate(this.radius, 0, this.radius)
+                this.leaf.display();
+                height += this.heights[i + 1];
+            this.scene.popMatrix();
+        }
+
     }
    
 }

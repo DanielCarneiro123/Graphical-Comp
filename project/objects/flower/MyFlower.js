@@ -1,6 +1,6 @@
 import { CGFobject, CGFappearance } from '../../../lib/CGF.js';
 import { MyCorolla } from "./corolla/MyCorolla.js";
-import { MyStem } from "./MyStem.js";
+import { MyStem } from "./stem/MyStem.js";
 
 
 export class MyFlower extends CGFobject {

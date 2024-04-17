@@ -1,7 +1,7 @@
 import {CGFobject} from '../../lib/CGF.js';
 
 export class MyCylinder extends CGFobject {
-    constructor(scene, slices, stacks, topCenter) {
+    constructor(scene, slices, stacks, topCenter = [0, 1, 0]) {
         super(scene);
         this.slices = slices;
         this.stacks = stacks;
