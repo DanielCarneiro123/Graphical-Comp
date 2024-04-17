@@ -22,13 +22,14 @@ export class MyStem extends CGFobject {
         let max = height;
         for (let i = 0; i < cylinderNumber - 1; i++) {
             let randomHeight = Math.random() * (maxHeight - minHeight) + minHeight;
+            randomHeight = Math.min(randomHeight, max);
             max -= randomHeight;
             this.heights.push(randomHeight);
         }
 
         this.heights.push(max); 
 
-        this.heights = this.heights.reverse();
+        console.log(this.heights)
     }
 
     initMisallignments(cylinderNumber, radius) {
@@ -42,19 +43,15 @@ export class MyStem extends CGFobject {
             z = Math.round(z * 100) / 100
             this.missallignments.push([x, 1, z])
         }
-        console.log(this.missallignments)
     }
 
     initLeafPositions(cylinderNumber) {
         this.leafPositions = []
         for (let i = 0; i < cylinderNumber; i++) {
-            let randomAngleX = Math.random() * 2 * Math.PI;
             let randomAngleY = Math.random() * Math.PI - Math.PI/2;
             if (i % 2 == 0) randomAngleY += Math.PI;
-            this.leafPositions.push([randomAngleX, randomAngleY])
+            this.leafPositions.push(randomAngleY)
         }
-
-        console.log(this.leafPositions)
     }
 
 
@@ -91,32 +88,33 @@ export class MyStem extends CGFobject {
 
         
         let offset = [0, 0, 0];
+        
+        // display cylinders
         for (let i = 0; i < this.cylinderNumber; i++) {
-
             this.scene.pushMatrix();
                 this.scene.scale(this.radius, 1, this.radius)
+                this.scene.translate(...offset);
+
+                if (i > 0) {
+                    this.scene.pushMatrix();
+                        this.scene.rotate(this.leafPositions[i], 0, 1, 0)
+                        this.scene.pushMatrix()
+                            this.scene.scale(1/this.radius, 1, 1/this.radius);
+                            this.scene.translate(this.radius, 0, 0)
+                            this.leaf.display();
+                        this.scene.popMatrix();
+                    this.scene.popMatrix();
+                }
+
                 this.scene.pushMatrix();
                     this.stemAppearance.apply();
-                    this.scene.translate(...offset);
+                    //this.scene.translate(...offset);
                     this.scene.scale(1, this.heights[i], 1);
                     this.cylinders[i].display();
                     offset = [offset[0] + this.missallignments[i][0], offset[1] + this.heights[i], offset[2] + this.missallignments[i][2]];
                 this.scene.popMatrix();
             this.scene.popMatrix();
 
-        }
-
-        let height = this.heights[0];
-        
-        for (let i = 0; i < this.leafPositions.length; i++) {
-            this.scene.pushMatrix();
-                this.scene.scale(0.7, 0.5, 0.5)
-                this.scene.translate(0, height, 0);
-                this.scene.rotate(this.leafPositions[i][1], 0, 1, 0);
-                this.scene.translate(this.radius, 0, this.radius)
-                this.leaf.display();
-                height += this.heights[i + 1];
-            this.scene.popMatrix();
         }
 
     }
