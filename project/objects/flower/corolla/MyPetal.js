@@ -17,14 +17,10 @@ export class MyPetal extends CGFobject {
 	
 	display() {
 
-		const appearance = new CGFappearance(this.scene);
-		appearance.setAmbient(this.petalColor[0], this.petalColor[1], this.petalColor[2], 1);
-		appearance.setSpecular(0.6, 0.6, 0.6, 1);
-		appearance.setShininess(10.0);
-		appearance.setDiffuse(this.petalColor[0], this.petalColor[1], this.petalColor[2], 1);
+		
 
 		this.scene.pushMatrix();
-			appearance.apply();
+			
 			
 			this.scene.scale(1, this.height / 2, 1);			
 			this.scene.translate(0, this.height / 2, 0);

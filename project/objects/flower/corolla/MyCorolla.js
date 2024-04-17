@@ -30,6 +30,13 @@ export class MyCorolla extends CGFobject {
         this.coneMaterial.setShininess(10.0);
         this.coneMaterial.loadTexture('images/stem4.jpg');
         this.coneMaterial.setTextureWrap('REPEAT', 'REPEAT');
+        this.petalMaterial = new CGFappearance(this.scene);
+        this.petalMaterial.setAmbient(1.0, 0.75, 0.8, 1);
+        this.petalMaterial.setDiffuse(1.0, 0.75, 0.8, 1);
+        this.petalMaterial.setSpecular(1.0, 0.75, 0.8, 1);
+        this.petalMaterial.setShininess(10.0);
+        this.petalMaterial.loadTexture('images/petal.jpg');
+        this.petalMaterial.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     display() {
@@ -43,7 +50,7 @@ export class MyCorolla extends CGFobject {
         let angle = 2 * Math.PI / this.nrPetals;
 
         this.scene.pushMatrix()
-
+            this.petalMaterial.apply()
             this.scene.translate(0, 0.5, 0)
             this.scene.rotate(-Math.PI/2, 1, 0, 0)
             for (let i = 0; i < this.nrPetals; i++) {
