@@ -16,10 +16,10 @@ export class MyGarden extends CGFobject{
             this.flowers.push([]);
             for (let j = 0; j < this.numCols; j++) {
                 const nrPetals = Math.floor(Math.random() * 10) + 5;
-                const corollaRadius = Math.random() * 2 + 1; 
-                const receptacleRadius = Math.random(3,7); 
-                const stemRadius = Math.random() * 0.2 + 0.1; 
-                const stemHeight = Math.random() * 6 + 4;
+                const receptacleRadius = Math.random(1.5,3.5); //dentro
+                const corollaRadius = receptacleRadius*2 + 1;  //fora
+                const stemRadius = Math.random() * 0.2 + 0.1; //
+                const stemHeight = Math.random() * 4 + 4;
                 const petalColor = [Math.random(), Math.random(), Math.random()];
                 const receptacleColor = [Math.random(), Math.random(), Math.random()]; 
                 const stemColor = [Math.random(), Math.random(), Math.random()]; 
