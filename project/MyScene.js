@@ -29,6 +29,8 @@ export class MyScene extends CGFscene {
     this.terrain = new CGFtexture(this, "images/terrain.jpg");
     this.earth = new CGFtexture(this, "images/earth.jpg");
     this.panoramaImage = new CGFtexture(this, "images/panorama4.jpg");
+    this.stem = new CGFtexture(this, "images/stem2.png");
+
 
     this.terrainAppearance = new CGFappearance(this);
     this.terrainAppearance.setTexture(this.terrain);
@@ -43,7 +45,7 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this,30);
     this.sphere = new MySphere(this, 50, 50);
     this.panorama = new MyPanorama(this, this.panoramaImage)
-    this.flower = new MyFlower(this, 15, 3, 1, 0.3, 5, [1, 0, 0], [0, 0, 1], [0, 1, 0], 45, 50, 10);
+    this.flower = new MyFlower(this, 15, 3, 1, 0.15, 5, [1, 0, 0], [0, 0, 1], [0, 1, 0], 45, 50, 10);
 
     //Objects connected to MyInterface
     this.displayAxis = true;

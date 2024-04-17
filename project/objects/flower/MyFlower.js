@@ -7,7 +7,7 @@ export class MyFlower extends CGFobject {
     constructor(scene, nrPetals, corollaRadius, receptacleRadius, stemRadius, stemHeight, petalColor, receptacleColor, stemColor, petalAngle, maxAngle, minAngle) {
         super(scene)
         this.corolla = new MyCorolla(this.scene, nrPetals, corollaRadius, receptacleRadius, petalColor, receptacleColor, petalAngle, maxAngle, minAngle)
-        this.stem = new MyStem(this.scene, 20, 4, stemRadius, stemHeight)
+        this.stem = new MyStem(this.scene, 20, 5, stemRadius, stemHeight, stemHeight/10, stemHeight/3)
         this.stemColor = stemColor
     }
 
