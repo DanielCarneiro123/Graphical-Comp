@@ -33,7 +33,6 @@ export class MyCylinder extends CGFobject {
                 this.texCoords.push(i / this.slices, j * increment_y)
 
             } 
-            console.log("\n\n\n")
         }
 
         // lateral surface
@@ -57,14 +56,14 @@ export class MyCylinder extends CGFobject {
         const base = (this.slices + 1) * (this.stacks + 1) 
 
         for (let i = 0; i <= this.slices; i++) {
-                let x = Math.cos(i * angle); 
-                let z = Math.sin(i * angle); 
-                this.vertices.push(
-                    x, 0, z,
-                    x + this.offsetZ * increment_x, 1, z + this.offsetZ * increment_z)
-                this.normals.push(0, -1, 0, 0, 1, 0)
-            }
-        
+            let x = Math.cos(i * angle); 
+            let z = Math.sin(i * angle); 
+            this.vertices.push(
+                x, 0, z,
+                x + this.offsetZ * increment_x, 1, z + this.offsetZ * increment_z)
+            this.normals.push(0, -1, 0, 0, 1, 0)
+        }
+    
 
         for (let i = 0; i < this.slices; i++) {
             let indexA = i * increment_y;
