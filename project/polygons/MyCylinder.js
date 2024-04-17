@@ -22,7 +22,6 @@ export class MyCylinder extends CGFobject {
         let increment_x = this.offsetX / this.stacks;
         let increment_z = this.offsetZ / this.stacks;
 
-
         // vertices, normals and texCoords
         for (let i = 0; i <= this.slices; i++) {
             for (let j = 0; j <= this.stacks; j++) {
@@ -48,8 +47,6 @@ export class MyCylinder extends CGFobject {
     
         increment_y = 1 + this.stacks
 
-        // lower base
-
         this.vertices.push(0, 0, 0, this.topCenter[0], this.topCenter[1], this.topCenter[2])
         this.normals.push(0, -1, 0, 0, 1, 0)
       
@@ -64,7 +61,7 @@ export class MyCylinder extends CGFobject {
             this.normals.push(0, -1, 0, 0, 1, 0)
         }
     
-
+        // lower base
         for (let i = 0; i < this.slices; i++) {
             let indexA = i * increment_y;
             let indexB = indexA + increment_y;

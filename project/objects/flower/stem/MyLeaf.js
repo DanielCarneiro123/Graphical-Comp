@@ -1,4 +1,4 @@
-import {CGFobject, CGFappearance} from '../../../../lib/CGF.js';
+import { CGFobject } from '../../../../lib/CGF.js';
 import { MyCylinder } from "../../../polygons/MyCylinder.js";
 import { MyTriangle } from '../../../polygons/MyTriangle.js';
 
@@ -8,7 +8,6 @@ export class MyLeaf extends CGFobject {
         this.triangle = new MyTriangle(this.scene);
         this.cylinder = new MyCylinder(this.scene, 20, 1);
     }   
-
 
     display() {        
         this.scene.pushMatrix();

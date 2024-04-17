@@ -35,8 +35,6 @@ export class MyCircle extends CGFobject {
             this.indices.push(i, i + 1, 0, 0, i + 1, i);
         }
 
-
-
 		this.primitiveType = this.scene.gl.TRIANGLES;
 
 		this.initGLBuffers();

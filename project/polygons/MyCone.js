@@ -24,12 +24,7 @@ export class MyCone extends CGFobject {
         }
 
         for (let i = 0; i < this.slices * 2; i+=2) {
-            let indexA = i;
-            let indexB = i + 1;
-            let indexC = i + 2;
-            console.log("Indices", indexA, indexB, indexC)
-            this.indices.push(indexB, indexA, indexC);
-            
+            this.indices.push(i + 1, i, i + 2);       
         }
 
         this.primitiveType = this.scene.gl.TRIANGLES;

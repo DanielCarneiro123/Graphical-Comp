@@ -1,13 +1,17 @@
-import { CGFobject, CGFappearance } from '../../../lib/CGF.js';
+import { CGFobject } from '../../../lib/CGF.js';
 import { MyCorolla } from "./corolla/MyCorolla.js";
 import { MyStem } from "./stem/MyStem.js";
 
 
 export class MyFlower extends CGFobject {
-    constructor(scene, nrPetals, corollaRadius, receptacleRadius, stemRadius, stemHeight, petalColor, receptacleColor, stemColor, petalAngle, maxAngle, minAngle) {
+    constructor(scene, nrPetals, nrCylinder, 
+            corollaRadius, receptacleRadius, stemRadius, stemHeight, 
+            petalColor, receptacleColor, stemColor, leafColor,
+            petalAngle, maxAngle, minAngle, 
+            leafAppearance, stemAppearance, receptacleAppearance, petalAppearance) {
         super(scene)
-        this.corolla = new MyCorolla(this.scene, nrPetals, corollaRadius, receptacleRadius, petalColor, receptacleColor, petalAngle, maxAngle, minAngle)
-        this.stem = new MyStem(this.scene, 20, 4, stemRadius, stemHeight, stemHeight/6, stemHeight/4)
+        this.corolla = new MyCorolla(this.scene, nrPetals, corollaRadius, receptacleRadius, petalColor, receptacleColor, stemColor, petalAngle, maxAngle, minAngle, receptacleAppearance, stemAppearance, petalAppearance)
+        this.stem = new MyStem(this.scene, 20, nrCylinder, stemRadius, stemHeight, stemHeight/6, stemHeight/4, leafAppearance, stemAppearance, leafColor, stemColor)
     }
 
     display() {

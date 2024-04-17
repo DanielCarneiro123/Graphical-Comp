@@ -1,4 +1,4 @@
-import {CGFobject, CGFappearance} from '../../../../lib/CGF.js';
+import { CGFobject } from '../../../../lib/CGF.js';
 import { MyTriangle } from '../../../polygons/MyTriangle.js';
 
 /**
@@ -7,21 +7,15 @@ import { MyTriangle } from '../../../polygons/MyTriangle.js';
  * @param scene - Reference to MyScene object
  */
 export class MyPetal extends CGFobject {
-	constructor(scene, height, petalColor, rotateAngle) {
+	constructor(scene, height, rotateAngle) {
 		super(scene);
 		this.height = height;
-		this.petalColor = petalColor;
 		this.rotateAngle = rotateAngle * Math.PI / 180;
 		this.triangle = new MyTriangle(this.scene);
 	}
 	
 	display() {
-
-		
-
 		this.scene.pushMatrix();
-			
-			
 			this.scene.scale(1, this.height / 2, 1);			
 			this.scene.translate(0, this.height / 2, 0);
 
