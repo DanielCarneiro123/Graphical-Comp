@@ -27,7 +27,7 @@ Por fim, para criar a ilusão de que a superfície esférica se encontra sempre 
 <p align="center">Figure 2: Earth and Panorama</p>
 
 
-2. Flores
+## 2. Flores
 
 No exercício dois, desenvolvemos um modelo simplificado de uma flor, utilizando apenas polígonos básicos. Para otimizar o desempenho computacional, decidimos representar o receptáculo da flor como um círculo em vez de uma esfera.
 
