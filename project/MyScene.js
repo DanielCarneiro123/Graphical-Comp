@@ -43,17 +43,30 @@ export class MyScene extends CGFscene {
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
+
     this.plane = new MyPlane(this,30);
     this.sphere = new MySphere(this, 50, 50);
     this.panorama = new MyPanorama(this, this.panoramaImage)
     this.flower = new MyFlower(this, 10, 2.5, 1.2, 0.15, 4, [1, 0, 0], [0, 0, 1], [0, 1, 0], 40, 20, 10);
     this.garden = new MyGarden(this, 5, 5);
+    
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayNormals = false;
     this.displayInfinitePanorama = false;
-
     this.scaleFactor = 1;
+
+    // display
+    this.displayFlower = false;
+    this.displayGarden = false;
+    this.displayTerrain = false;
+    this.displayEarth = false;
+
+    // garden
+    this.gardenRows = 5;
+    this.gardenCols = 5;
+    this.displayFlower = false;
+
 
     this.enableTextures(true);
 
@@ -79,6 +92,15 @@ export class MyScene extends CGFscene {
     this.setSpecular(0.2, 0.4, 0.8, 1.0);
     this.setShininess(10.0);
   }
+
+  updateGarden() {
+    this.garden = new MyGarden(this, this.gardenRows, this.gardenCols);
+  }
+
+  onSelectedObjectChanged() {
+
+  }
+
   display() {
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
@@ -95,27 +117,39 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
-    /*
-    this.pushMatrix();
-    this.terrainAppearance.apply();
-    this.translate(0,-100,0);
-    this.scale(400,400,400);
-    this.rotate(-Math.PI/2.0,1,0,0);
-    this.plane.display();
-    this.popMatrix();
-    */
-    
     this.panorama.display();
 
-    /*
-    this.pushMatrix();
-    this.earthAppearance.apply();
-    this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
-    this.sphere.display();
-    this.popMatrix();
-    */
 
-    this.garden.display();
+    if (this.displayTerrain) {
+      this.pushMatrix();
+      this.terrainAppearance.apply();
+      this.translate(0,-100,0);
+      this.scale(400,400,400);
+      this.rotate(-Math.PI/2.0,1,0,0);
+      this.plane.display();
+      this.popMatrix();
+    }
+    
+
+    if (this.displayEarth) {
+      this.pushMatrix();
+      this.earthAppearance.apply();
+      this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+      this.sphere.display();
+      this.popMatrix();
+    }
+
+
+    if (this.displayFlower) {
+      this.pushMatrix();
+      this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+      this.flower.display();
+      this.popMatrix();
+    }
+
+    if (this.displayGarden) {
+      this.garden.display();
+    }
     
 
     if (this.displayNormals)
