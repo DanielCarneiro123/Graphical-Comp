@@ -18,8 +18,18 @@ export class MyCorolla extends CGFobject {
         }
 
         this.cone = new MyCone(this.scene, 20);
+        this.initMaterials();
 
+    }
 
+    initMaterials(){
+        this.coneMaterial = new CGFappearance(this.scene);
+        this.coneMaterial.setAmbient(0.0, 1.0, 0.0, 1);
+        this.coneMaterial.setDiffuse(0.0, 1.0, 0.0, 1);
+        this.coneMaterial.setSpecular(0.0, 1.0, 0.0, 1);
+        this.coneMaterial.setShininess(10.0);
+        this.coneMaterial.loadTexture('images/stem4.jpg');
+        this.coneMaterial.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     display() {
@@ -54,7 +64,7 @@ export class MyCorolla extends CGFobject {
 
         
         this.scene.pushMatrix()
-            appearance.apply();
+            this.coneMaterial.apply();
             this.scene.scale(this.receptacleRadius * 0.8, 0.5, this.receptacleRadius * 0.8);
             this.cone.display();
 

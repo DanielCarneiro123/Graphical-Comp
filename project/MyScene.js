@@ -3,6 +3,7 @@ import { MyPlane } from "./polygons/MyPlane.js";
 import { MySphere } from "./polygons/MySphere.js";
 import { MyPanorama } from "./objects/MyPanorama.js";
 import { MyFlower } from "./objects/flower/MyFlower.js";
+import { MyGarden } from "./objects/MyGarden.js";
 
 /**
  * MyScene
@@ -46,7 +47,7 @@ export class MyScene extends CGFscene {
     this.sphere = new MySphere(this, 50, 50);
     this.panorama = new MyPanorama(this, this.panoramaImage)
     this.flower = new MyFlower(this, 10, 2.5, 1.2, 0.15, 4, [1, 0, 0], [0, 0, 1], [0, 1, 0], 40, 20, 10);
-
+    this.garden = new MyGarden(this, 5, 5);
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayNormals = false;
@@ -114,7 +115,8 @@ export class MyScene extends CGFscene {
     this.popMatrix();
     */
 
-    this.flower.display();
+    this.garden.display();
+    
 
     if (this.displayNormals)
       this.sphere.enableNormalViz();
