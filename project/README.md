@@ -25,3 +25,20 @@ Por fim, para criar a ilusão de que a superfície esférica se encontra sempre 
 
 ![Panorama](screenshots/project-t11g09-1.2.png)
 <p align="center">Figure 2: Earth and Panorama</p>
+
+
+2. Flores
+
+No exercício dois, desenvolvemos um modelo simplificado de uma flor, utilizando apenas polígonos básicos. Para otimizar o desempenho computacional, decidimos representar o receptáculo da flor como um círculo em vez de uma esfera.
+
+Além disso, os cilindros que compõem o caule da flor têm comprimentos variados, controlados aleatoriamente, resultando num desalinhamento entre eles.
+
+![Flower](screenshots/project-t11g09-2.1.png)
+<p align="center">Figure 3: Flower</p>
+
+Por fim, criamos uma zona  `MyGarden` no mundo virtual, que consiste numa matriz de flores com um número específico de linhas e colunas definido na interface UI/UX.
+
+Cada flor na matriz é gerada com valores aleatórios nos seus parâmetros, tais como o número de pétalas, os ângulos de curvatura das pétalas, o raio do círculo central da flor, o raio do círculo representando o caule, assim como os comprimentos e ângulos entre os cilindros que formam o caule.
+
+![Garden](screenshots/project-t11g09-2.2.png)
+<p align="center">Figure 4: Garden</p>
