@@ -2,12 +2,13 @@ import { MyFlower } from './flower/MyFlower.js';
 import { CGFobject } from '../../../lib/CGF.js';
 
 export class MyGarden extends CGFobject{
-    constructor(scene, numRows, numCols, leaf, stem, receptacles = [], petals = []) {
+    constructor(scene, numRows, numCols, leaf, stem, petals = []) {
         super(scene);
         this.numRows = numRows;
         this.numCols = numCols;
         this.leafAppearance = leaf;
         this.stemAppearance = stem;
+        this.petalAppearances = petals;
         this.createFlowers();
     }
 
@@ -29,6 +30,7 @@ export class MyGarden extends CGFobject{
                 const petalAngle = Math.random() * 40; 
                 const minAngle = Math.random() * 30; 
                 const maxAngle = minAngle + Math.random() * 20; 
+                const petalAppearance = this.petalAppearances[Math.floor(Math.random() * this.petalAppearances.length)];
 
                 this.flowers[i].push(new MyFlower(
                     this.scene,
@@ -48,9 +50,8 @@ export class MyGarden extends CGFobject{
                     this.leafAppearance,
                     this.stemAppearance,
                     this.scene.receptacleAppearance,
-                    this.scene.petalAppearance
+                    petalAppearance
                 ));
-                console.log("creating flower with colors: ", petalColor, receptacleColor, stemColor, leafColor)
             }
         }
     }

@@ -33,8 +33,12 @@ export class MyScene extends CGFscene {
     this.stem = new CGFtexture(this, "images/stem4.jpg");
     this.leaf = new CGFtexture(this, "images/leaf.jpg");
     this.receptacle = new CGFtexture(this, "images/receptacle.jpg");
-    this.petal = new CGFtexture(this, "images/petal.jpg");
+    this.whitePetal = new CGFtexture(this, "images/whitepetal.jpg");
+    this.bluePetal = new CGFtexture(this, "images/bluepetal.jpg");
+    this.redPetal = new CGFtexture(this, "images/redpetal.jpg");
+    this.pinkPetal = new CGFtexture(this, "images/petal.jpg");
 
+  
     this.terrainAppearance = new CGFappearance(this);
     this.terrainAppearance.setTexture(this.terrain);
     this.terrainAppearance.setTextureWrap('REPEAT', 'REPEAT');
@@ -55,9 +59,23 @@ export class MyScene extends CGFscene {
     this.receptacleAppearance.setTexture(this.receptacle);
     this.receptacleAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
-    this.petalAppearance = new CGFappearance(this);
-    this.petalAppearance.setTexture(this.petal);
-    this.petalAppearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.pinkPetalAppearance = new CGFappearance(this);
+    this.pinkPetalAppearance.setTexture(this.petal);
+    this.pinkPetalAppearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.whitePetalAppearance = new CGFappearance(this);
+    this.whitePetalAppearance.setTexture(this.whitePetal);
+    this.whitePetalAppearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.bluePetalAppearance = new CGFappearance(this); 
+    this.bluePetalAppearance.setTexture(this.bluePetal);
+    this.bluePetalAppearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.redPetalAppearance = new CGFappearance(this);
+    this.redPetalAppearance.setTexture(this.redPetal);
+    this.redPetalAppearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.petalApperances = [this.pinkPetalAppearance, this.whitePetalAppearance, this.bluePetalAppearance, this.redPetalAppearance];
 
     this.petalColor = vec4.fromValues(0.9, 0.25, 0.5, 1);
     this.receptacleColor = vec4.fromValues(1.0, 1.0, 0.0, 1);
@@ -70,8 +88,8 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this,30);
     this.sphere = new MySphere(this, 50, 50);
     this.panorama = new MyPanorama(this, this.panoramaImage);
-    this.flower = new MyFlower(this, 10, 4, 2.5, 1.2, 0.15, 4, this.petalColor, this.receptacleColor, this.stemColor, this.leafColor, 40, 20, 10, this.leafAppearance, this.stemAppearance, this.receptacleAppearance, this.petalAppearance);
-    this.garden = new MyGarden(this, 5, 5, this.leafAppearance, this.stemAppearance);
+    this.flower = new MyFlower(this, 10, 4, 2.5, 1.2, 0.15, 4, this.petalColor, this.receptacleColor, this.stemColor, this.leafColor, 40, 20, 10, this.leafAppearance, this.stemAppearance, this.receptacleAppearance, this.pinkPetalAppearance);
+    this.garden = new MyGarden(this, 5, 5, this.leafAppearance, this.stemAppearance, this.petalApperances);
     
     //Objects connected to MyInterface
     this.displayAxis = true;
