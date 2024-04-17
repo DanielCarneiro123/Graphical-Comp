@@ -30,7 +30,7 @@ export class MyScene extends CGFscene {
     this.earth = new CGFtexture(this, "images/earth.jpg");
     this.panoramaImage = new CGFtexture(this, "images/panorama4.jpg");
     this.stem = new CGFtexture(this, "images/stem2.png");
-
+    this.leaf = new CGFtexture(this, "images/leaf.jpg");
 
     this.terrainAppearance = new CGFappearance(this);
     this.terrainAppearance.setTexture(this.terrain);

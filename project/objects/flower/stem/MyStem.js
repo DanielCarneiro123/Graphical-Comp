@@ -64,24 +64,21 @@ export class MyStem extends CGFobject {
 
 
     initMaterials() {
-        let appearance = new CGFappearance(this.scene);
-        appearance.setAmbient(0.3, 0.3, 0.3, 1);
-        appearance.setSpecular(0.6, 0.6, 0.6, 1);
-        appearance.setShininess(10.0);
-        appearance.setDiffuse(0, 1, 0, 1);
-        this.appearance = appearance
+        this.stemMaterial = new CGFappearance(this.scene);
+        this.stemMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+        this.stemMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.stemMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.stemMaterial.setShininess(10.0);
+        this.stemMaterial.loadTexture('images/stem4.jpg');
+        this.stemMaterial.setTextureWrap('REPEAT', 'REPEAT');
 
-        let appearance2 = new CGFappearance(this.scene);
-        appearance2.setAmbient(0.3, 0.3, 0.3, 1);
-        appearance2.setSpecular(1, 0.6, 0.6, 1);
-        appearance2.setShininess(10.0);
-        appearance2.setDiffuse(1, 0, 0, 1)
-        this.appearance2 = appearance2
-
-        this.stemAppearance = new CGFappearance(this.scene);
-        this.stemAppearance.setTexture(this.scene.stem);
-        this.stemAppearance.setTextureWrap('REPEAT', 'REPEAT');
-    
+        this.leafMaterial = new CGFappearance(this.scene);
+        this.leafMaterial.setAmbient(0.1, 0.1, 0.1, 1);
+        this.leafMaterial.setDiffuse(0.9, 0.9, 0.9, 1);
+        this.leafMaterial.setSpecular(0.1, 0.1, 0.1, 1);
+        this.leafMaterial.setShininess(10.0);
+        this.leafMaterial.loadTexture('images/leaf.jpg');
+        this.leafMaterial.setTextureWrap('REPEAT', 'REPEAT');
     }
 
     display() {
@@ -101,14 +98,14 @@ export class MyStem extends CGFobject {
                         this.scene.pushMatrix()
                             this.scene.scale(1/this.radius, 1, 1/this.radius);
                             this.scene.translate(this.radius, 0, 0)
+                            this.leafMaterial.apply();
                             this.leaf.display();
                         this.scene.popMatrix();
                     this.scene.popMatrix();
                 }
 
                 this.scene.pushMatrix();
-                    this.stemAppearance.apply();
-                    //this.scene.translate(...offset);
+                    this.stemMaterial.apply();
                     this.scene.scale(1, this.heights[i], 1);
                     this.cylinders[i].display();
                     offset = [offset[0] + this.missallignments[i][0], offset[1] + this.heights[i], offset[2] + this.missallignments[i][2]];
