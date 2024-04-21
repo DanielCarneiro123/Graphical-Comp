@@ -1,6 +1,6 @@
 import {CGFobject} from '../../lib/CGF.js';
 
-export class MySphere extends CGFobject {
+export class MyRock extends CGFobject {
     constructor(scene, slices, stacks, radius = 1, panorama = false) {
         super(scene);
         this.slices = slices;
@@ -37,8 +37,14 @@ export class MySphere extends CGFobject {
                 let z = Math.sin(polarAngle) * Math.cos(azumithAngle);
                 let x = Math.sin(polarAngle) * Math.sin(azumithAngle);
                 let y = Math.cos(polarAngle);
+
                 
-                this.vertices.push(this.radius * x, this.radius * y, this.radius * z);
+                let modificationFactor = 0.1; // Ajuste conforme necessário
+                let modifiedX = x + (x * modificationFactor);
+                let modifiedY = y + (y * modificationFactor);
+                let modifiedZ = z + (z * modificationFactor);
+                
+                this.vertices.push(this.radius * modifiedX, this.radius * modifiedY, this.radius * modifiedZ);
                 this.normals.push(this.panorama * x, this.panorama * y, this.panorama * z);
                 this.texCoords.push(i / this.slices, j / (2 * this.stacks));
             }
@@ -94,5 +100,3 @@ export class MySphere extends CGFobject {
         this.initGLBuffers();
     }
 }
-
-

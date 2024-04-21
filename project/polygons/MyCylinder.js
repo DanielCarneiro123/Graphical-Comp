@@ -1,10 +1,13 @@
 import {CGFobject} from '../../lib/CGF.js';
 
 export class MyCylinder extends CGFobject {
-    constructor(scene, slices, stacks) {
+    constructor(scene, slices, stacks, topCenter = [0, 1, 0]) {
         super(scene);
         this.slices = slices;
         this.stacks = stacks;
+        this.topCenter = topCenter;
+        this.offsetX = topCenter[0];
+        this.offsetZ = topCenter[2];
         this.initBuffers();
     }   
 
@@ -15,19 +18,22 @@ export class MyCylinder extends CGFobject {
         this.texCoords = [];
 
         let angle = 2 * Math.PI / this.slices;
-        let increment = 1 / (this.stacks)
+        let increment_y = 1 / (this.stacks)
+        let increment_x = this.offsetX / this.stacks;
+        let increment_z = this.offsetZ / this.stacks;
 
         // vertices, normals and texCoords
         for (let i = 0; i <= this.slices; i++) {
             for (let j = 0; j <= this.stacks; j++) {
                 let x = Math.cos(i * angle); 
                 let z = Math.sin(i * angle); 
-                this.vertices.push(x, j * increment, z)
-                this.normals.push(x, 0, z);
-                this.texCoords.push(i / this.slices, j * increment)
+                this.vertices.push(x + j * increment_x, j * increment_y, z + j * increment_z)
+                this.normals.push(x, 0, z)
+                this.texCoords.push(i / this.slices, j * increment_y)
+
             } 
         }
-       
+
         // lateral surface
         for (let i = 0; i < this.slices; i++) {
             for (let j = 0; j < this.stacks; j++) {
@@ -39,26 +45,33 @@ export class MyCylinder extends CGFobject {
             }
         }
     
-        increment = 1 + this.stacks
+        increment_y = 1 + this.stacks
 
-        // lower base
-
-        this.vertices.push(0, 0, 0)
-        this.normals.push(0, -1, 0)
+        this.vertices.push(0, 0, 0, this.topCenter[0], this.topCenter[1], this.topCenter[2])
+        this.normals.push(0, -1, 0, 0, 1, 0)
+      
         const base = (this.slices + 1) * (this.stacks + 1) 
-       
+
+        for (let i = 0; i <= this.slices; i++) {
+            let x = Math.cos(i * angle); 
+            let z = Math.sin(i * angle); 
+            this.vertices.push(
+                x, 0, z,
+                x + this.offsetZ * increment_x, 1, z + this.offsetZ * increment_z)
+            this.normals.push(0, -1, 0, 0, 1, 0)
+        }
+    
+        // lower base
         for (let i = 0; i < this.slices; i++) {
-            let indexA = i * increment;
-            let indexB = indexA + increment;
+            let indexA = i * increment_y;
+            let indexB = indexA + increment_y;
             this.indices.push(base, indexA, indexB)
         }
         
         // upper base
-        this.vertices.push(0, 1, 0)
-        this.normals.push(0, 1, 0)
         for (let i = 0; i < this.slices; i++) {
-            let indexA = i * increment + this.stacks;
-            let indexB = indexA + increment;
+            let indexA = i * increment_y + this.stacks;
+            let indexB = indexA + increment_y;
             this.indices.push(base + 1, indexB, indexA)
         }
 
@@ -66,4 +79,3 @@ export class MyCylinder extends CGFobject {
         this.initGLBuffers();
     }
 }
-

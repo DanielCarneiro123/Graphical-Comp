@@ -1,4 +1,4 @@
-import { CGFobject, CGFappearance } from '../../../../lib/CGF.js';
+import { CGFobject } from '../../../../lib/CGF.js';
 import { MyCircle } from "../../../polygons/MyCircle.js";
 
 export class MyReceptacle extends CGFobject {
@@ -8,9 +8,8 @@ export class MyReceptacle extends CGFobject {
         this.circle = new MyCircle(this.scene, radius, 50)
     }
 
+
     display() {
-        this.scene.pushMatrix()
         this.circle.display()
-        this.scene.popMatrix()
     }
 }
