@@ -5,6 +5,7 @@ import { MyPanorama } from "./objects/MyPanorama.js";
 import { MyFlower } from "./objects/flower/MyFlower.js";
 import { MyGarden } from "./objects/MyGarden.js";
 import { MyRock } from "./objects/MyRock.js";
+import { MyRockSet } from "./objects/MyRockSet.js";
 /**
  * MyScene
  * @constructor
@@ -96,7 +97,9 @@ export class MyScene extends CGFscene {
     this.panorama = new MyPanorama(this, this.panoramaImage);
     this.flower = new MyFlower(this, 10, 4, 2.5, 1.2, 0.15, 4, this.petalColor, this.receptacleColor, this.stemColor, this.leafColor, 40, 20, 10, this.leafAppearance, this.stemAppearance, this.receptacleAppearance, this.pinkPetalAppearance);
     this.garden = new MyGarden(this, 5, 5, this.leafAppearance, this.stemAppearance, this.petalApperances);
-    this.rock = new MyRock(this, 4, 6);
+    this.rock = new MyRock(this, 5, 5, 0.5);
+    this.rockSet = new MyRockSet(this, 9, 5, 5, 0.2, 0.7);
+
 
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -110,6 +113,7 @@ export class MyScene extends CGFscene {
     this.displayTerrain = false;
     this.displayEarth = false;
     this.displayRock = false;
+    this.displayRockSet = false;
 
     // garden
     this.gardenRows = 5;
@@ -208,6 +212,9 @@ export class MyScene extends CGFscene {
       this.popMatrix();
     }
     
+    if (this.displayRockSet){
+      this.rockSet.display();
+    }
 
     if (this.displayNormals)
       this.sphere.enableNormalViz();
