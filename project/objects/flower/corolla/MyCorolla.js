@@ -50,35 +50,42 @@ export class MyCorolla extends CGFobject {
             this.petalAppearance.apply()
             this.scene.translate(0, 0.5, 0)
             this.scene.rotate(-Math.PI/2, 1, 0, 0)
-            for (let i = 0; i < this.nrPetals; i++) {
+
+            for (let i = 0; i < this.nrPetals * 2; i++) {
                 this.scene.pushMatrix()
-                
+                    
                     this.scene.rotate(i * angle, 0, 0, 1)
-                    this.scene.translate(0, this.receptacleRadius - 0.2, 0)
+                    this.scene.translate(0, this.receptacleRadius - 0.1, 0)
                     
                     this.scene.pushMatrix()
                         this.scene.rotate(this.randomsAngles[i], 1, 0, 0);
                         this.petal.display()
                     this.scene.popMatrix()
-                
+
+                    this.scene.pushMatrix()  
+                        this.scene.translate(0, -0.1, 0)  
+                        this.scene.rotate(this.randomsAngles[i] - Math.PI/6, 1, 0, 0);
+                        this.petal.display()
+                    this.scene.popMatrix()  
                 this.scene.popMatrix()
             }
+
+          
 
         this.scene.popMatrix()
 
         
         this.scene.pushMatrix()
             this.coneAppearance.apply();
-            this.scene.scale(this.receptacleRadius * 0.8, 0.5, this.receptacleRadius * 0.8);
+            this.scene.scale(this.receptacleRadius * 0.9, 0.6, this.receptacleRadius * 0.9);
             this.cone.display();
-
         this.scene.popMatrix()
 
 
         this.scene.pushMatrix()
             this.receptacleAppearance.apply()
             this.scene.rotate(-Math.PI/2, 1, 0, 0);
-            this.scene.translate(0, 0, 0.5);
+            this.scene.translate(0, 0, 0.62);
             this.receptacle.display();
 
         this.scene.popMatrix()

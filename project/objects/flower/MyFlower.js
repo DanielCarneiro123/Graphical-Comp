@@ -11,20 +11,30 @@ export class MyFlower extends CGFobject {
             leafAppearance, stemAppearance, receptacleAppearance, petalAppearance) {
         super(scene)
         this.corolla = new MyCorolla(this.scene, nrPetals, corollaRadius, receptacleRadius, petalColor, receptacleColor, stemColor, petalAngle, maxAngle, minAngle, receptacleAppearance, stemAppearance, petalAppearance)
-        this.stem = new MyStem(this.scene, 20, nrCylinder, stemRadius, stemHeight, stemHeight/6, stemHeight/4, leafAppearance, stemAppearance, leafColor, stemColor)
+        this.stem = new MyStem(this.scene, 8, nrCylinder, stemRadius, stemHeight, stemHeight/6, stemHeight/3, leafAppearance, stemAppearance, leafColor, stemColor)
+        this.stemRadius = stemRadius
+        this.angle = Math.random() * Math.PI / 2
     }
 
     display() {
+        
         this.scene.pushMatrix()
-            this.scene.translate(...this.stem.final)
+        
+        this.scene.rotate(-Math.PI/4, 0, 1, 0)
+
+        this.scene.pushMatrix()
+            this.scene.translate(this.stem.final[0] - this.stemRadius, this.stem.final[1] - this.stemRadius, this.stem.final[2])
             this.scene.pushMatrix()
-                this.scene.rotate(Math.PI/3, 1, 0, 0)
+                this.scene.rotate(Math.PI / 4, 0, 1, 0)
+                this.scene.rotate(this.angle, 1, 0, 0)
                 this.corolla.display();
             this.scene.popMatrix()
         this.scene.popMatrix()
         
         this.scene.pushMatrix()
             this.stem.display();
+        this.scene.popMatrix()
+
         this.scene.popMatrix()
     }
 }
