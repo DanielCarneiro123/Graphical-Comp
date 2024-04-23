@@ -39,7 +39,7 @@ export class MyRock extends CGFobject {
                 let y = Math.cos(polarAngle);
 
                 
-                let modificationFactor = 0.1; // Ajuste conforme necessário
+                let modificationFactor = 0.1; 
                 let modifiedX = x + (x * modificationFactor);
                 let modifiedY = y + (y * modificationFactor);
                 let modifiedZ = z + (z * modificationFactor);
