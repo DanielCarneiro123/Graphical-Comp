@@ -1,4 +1,5 @@
 import { MyFlower } from './flower/MyFlower.js';
+<<<<<<< HEAD
 import { CGFobject } from '../../../lib/CGF.js';
 
 export class MyGarden extends CGFobject{
@@ -9,6 +10,17 @@ export class MyGarden extends CGFobject{
         this.leafAppearance = leaf;
         this.stemAppearance = stem;
         this.petalAppearances = petals;
+=======
+import { CGFobject, CGFappearance } from '../../../lib/CGF.js';
+
+export class MyGarden extends CGFobject{
+    constructor(scene, numRows, numCols) {
+        super(scene);
+        this.numRows = numRows;
+        this.numCols = numCols;
+        this.flowers = [];
+
+>>>>>>> 44186d6fe787f68fd31d4921314c21c7a88fee16
         this.createFlowers();
     }
 
