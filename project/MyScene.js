@@ -34,11 +34,9 @@ export class MyScene extends CGFscene {
     this.leaf = new CGFtexture(this, "images/leaf.jpg");
     this.receptacle = new CGFtexture(this, "images/receptacle.jpg");
     
-    this.whitePetal = new CGFtexture(this, "images/whitepetal.jpg");
-    this.bluePetal = new CGFtexture(this, "images/petal1.jpg");
-    this.redPetal = new CGFtexture(this, "images/petal2.png");
-    this.pinkPetal = new CGFtexture(this, "images/petal.jpg");
+    this.initPetalTextures();
 
+  
 
     this.terrainAppearance = new CGFappearance(this);
     this.terrainAppearance.setTexture(this.terrain);
@@ -60,25 +58,8 @@ export class MyScene extends CGFscene {
     this.receptacleAppearance.setTexture(this.receptacle);
     this.receptacleAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
-    this.pinkPetalAppearance = new CGFappearance(this);
-    this.pinkPetalAppearance.setTexture(this.petal);
-    this.pinkPetalAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+    this.petalColors = [vec4.fromValues(189/255, 111/255, 110/255, 1), vec4.fromValues(1.0, 1.0, 0.0, 1), vec4.fromValues(199/255,110/255,44/255, 1), vec4.fromValues(1.0, 0.0, 0.0, 1)];
 
-    this.whitePetalAppearance = new CGFappearance(this);
-    this.whitePetalAppearance.setTexture(this.whitePetal);
-    this.whitePetalAppearance.setTextureWrap('REPEAT', 'REPEAT');
-
-    this.bluePetalAppearance = new CGFappearance(this); 
-    this.bluePetalAppearance.setTexture(this.bluePetal);
-    this.bluePetalAppearance.setTextureWrap('REPEAT', 'REPEAT');
-
-    this.redPetalAppearance = new CGFappearance(this);
-    this.redPetalAppearance.setTexture(this.redPetal);
-    this.redPetalAppearance.setTextureWrap('REPEAT', 'REPEAT');
-
-    this.petalApperances = [this.pinkPetalAppearance, this.whitePetalAppearance, this.bluePetalAppearance, this.redPetalAppearance];
-
-    this.petalColor = vec4.fromValues(0.9, 0.25, 0.5, 1);
     this.receptacleColor = vec4.fromValues(1.0, 1.0, 0.0, 1);
     this.stemColor = vec4.fromValues(0.1, 1.0, 0.1, 1);
     this.leafColor = vec4.fromValues(0.25, 1.0, 0.25, 1);
@@ -89,7 +70,7 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this, 30);
     this.sphere = new MySphere(this, 50, 50);
     this.panorama = new MyPanorama(this, this.panoramaImage);
-    this.flower = new MyFlower(this, 10, 3.5, 2.5, 0.8, 0.15, 4, this.petalColor, this.receptacleColor, this.stemColor, this.leafColor, 30, 30, 20, this.leafAppearance, this.stemAppearance, this.receptacleAppearance, this.whitePetalAppearance);
+    this.flower = new MyFlower(this, 10, 3.5, 2.5, 0.8, 0.15, 4, 30, 30, 20, this.leafAppearance, this.stemAppearance, this.receptacleAppearance, this.petalApperances[3]);
     this.garden = new MyGarden(this, 5, 5, this.leafAppearance, this.stemAppearance, this.petalApperances);
     
     //Objects connected to MyInterface
@@ -146,6 +127,48 @@ export class MyScene extends CGFscene {
 
   onSelectedObjectChanged() {
 
+  }
+
+  initPetalTextures() {
+    this.pinkPetal = new CGFtexture(this, "images/petals/pink.jpg");
+    this.whitePetal = new CGFtexture(this, "images/petals/white.jpg");
+    this.orangePetal = new CGFtexture(this, "images/petals/orange.jpg");
+    this.redPetal = new CGFtexture(this, "images/petals/red.jpg");
+
+    this.pinkPetalAppearance = new CGFappearance(this);
+    this.pinkPetalAppearance.setTexture(this.pinkPetal);
+    this.pinkPetalAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+    this.pinkPetalAppearance.setAmbient(0.85, 0.62, 0.62, 1);
+    this.pinkPetalAppearance.setDiffuse(0.85, 0.62, 0.62, 1);
+    this.pinkPetalAppearance.setSpecular(0.85, 0.62, 0.62, 1);
+    this.pinkPetalAppearance.setShininess(10.0);
+
+    this.whitePetalAppearance = new CGFappearance(this);
+    this.whitePetalAppearance.setTexture(this.whitePetal);
+    this.whitePetalAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+    this.whitePetalAppearance.setAmbient(0.8, 0.8, 0.8, 1);
+    this.whitePetalAppearance.setDiffuse(0.8, 0.8, 0.8, 1);
+    this.whitePetalAppearance.setSpecular(0.8, 0.8, 0.8, 1);
+    this.whitePetalAppearance.setShininess(10.0);
+
+    this.orangePetalAppearance = new CGFappearance(this); 
+    this.orangePetalAppearance.setTexture(this.orangePetal);
+    this.orangePetalAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+    this.orangePetalAppearance.setAmbient(0.95, 0.8, 0.4, 1);
+    this.orangePetalAppearance.setDiffuse(0.95, 0.8, 0.4, 1);
+    this.orangePetalAppearance.setSpecular(0.95, 0.8, 0.4, 1);
+    this.orangePetalAppearance.setShininess(10.0);
+
+    this.redPetalAppearance = new CGFappearance(this);
+    this.redPetalAppearance.setTexture(this.redPetal);
+    this.redPetalAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+    this.redPetalAppearance.setAmbient(0.9, 0.5, 0.5, 1);
+    this.redPetalAppearance.setDiffuse(0.9, 0.5, 0.5, 1);
+    this.redPetalAppearance.setSpecular(0.9, 0.5, 0.5, 1);
+    this.redPetalAppearance.setShininess(10.0);
+
+    this.petalApperances = [this.pinkPetalAppearance, this.whitePetalAppearance, this.orangePetalAppearance, this.redPetalAppearance];
+    
   }
 
   display() {

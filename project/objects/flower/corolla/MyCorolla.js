@@ -4,7 +4,7 @@ import { MyReceptacle } from './MyReceptacle.js';
 import { MyCone } from '../../../polygons/MyCone.js';
 
 export class MyCorolla extends CGFobject {
-    constructor(scene, nrPetals, corollaRadius, receptacleRadius, petalColor, receptacleColor, coneColor, petalAngle, maxAngle, minAngle, receptacleAppearance, coneAppearance, petalAppearance) {
+    constructor(scene, nrPetals, corollaRadius, receptacleRadius, petalAngle, maxAngle, minAngle, receptacleAppearance, coneAppearance, petalAppearance) {
         super(scene)
         this.nrPetals = nrPetals
         this.receptacleRadius = receptacleRadius
@@ -12,10 +12,6 @@ export class MyCorolla extends CGFobject {
         this.coneAppearance = coneAppearance
         this.petalAppearance = petalAppearance
         this.receptacleAppearance = receptacleAppearance
-        
-        this.petalColor = petalColor
-        this.receptacleColor = receptacleColor
-        this.coneColor = coneColor
 
         this.petal = new MyPetal(this.scene, corollaRadius - receptacleRadius, petalAngle, maxAngle, minAngle)
         this.receptacle = new MyReceptacle(this.scene, receptacleRadius)
@@ -28,22 +24,7 @@ export class MyCorolla extends CGFobject {
 
     }
 
-    initColors(petalColor, receptacleColor, coneColor) {
-        this.petalAppearance.setAmbient(petalColor[0], petalColor[1], petalColor[2], 1.0);
-        this.petalAppearance.setDiffuse(petalColor[0], petalColor[1], petalColor[2], 1.0);
-        this.petalAppearance.setSpecular(petalColor[0], petalColor[1], petalColor[2], 1.0);
-
-        this.receptacleAppearance.setAmbient(receptacleColor[0], receptacleColor[1], receptacleColor[2], 1.0);
-        this.receptacleAppearance.setDiffuse(receptacleColor[0], receptacleColor[1], receptacleColor[2], 1.0);
-        this.receptacleAppearance.setSpecular(receptacleColor[0], receptacleColor[1], receptacleColor[2], 1.0);
-
-        this.coneAppearance.setAmbient(coneColor[0], coneColor[1], coneColor[2], 1.0);
-        this.coneAppearance.setDiffuse(coneColor[0], coneColor[1], coneColor[2], 1.0);
-        this.coneAppearance.setSpecular(coneColor[0], coneColor[1], coneColor[2], 1.0);
-    }
-
     display() {
-        this.initColors(this.petalColor, this.receptacleColor, this.coneColor)
         let angle = 2 * Math.PI / this.nrPetals;
 
         this.scene.pushMatrix()

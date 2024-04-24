@@ -25,17 +25,6 @@ export class MyStem extends CGFobject {
 
     }   
 
-    initColors(leafColor, stemColor) {
-        this.leafAppearance.setAmbient(leafColor[0], leafColor[1], leafColor[2], 1);
-        this.leafAppearance.setDiffuse(leafColor[0], leafColor[1], leafColor[2], 1);
-        this.leafAppearance.setSpecular(leafColor[0], leafColor[1], leafColor[2], 1);
-
-        this.stemAppearance.setAmbient(stemColor[0], stemColor[1], stemColor[2], 1);
-        this.stemAppearance.setDiffuse(stemColor[0], stemColor[1], stemColor[2], 1);
-        this.stemAppearance.setSpecular(stemColor[0], stemColor[1], stemColor[2], 1);
-    }
-
-
     initHeights(cylinderNumber, height, minHeight, maxHeight) {
         this.heights = [];
         let max = height;
@@ -75,8 +64,6 @@ export class MyStem extends CGFobject {
     }
 
     display() {
-
-        this.initColors(this.leafColor, this.stemColor);
 
         let offset = [0, 0, 0];
        

@@ -6,12 +6,11 @@ import { MyStem } from "./stem/MyStem.js";
 export class MyFlower extends CGFobject {
     constructor(scene, nrPetals, nrCylinder, 
             corollaRadius, receptacleRadius, stemRadius, stemHeight, 
-            petalColor, receptacleColor, stemColor, leafColor,
             petalAngle, maxAngle, minAngle, 
             leafAppearance, stemAppearance, receptacleAppearance, petalAppearance) {
         super(scene)
-        this.corolla = new MyCorolla(this.scene, nrPetals, corollaRadius, receptacleRadius, petalColor, receptacleColor, stemColor, petalAngle, maxAngle, minAngle, receptacleAppearance, stemAppearance, petalAppearance)
-        this.stem = new MyStem(this.scene, 8, nrCylinder, stemRadius, stemHeight, stemHeight/6, stemHeight/3, leafAppearance, stemAppearance, leafColor, stemColor)
+        this.corolla = new MyCorolla(this.scene, nrPetals, corollaRadius, receptacleRadius, petalAngle, maxAngle, minAngle, receptacleAppearance, stemAppearance, petalAppearance)
+        this.stem = new MyStem(this.scene, 8, nrCylinder, stemRadius, stemHeight, stemHeight/6, stemHeight/3, leafAppearance, stemAppearance)
         this.stemRadius = stemRadius
         this.angle = Math.random() * Math.PI / 2
     }
