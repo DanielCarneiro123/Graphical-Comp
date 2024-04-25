@@ -225,8 +225,8 @@ export class MyScene extends CGFscene {
     if (this.displayFlower) {
       this.pushMatrix();
       this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
-      //this.sunflower.display();
-      this.pinkflower.display();
+      this.sunflower.display();
+      //this.pinkflower.display();
       this.popMatrix();
     }
   
