@@ -23,6 +23,10 @@ export class MyStem extends CGFobject {
 
         this.leaf = new MyLeaf(this.scene)
 
+        console.log("The heights are: ", this.heights)
+        console.log("The missallignments are: ", this.missallignments)
+        console.log("The final is: ", this.final)
+
     }   
 
     initHeights(cylinderNumber, height, minHeight, maxHeight) {
@@ -35,14 +39,15 @@ export class MyStem extends CGFobject {
             this.heights.push(randomHeight);
         }
         this.heights.push(max); 
-        this.heights = this.heights.reverse();
+        this.heights = this.heights.sort().reverse();
     }
 
     initMisallignments(cylinderNumber, radius) {
         this.missallignments = []
-        this.final = [0, 1, 0]
+        let offset_x = 0;
+        let offset_z = 0;
 
-        for (let i = 0; i < cylinderNumber; i++) {
+        for (let i = 0; i < cylinderNumber - 1; i++) {
             let randomAngle = Math.random() * 2 * Math.PI;
             let randomRadius = Math.random(radius/2, radius) * 1.5;
             let x = Math.cos(randomAngle) * randomRadius;
@@ -50,9 +55,19 @@ export class MyStem extends CGFobject {
             x = Math.round(x * 100) / 100
             z = Math.round(z * 100) / 100
             this.missallignments.push([x, 1, z])
-            this.final = [this.final[0] + x, 1, this.final[2] + z]
+            offset_x += x;
+            offset_z += z;
         }
-        this.final = [this.final[0] * this.radius,  this.height, this.final[2] * this.radius - this.radius]
+        
+        let angles = [Math.PI / 6, Math.PI / 5, Math.PI / 4, Math.PI / 3];
+        let randomIndex = Math.floor(Math.random() * angles.length);
+        this.angle = angles[randomIndex];
+        let x = Math.cos(this.angle);
+        let z = Math.sin(this.angle);
+        this.missallignments.push([x, 1, z])
+        offset_x += x;
+        offset_z += z;
+        this.final = [offset_x * this.radius - this.radius / 2, this.height - this.radius, offset_z * this.radius - this.radius / 2]
     }
 
 
@@ -77,16 +92,13 @@ export class MyStem extends CGFobject {
                         this.scene.translate(this.radius, 0, 0)
                         if (i % 2) this.scene.rotate(Math.PI, 0, 1, 0)
                         this.scene.rotate(Math.PI/3, 1, 0, 0)
-
                         this.leafAppearance.apply();
                         this.leaf.display();
                     this.scene.popMatrix();
                 }
 
                 this.scene.pushMatrix();
-                    this.stemAppearance.setAmbient(0.1, 0.1, 0.1, 1);
                     this.stemAppearance.apply();
-                    
                     this.scene.scale(1, this.heights[i], 1);
                     this.cylinders[i].display();
                     offset = [offset[0] + this.missallignments[i][0] , offset[1] + this.heights[i], offset[2] + this.missallignments[i][2]];

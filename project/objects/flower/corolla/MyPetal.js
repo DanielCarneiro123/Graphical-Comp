@@ -16,12 +16,12 @@ export class MyPetal extends CGFobject {
 	
 	display() {
 		this.scene.pushMatrix();
-			this.scene.scale(0.7, this.height / 2, 0.7);			
+			this.scene.scale(1, this.height / 2, 1);			
 			this.scene.translate(0, this.height / 2, 0);
 
 			// inner petal
 			this.scene.pushMatrix();
-				this.scene.scale(1, -1, 1);
+				this.scene.rotate(Math.PI, 0, 0, 1);
 				this.triangle.display();
 			this.scene.popMatrix();
 
