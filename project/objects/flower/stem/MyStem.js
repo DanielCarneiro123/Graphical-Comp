@@ -22,11 +22,6 @@ export class MyStem extends CGFobject {
         this.initCylinders(cylinderNumber, radius);
 
         this.leaf = new MyLeaf(this.scene)
-
-        console.log("The heights are: ", this.heights)
-        console.log("The missallignments are: ", this.missallignments)
-        console.log("The final is: ", this.final)
-
     }   
 
     initHeights(cylinderNumber, height, minHeight, maxHeight) {
