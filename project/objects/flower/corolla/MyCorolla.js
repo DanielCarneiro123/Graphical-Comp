@@ -61,7 +61,6 @@ export class MyCorolla extends CGFobject {
             this.cone.display();
         this.scene.popMatrix()
 
-
         this.scene.pushMatrix()
             this.receptacleAppearance.apply()
             this.scene.rotate(-Math.PI/2, 1, 0, 0);

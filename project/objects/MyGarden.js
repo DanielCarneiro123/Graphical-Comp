@@ -13,9 +13,10 @@ export class MyGarden extends CGFobject{
         this.petalAppearances = petalAppearances;
         this.receptacleAppearances = receptacleAppearances;
         this.shadowAppearance = new CGFappearance(this.scene);
-        this.shadowAppearance.setAmbient(0.1, 0.1, 0.1, 0);
-        this.shadowAppearance.setDiffuse(0.1, 0.1, 0.1, 0);
+        this.shadowAppearance.setAmbient(0, 0, 0, 0.29);
+        this.shadowAppearance.setDiffuse(0, 0, 0, 0);
         this.shadowAppearance.setSpecular(0, 0, 0, 0);
+        this.shadowAppearance.setEmission(0, 0, 0, 0);
 
         this.flowerPositions = [];
         for (let i = 0; i < this.numRows; i++) {
@@ -66,7 +67,7 @@ export class MyGarden extends CGFobject{
                     petalAppearance
                 ));
 
-                this.shadow[i].push(new MyCircle(this.scene, receptacleRadius * 2, 20));
+                this.shadow[i].push(new MyCircle(this.scene, receptacleRadius * 1.5, 20));
             }
         }
     }
