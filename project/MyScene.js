@@ -98,7 +98,7 @@ export class MyScene extends CGFscene {
     this.flower = new MyFlower(this, 10, 4, 2.5, 1.2, 0.15, 4, this.petalColor, this.receptacleColor, this.stemColor, this.leafColor, 40, 20, 10, this.leafAppearance, this.stemAppearance, this.receptacleAppearance, this.pinkPetalAppearance);
     this.garden = new MyGarden(this, 5, 5, this.leafAppearance, this.stemAppearance, this.petalApperances);
     this.rock = new MyRock(this, 5, 5, 0.5);
-    this.rockSet = new MyRockSet(this, 9, 5, 5, 0.2, 0.7);
+    this.rockSet = new MyRockSet(this, 5, 10);
 
 
     //Objects connected to MyInterface
@@ -213,7 +213,11 @@ export class MyScene extends CGFscene {
     }
     
     if (this.displayRockSet){
+      this.pushMatrix();
+      this.rockAppearance.apply();
+      this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
       this.rockSet.display();
+      this.popMatrix();
     }
 
     if (this.displayNormals)
