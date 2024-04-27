@@ -4,6 +4,7 @@ import { MySphere } from "./polygons/MySphere.js";
 import { MyPanorama } from "./objects/MyPanorama.js";
 import { MyFlower } from "./objects/flower/MyFlower.js";
 import { MyGarden } from "./objects/MyGarden.js";
+import { MyBee } from "./objects/bee/MyBee.js";
 
 /**
  * MyScene
@@ -63,7 +64,7 @@ export class MyScene extends CGFscene {
     this.panorama = new MyPanorama(this, this.panoramaImage);
     this.sunflower = new MyFlower(this, 12, 4, 2.5, 0.8, 0.15, 4, 40, 40, 20, this.leafAppearance, this.stemAppearance, this.receptacleAppearances[0], this.petalAppearances[3]);
     this.pinkflower = new MyFlower(this, 12, 4, 2.5, 0.8, 0.15, 4, 20, 40, 20, this.leafAppearance, this.stemAppearance, this.receptacleAppearances[1], this.petalAppearances[0]);
-
+    this.bee = new MyBee(this);
 
     this.garden = new MyGarden(this, 5, 5, this.leafAppearance, this.stemAppearance, this.petalAppearances, this.receptacleAppearances);
     
@@ -78,6 +79,8 @@ export class MyScene extends CGFscene {
     this.displayGarden = false;
     this.displayTerrain = false;
     this.displayEarth = false;
+    this.displayBee = false;
+
 
     // garden
     this.gardenRows = 5;
@@ -244,12 +247,7 @@ export class MyScene extends CGFscene {
       this.garden.display();
     }
     
-
-    if (this.displayNormals)
-      this.sphere.enableNormalViz();
-    else
-      this.sphere.disableNormalViz();
-
+    this.bee.display();
     // ---- END Primitive drawing section
   }
 }
