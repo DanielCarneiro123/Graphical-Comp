@@ -2,11 +2,10 @@ import { CGFobject, CGFappearance } from "../../../../lib/CGF.js";
 import { MyCircle } from "../../../polygons/MyCircle.js";
 
 export class MyWing extends CGFobject {
-  constructor(scene, wingAngle) {
+  constructor(scene) {
     super(scene);
 
     this.circle = new MyCircle(this.scene, 1, 50);
-    this.wingAngle = wingAngle;
     this.transparent = new CGFappearance(this.scene);
     this.transparent.setAmbient(0.0, 0.0, 0.0, 0.2);
     this.transparent.setDiffuse(0.0, 0.0, 0.0, 0.0);
