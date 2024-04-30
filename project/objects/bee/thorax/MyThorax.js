@@ -6,11 +6,11 @@ import { MyMiddleLeg } from "./legs/MyMiddleLeg.js";
 import { MyHindLeg } from "./legs/MyHindLeg.js";
 
 export class MyThorax extends CGFobject {
-  constructor(scene) {
+  constructor(scene, wingAngle) {
     super(scene);
-
+    this.wingAngle = wingAngle;
     this.sphere = new MySphere(this.scene, 50, 50);
-    this.wing = new MyWing(this.scene);
+    this.wing = new MyWing(this.scene, this.wingAngle);
     this.frontleg = new MyFrontLeg(this.scene);
     this.middleleg = new MyMiddleLeg(this.scene);
     this.hindleg = new MyHindLeg(this.scene);

@@ -7,6 +7,7 @@ export class MyMovement extends MyAnimation {
         this.x = 0;
         this.y = 0;
         this.z = 0;
+        this.wingAngle = 0;
     }
 
     updatePositionObj(elapsedTime, vector) {
@@ -19,9 +20,10 @@ export class MyMovement extends MyAnimation {
             staticSpeed = 10;
         }
 
-        this.x = vector.x;
-        this.y = this.startVal + this.movementFunction(elapsedTime) * (this.endVal - this.startVal);
-        this.z = vector.z;
+        this.x = vector.x + vector.speed * Math.sin(vector.orientation)
+        this.y = this.animVal;
+        this.z = vector.z + vector.speed * Math.cos(vector.orientation)
+        this.wingAngle = Math.PI / 4 * Math.sin(staticSpeed * elapsedTime)
     }
 
     movementFunction(elapsedTime) {

@@ -89,6 +89,9 @@ export class MyScene extends CGFscene {
 
     this.speedFactor = 1;
 
+    this.setUpdatePeriod(50);
+
+    this.appStartTime = Date.now();
 
     this.enableTextures(true);
 
