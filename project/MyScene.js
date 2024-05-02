@@ -124,7 +124,6 @@ export class MyScene extends CGFscene {
 
   initPetalTextures() {
     this.pinkPetal = new CGFtexture(this, "images/petals/pink.jpg");
-    this.whitePetal = new CGFtexture(this, "images/petals/white.jpg");
     this.orangePetal = new CGFtexture(this, "images/petals/orange.jpg");
     this.redPetal = new CGFtexture(this, "images/petals/red.jpg");
     this.yellowPetal = new CGFtexture(this, "images/petals/yellow.jpg");

@@ -1,5 +1,4 @@
-import { CGFobject, CGFappearance } from "../../../lib/CGF.js";
-import { MySphere } from "../../polygons/MySphere.js";
+import { CGFobject } from "../../../lib/CGF.js";
 import { MyHead } from "./head/MyHead.js";
 import { MyThorax } from "./thorax/MyThorax.js";
 import { MyAbdomen } from "./MyAbdomen.js";
@@ -13,8 +12,8 @@ export class MyBee extends CGFobject {
   }
 
   display() {
-    this.head.display();
-    this.thorax.display();
-    this.abdomen.display();
+      this.head.display();
+      this.thorax.display();
+      this.abdomen.display();
   }
 }
