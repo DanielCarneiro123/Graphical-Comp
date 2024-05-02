@@ -27,11 +27,13 @@ export class MyScene extends CGFscene {
     this.gl.enable(this.gl.DEPTH_TEST);
     this.gl.enable(this.gl.CULL_FACE);
     this.gl.depthFunc(this.gl.LEQUAL);
-
+    this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
+    this.gl.enable(this.gl.BLEND);
+    
     this.terrain = new CGFtexture(this, "images/terrain.jpg");
     this.earth = new CGFtexture(this, "images/earth.jpg");
-    this.panoramaImage = new CGFtexture(this, "images/panorama4.jpg");
-    this.stem = new CGFtexture(this, "images/stem4.jpg");
+    this.panoramaImage = new CGFtexture(this, "images/panorama1.jpg");
+    this.stem = new CGFtexture(this, "images/stem.jpg");
     this.leaf = new CGFtexture(this, "images/leaf.jpg");
     this.receptacle = new CGFtexture(this, "images/receptacle.jpg");
     this.whitePetal = new CGFtexture(this, "images/whitepetal.jpg");
@@ -40,7 +42,6 @@ export class MyScene extends CGFscene {
     this.pinkPetal = new CGFtexture(this, "images/petal.jpg");
     this.rock = new CGFtexture(this, "images/rock.png");
 
-  
     this.terrainAppearance = new CGFappearance(this);
     this.terrainAppearance.setTexture(this.terrain);
     this.terrainAppearance.setTextureWrap('REPEAT', 'REPEAT');
@@ -108,7 +109,7 @@ export class MyScene extends CGFscene {
     this.scaleFactor = 1;
 
     // display
-    this.displayFlower = false;
+    this.displayFlower = true;
     this.displayGarden = false;
     this.displayTerrain = false;
     this.displayEarth = false;
@@ -125,10 +126,15 @@ export class MyScene extends CGFscene {
 
   }
   initLights() {
-    this.lights[0].setPosition(15, 0, 5, 1);
+    this.lights[0].setPosition(15, 5, 5, 1);
     this.lights[0].setDiffuse(1.0, 1.0, 1.0, 1.0);
     this.lights[0].enable();
     this.lights[0].update();
+
+    this.lights[1].setPosition(-15, 5, 5, 1);
+    this.lights[1].setDiffuse(1.0, 1.0, 1.0, 1.0);
+    this.lights[1].enable();
+    this.lights[1].update();
   }
   initCameras() {
     this.camera = new CGFcamera(
@@ -147,11 +153,73 @@ export class MyScene extends CGFscene {
   }
 
   updateGarden() {
-    this.garden = new MyGarden(this, this.gardenRows, this.gardenCols, this.stemAppearance, this.leafAppearance);
+    this.garden = new MyGarden(this, this.gardenRows, this.gardenCols, this.stemAppearance, this.leafAppearance, this.petalAppearances, this.receptacleAppearances);
   }
 
-  onSelectedObjectChanged() {
+  initPetalTextures() {
+    this.pinkPetal = new CGFtexture(this, "images/petals/pink.jpg");
+    this.whitePetal = new CGFtexture(this, "images/petals/white.jpg");
+    this.orangePetal = new CGFtexture(this, "images/petals/orange.jpg");
+    this.redPetal = new CGFtexture(this, "images/petals/red.jpg");
+    this.yellowPetal = new CGFtexture(this, "images/petals/yellow.jpg");
 
+    this.pinkPetalAppearance = new CGFappearance(this);
+    this.pinkPetalAppearance.setTexture(this.pinkPetal);
+    this.pinkPetalAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+    this.pinkPetalAppearance.setAmbient(0.85, 0.62, 0.62, 1);
+    this.pinkPetalAppearance.setDiffuse(0.85, 0.62, 0.62, 1);
+    this.pinkPetalAppearance.setSpecular(0.85, 0.62, 0.62, 1);
+    this.pinkPetalAppearance.setShininess(10.0);
+
+    this.orangePetalAppearance = new CGFappearance(this); 
+    this.orangePetalAppearance.setTexture(this.orangePetal);
+    this.orangePetalAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+    this.orangePetalAppearance.setAmbient(0.95, 0.8, 0.4, 1);
+    this.orangePetalAppearance.setDiffuse(0.95, 0.8, 0.4, 1);
+    this.orangePetalAppearance.setSpecular(0.95, 0.8, 0.4, 1);
+    this.orangePetalAppearance.setShininess(10.0);
+
+    this.redPetalAppearance = new CGFappearance(this);
+    this.redPetalAppearance.setTexture(this.redPetal);
+    this.redPetalAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+    this.redPetalAppearance.setAmbient(0.9, 0.5, 0.5, 1);
+    this.redPetalAppearance.setDiffuse(0.9, 0.5, 0.5, 1);
+    this.redPetalAppearance.setSpecular(0.9, 0.5, 0.5, 1);
+    this.redPetalAppearance.setShininess(10.0);
+
+    this.yellowPetalAppearance = new CGFappearance(this);
+    this.yellowPetalAppearance.setTexture(this.yellowPetal);
+    this.yellowPetalAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+    this.yellowPetalAppearance.setAmbient(0.9, 0.9, 0.5, 1);
+    this.yellowPetalAppearance.setDiffuse(0.9, 0.9, 0.5, 1);
+    this.yellowPetalAppearance.setSpecular(0.9, 0.9, 0.5, 1);
+    this.yellowPetalAppearance.setShininess(10.0);
+
+    this.petalAppearances = [this.pinkPetalAppearance, this.orangePetalAppearance, this.redPetalAppearance, this.yellowPetalAppearance];
+    
+  }
+
+  initRecetacleTextures() {
+    this.sunflower = new CGFtexture(this, "images/receptacles/sunflower.png");
+    this.pinkFlower = new CGFtexture(this, "images/receptacles/pink.png");
+
+    this.sunflowerAppearance = new CGFappearance(this);
+    this.sunflowerAppearance.setTexture(this.sunflower);
+    this.sunflowerAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+    this.sunflowerAppearance.setAmbient(1, 1, 0, 1);
+    this.sunflowerAppearance.setDiffuse(1, 1, 0, 1);
+    this.sunflowerAppearance.setSpecular(1, 1, 0, 1);
+    this.sunflowerAppearance.setShininess(10.0);
+
+    this.pinkflowerAppearance = new CGFappearance(this);
+    this.pinkflowerAppearance.setTexture(this.pinkFlower);
+    this.pinkflowerAppearance.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
+    this.pinkflowerAppearance.setAmbient(0.9, 0.5, 0.5, 1);
+    this.pinkflowerAppearance.setDiffuse(0.9, 0.5, 0.5, 1);
+    this.pinkflowerAppearance.setSpecular(0.9, 0.5, 0.5, 1);
+    this.pinkflowerAppearance.setShininess(10.0);
+
+    this.receptacleAppearances = [this.sunflowerAppearance, this.pinkflowerAppearance];
   }
 
   display() {
@@ -176,7 +244,7 @@ export class MyScene extends CGFscene {
     if (this.displayTerrain) {
       this.pushMatrix();
       this.terrainAppearance.apply();
-      this.translate(0,-100,0);
+      this.translate(0,-50,0);
       this.scale(400,400,400);
       this.rotate(-Math.PI/2.0,1,0,0);
       this.plane.display();
@@ -196,11 +264,20 @@ export class MyScene extends CGFscene {
     if (this.displayFlower) {
       this.pushMatrix();
       this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
-      this.flower.display();
+      this.sunflower.display();
+      //this.pinkflower.display();
       this.popMatrix();
     }
+  
 
     if (this.displayGarden) {
+      this.pushMatrix();
+        this.terrainAppearance.apply();
+        this.scale(this.gardenRows * 5, 1, this.gardenCols * 5);
+        this.translate(0.4,0,0.4);
+        this.rotate(-Math.PI/2.0,1,0,0);
+        this.plane.display();
+      this.popMatrix();
       this.garden.display();
     }
 
@@ -228,3 +305,5 @@ export class MyScene extends CGFscene {
     // ---- END Primitive drawing section
   }
 }
+
+

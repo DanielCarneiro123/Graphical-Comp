@@ -19,7 +19,7 @@ export class MyCone extends CGFobject {
             let x = Math.cos(i * angle);
             let z = Math.sin(i * angle);
             this.vertices.push(x, 1, z, 0, 0, 0);
-            this.normals.push(0, 1, 0, 0, -1, 0);
+            this.normals.push(0, -1, 0, 0, 1, 0);
             this.texCoords.push(1 / this.slices * i, 0, 1 / this.slices * i, 1);
         }
 
