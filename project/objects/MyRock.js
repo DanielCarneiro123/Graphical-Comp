@@ -1,26 +1,28 @@
-import {CGFobject} from '../../lib/CGF.js';
+import { CGFobject } from '../../lib/CGF.js';
 
-export class MySphere extends CGFobject {
-    constructor(scene, slices, stacks, radius = 1, panorama = false) {
+export class MyRock extends CGFobject {
+    constructor(scene, slices, stacks, radius = 1, posX = 0, posY = 0, posZ = 0, rotationY = 0, panorama = false) {
         super(scene);
         this.slices = slices;
         this.stacks = stacks;
         this.radius = radius;
+        this.posX = posX; 
+        this.posY = posY; 
+        this.posZ = posZ; 
+        this.rotationY = rotationY; 
         this.panorama = panorama ? -1 : 1;
         this.initBuffers();
-    }   
+    }
 
     initBuffers() {
         this.vertices = [];
         this.indices = [];
         this.normals = [];
         this.texCoords = [];
-
+    
         let polarStep = (Math.PI / 2) / this.stacks;
         let azumithStep = (2 * Math.PI) / this.slices;
-
-
-        
+    
         /* Vertices, normals and texCoords */
         for (let i = 0; i <= this.slices; i++) {
 
@@ -37,9 +39,16 @@ export class MySphere extends CGFobject {
                 let z = Math.sin(polarAngle) * Math.cos(azumithAngle);
                 let x = Math.sin(polarAngle) * Math.sin(azumithAngle);
                 let y = Math.cos(polarAngle);
-                
+
+                let inclinationFactorX = Math.random(); 
+                let inclinationFactorY = Math.random(); 
+                let inclinationFactorZ = Math.random(); 
+                let modifiedNormalX = x + (inclinationFactorX * x);
+                let modifiedNormalY = y + (inclinationFactorY * y);
+                let modifiedNormalZ = z + (inclinationFactorZ * z);
+
                 this.vertices.push(this.radius * x, this.radius * y, this.radius * z);
-                this.normals.push(this.panorama * x, this.panorama * y, this.panorama * z);
+                this.normals.push(modifiedNormalX, modifiedNormalY, modifiedNormalZ);
                 this.texCoords.push(i / this.slices, j / (2 * this.stacks));
             }
 
@@ -50,11 +59,12 @@ export class MySphere extends CGFobject {
         }
 
 
-        /* Indices */
+
+        
         let offset = (2 * this.stacks) + 1; 
         let indexA, indexB, indexC, indexD;
 
-        for (let i = 1; i <= this.slices; i++) {
+        for (let i = 1; i <= this.slices + 1; i++) {
 
             // North Pole Triangles
             indexA = i * offset + 1; 
@@ -94,5 +104,3 @@ export class MySphere extends CGFobject {
         this.initGLBuffers();
     }
 }
-
-

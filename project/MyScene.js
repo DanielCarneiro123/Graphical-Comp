@@ -4,7 +4,8 @@ import { MySphere } from "./polygons/MySphere.js";
 import { MyPanorama } from "./objects/MyPanorama.js";
 import { MyFlower } from "./objects/flower/MyFlower.js";
 import { MyGarden } from "./objects/MyGarden.js";
-
+import { MyRock } from "./objects/MyRock.js";
+import { MyRockSet } from "./objects/MyRockSet.js";
 /**
  * MyScene
  * @constructor
@@ -34,9 +35,12 @@ export class MyScene extends CGFscene {
     this.panoramaImage = new CGFtexture(this, "images/panorama1.jpg");
     this.stem = new CGFtexture(this, "images/stem.jpg");
     this.leaf = new CGFtexture(this, "images/leaf.jpg");
-    
-    this.initPetalTextures();
-    this.initRecetacleTextures();
+    this.receptacle = new CGFtexture(this, "images/receptacle.jpg");
+    this.whitePetal = new CGFtexture(this, "images/whitepetal.jpg");
+    this.bluePetal = new CGFtexture(this, "images/bluepetal.jpg");
+    this.redPetal = new CGFtexture(this, "images/redpetal.jpg");
+    this.pinkPetal = new CGFtexture(this, "images/petal.jpg");
+    this.rock = new CGFtexture(this, "images/rock.png");
 
     this.terrainAppearance = new CGFappearance(this);
     this.terrainAppearance.setTexture(this.terrain);
@@ -54,19 +58,50 @@ export class MyScene extends CGFscene {
     this.leafAppearance.setTexture(this.leaf);
     this.leafAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
+    this.receptacleAppearance = new CGFappearance(this);
+    this.receptacleAppearance.setTexture(this.receptacle);
+    this.receptacleAppearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.pinkPetalAppearance = new CGFappearance(this);
+    this.pinkPetalAppearance.setTexture(this.petal);
+    this.pinkPetalAppearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.whitePetalAppearance = new CGFappearance(this);
+    this.whitePetalAppearance.setTexture(this.whitePetal);
+    this.whitePetalAppearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.bluePetalAppearance = new CGFappearance(this); 
+    this.bluePetalAppearance.setTexture(this.bluePetal);
+    this.bluePetalAppearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.redPetalAppearance = new CGFappearance(this);
+    this.redPetalAppearance.setTexture(this.redPetal);
+    this.redPetalAppearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.rockAppearance  = new CGFappearance(this);
+    this.rockAppearance.setTexture(this.rock);
+    this.rockAppearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.petalApperances = [this.pinkPetalAppearance, this.whitePetalAppearance, this.bluePetalAppearance, this.redPetalAppearance];
+
+    this.petalColor = vec4.fromValues(0.9, 0.25, 0.5, 1);
+    this.receptacleColor = vec4.fromValues(1.0, 1.0, 0.0, 1);
+    this.stemColor = vec4.fromValues(0.1, 1.0, 0.1, 1);
+    this.leafColor = vec4.fromValues(0.25, 1.0, 0.25, 1);
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
 
-    this.plane = new MyPlane(this, 30);
+
+    this.plane = new MyPlane(this,30);
     this.sphere = new MySphere(this, 50, 50);
     this.panorama = new MyPanorama(this, this.panoramaImage);
-    this.sunflower = new MyFlower(this, 12, 4, 2.5, 0.8, 0.15, 4, 40, 40, 20, this.leafAppearance, this.stemAppearance, this.receptacleAppearances[0], this.petalAppearances[3]);
-    this.pinkflower = new MyFlower(this, 12, 4, 2.5, 0.8, 0.15, 4, 20, 40, 20, this.leafAppearance, this.stemAppearance, this.receptacleAppearances[1], this.petalAppearances[0]);
+    this.flower = new MyFlower(this, 10, 4, 2.5, 1.2, 0.15, 4, this.petalColor, this.receptacleColor, this.stemColor, this.leafColor, 40, 20, 10, this.leafAppearance, this.stemAppearance, this.receptacleAppearance, this.pinkPetalAppearance);
+    this.garden = new MyGarden(this, 5, 5, this.leafAppearance, this.stemAppearance, this.petalApperances);
+    this.rock = new MyRock(this, 5, 5, 0.5);
+    this.rockSet = new MyRockSet(this, 5, 10);
 
 
-    this.garden = new MyGarden(this, 5, 5, this.leafAppearance, this.stemAppearance, this.petalAppearances, this.receptacleAppearances);
-    
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayNormals = false;
@@ -78,6 +113,8 @@ export class MyScene extends CGFscene {
     this.displayGarden = false;
     this.displayTerrain = false;
     this.displayEarth = false;
+    this.displayRock = false;
+    this.displayRockSet = false;
 
     // garden
     this.gardenRows = 5;
@@ -243,7 +280,22 @@ export class MyScene extends CGFscene {
       this.popMatrix();
       this.garden.display();
     }
+
+    if (this.displayRock) {
+      this.pushMatrix();
+      this.rockAppearance.apply();
+      this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+      this.rock.display();
+      this.popMatrix();
+    }
     
+    if (this.displayRockSet){
+      this.pushMatrix();
+      this.rockAppearance.apply();
+      this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+      this.rockSet.display();
+      this.popMatrix();
+    }
 
     if (this.displayNormals)
       this.sphere.enableNormalViz();

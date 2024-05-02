@@ -31,6 +31,8 @@ export class MyInterface extends CGFinterface {
         displayGroup.add(this.scene, 'displayGarden').name("Display garden");
         displayGroup.add(this.scene, 'displayTerrain').name("Display terrain");
         displayGroup.add(this.scene, 'displayEarth').name("Display earth");
+        displayGroup.add(this.scene, 'displayRock').name("Display Rock");
+        displayGroup.add(this.scene, 'displayRockSet').name("Display Rock Set");
 
         var garden = this.gui.addFolder('Garden')
         garden.add(this.scene, 'gardenRows', 1, 8, 1).name('Garden Rows').onChange(this.scene.updateGarden.bind(this.scene));
