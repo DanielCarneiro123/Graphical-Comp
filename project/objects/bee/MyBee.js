@@ -16,10 +16,10 @@ export class MyBee extends CGFobject {
     this.head = new MyHead(this.scene);
     this.abdomen = new MyAbdomen(this.scene);
     this.speed = 0;
-    this.orientation = 1;
+    this.orientation = 0;
     this.position = {x: x, y: y, z: z};
     this.defaultPosition = {x: x, y: y, z: z};
-    this.movement = new MyMovement(-0.5, 0.5, 1, true, true);
+    this.movement = new MyMovement(-0.5, 0.5, 0.5, true, true);
 
     this.slack = 10;
     this.lastSpeedFactor = 1;
@@ -71,7 +71,7 @@ export class MyBee extends CGFobject {
 
   reset() {
     this.speed = 0
-    this.orientation = 0
+    this.orientation = 0;
     this.position = {x: this.defaultPosition.x, y: this.defaultPosition.y, z: this.defaultPosition.z}
   }
 

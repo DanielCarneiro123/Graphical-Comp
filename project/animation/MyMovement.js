@@ -20,10 +20,10 @@ export class MyMovement extends MyAnimation {
             staticSpeed = 10;
         }
 
-        this.x = vector.x + vector.speed * Math.sin(vector.orientation)
+        this.x = vector.x + vector.speed*(-Math.cos(vector.orientation))
         this.y = this.animVal;
-        this.z = vector.z + vector.speed * Math.cos(vector.orientation)
-        this.wingAngle = Math.PI / 4 * Math.sin(staticSpeed * elapsedTime)
+        this.z = vector.z + vector.speed*(-Math.sin(-vector.orientation) )
+        this.wingAngle = Math.PI / 4 * Math.sin(4*staticSpeed * elapsedTime)
     }
 
     movementFunction(elapsedTime) {
