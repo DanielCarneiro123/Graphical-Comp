@@ -13,7 +13,7 @@ export class MyBee extends CGFobject {
 
   display() {
       this.head.display();
-      this.thorax.display();
       this.abdomen.display();
+      this.thorax.display();
   }
 }

@@ -17,8 +17,8 @@ export class MyHead extends CGFobject {
     this.gold = new CGFappearance(this.scene);
     this.gold.setAmbient(120/256, 80/256, 0, 1);
     this.gold.setDiffuse(120/256, 80/256, 0, 1);
-    this.gold.setSpecular(120/256, 80/256, 0, 1); // Set a non-zero specular component
-    this.gold.setShininess(4); // Adjust the shininess value as desired
+    this.gold.setSpecular(120/256, 80/256, 0, 1); 
+    this.gold.setShininess(4); 
     this.gold.setTexture(this.head);
     this.gold.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
 
@@ -31,7 +31,12 @@ export class MyHead extends CGFobject {
     this.white.setSpecular(0.1, 0.1, 0.1, 1);
     this.white.setShininess(0);
 
-    
+    this.black = new CGFappearance(this.scene);
+    this.black.setAmbient(0.1, 0.1, 0.1, 1);
+    this.black.setDiffuse(0.0, 0.0, 0.0, 1);
+    this.black.setSpecular(0.0, 0.0, 0.0, 1);
+    this.black.setShininess(10.0);
+
   }
 
   display() {
@@ -64,14 +69,13 @@ export class MyHead extends CGFobject {
     
     // Antennas
     this.scene.pushMatrix();
-        
+        this.black.apply();
         this.scene.pushMatrix();
             this.scene.translate(-0.2, 0.6, -0.2);
             this.scene.rotate(-Math.PI / 4, 0, 1, 0);
             this.antenna.display();
         this.scene.popMatrix();
         
-
         this.scene.pushMatrix();
             this.scene.translate(-0.2, 0.6, 0.2);
             this.antenna.display();

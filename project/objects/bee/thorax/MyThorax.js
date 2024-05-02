@@ -20,6 +20,10 @@ export class MyThorax extends CGFobject {
     this.gold.setTexture(this.texture);
     this.gold.setTextureWrap('REPEAT', 'REPEAT');
 
+    this.legTexture = new CGFtexture(this.scene, "images/leg.png");
+    this.leg = new CGFappearance(this.scene);
+    this.leg.setTexture(this.legTexture);
+    this.leg.setTextureWrap('REPEAT', 'REPEAT');
   }
 
   display() {
@@ -33,22 +37,9 @@ export class MyThorax extends CGFobject {
         this.scene.scale(0.8, 1.1, 0.8);
         this.sphere.display();
     this.scene.popMatrix();
-
-    this.scene.pushMatrix();
-        this.scene.translate(1.3, 0, 0);
-        this.scene.pushMatrix();
-            this.scene.rotate(Math.PI / 2.5, 1, 0, 0);
-            this.scene.translate(0, 0.6, 0);
-            this.wing.display();
-        this.scene.popMatrix();
-        this.scene.pushMatrix();
-            this.scene.rotate(- Math.PI / 2.5, 1, 0, 0);
-            this.scene.translate(0, 0.6, 0);
-            this.wing.display();
-        this.scene.popMatrix();
-    this.scene.popMatrix();
     
     this.scene.pushMatrix();
+        this.leg.apply();
         this.scene.translate(1.3, -0.7, 0.2);
         this.scene.rotate(Math.PI / 6, 0, 1, 0);
         this.frontleg.display();
@@ -84,5 +75,19 @@ export class MyThorax extends CGFobject {
         this.hindleg.display();
     this.scene.popMatrix();
 
+
+    this.scene.pushMatrix();
+        this.scene.translate(1.3, 0, 0);
+        this.scene.pushMatrix();
+            this.scene.rotate(Math.PI / 2.5, 1, 0, 0);
+            this.scene.translate(0, 0.6, 0);
+            this.wing.display();
+        this.scene.popMatrix();
+        this.scene.pushMatrix();
+            this.scene.rotate(- Math.PI / 2.5, 1, 0, 0);
+            this.scene.translate(0, 0.6, 0);
+            this.wing.display();
+        this.scene.popMatrix();
+    this.scene.popMatrix();
   }
 }

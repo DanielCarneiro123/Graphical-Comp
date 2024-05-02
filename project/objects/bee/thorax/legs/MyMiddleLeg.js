@@ -6,16 +6,11 @@ export class MyMiddleLeg extends CGFobject {
     super(scene);
 
     this.sphere = new MySphere(this.scene, 10, 10);
-    this.black = new CGFappearance(this.scene);
-    this.black.setAmbient(0, 0, 0, 1);
-    this.black.setDiffuse(0, 0, 0, 1);
-    this.black.setSpecular(0.0, 0.0, 0.0, 1);
   }
 
   display() {
 
     this.scene.pushMatrix();
-        this.black.apply();
         this.scene.translate(0, -0.2, 0);
         this.scene.pushMatrix();
             this.scene.scale(0.1, 0.2, 0.1);
