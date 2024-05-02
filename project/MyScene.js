@@ -75,7 +75,9 @@ export class MyScene extends CGFscene {
     this.scaleFactor = 1;
 
     // display
-    this.displayFlower = true;
+    this.displaySunFlower = false;
+    this.displayPinkFlower = false;
+
     this.displayGarden = false;
     this.displayTerrain = false;
     this.displayEarth = false;
@@ -226,11 +228,17 @@ export class MyScene extends CGFscene {
     }
 
 
-    if (this.displayFlower) {
+    if (this.displaySunFlower) {
       this.pushMatrix();
-      this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
-      this.sunflower.display();
-      //this.pinkflower.display();
+        this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+        this.sunflower.display();
+      this.popMatrix();
+    }
+
+    if (this.displayPinkFlower) {
+      this.pushMatrix();
+        this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+        this.pinkflower.display();
       this.popMatrix();
     }
   
@@ -246,7 +254,9 @@ export class MyScene extends CGFscene {
       this.garden.display();
     }
     
-    this.bee.display();
+    //if (this.displayBee) {
+      this.bee.display();
+    //}
     // ---- END Primitive drawing section
   }
 }

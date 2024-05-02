@@ -15,21 +15,30 @@ export class MyThorax extends CGFobject {
     this.middleleg = new MyMiddleLeg(this.scene);
     this.hindleg = new MyHindLeg(this.scene);
     
-    this.texture = new CGFtexture(this.scene, "images/bee.jpg");
-    this.gold = new CGFappearance(this.scene);
-    this.gold.setTexture(this.texture);
-    this.gold.setTextureWrap('REPEAT', 'REPEAT');
+    this.thoraxTexture = new CGFappearance(this.scene);
+    this.thoraxTexture.setTexture(new CGFtexture(this.scene, "images/bee.jpg"));
+    this.thoraxTexture.setAmbient(1, 1, 0, 1);
+    this.thoraxTexture.setDiffuse(1, 1, 0, 1);
+    this.thoraxTexture.setSpecular(1, 1, 0, 1); 
+    this.thoraxTexture.setTextureWrap('REPEAT', 'REPEAT');
 
     this.legTexture = new CGFtexture(this.scene, "images/leg.png");
     this.leg = new CGFappearance(this.scene);
     this.leg.setTexture(this.legTexture);
     this.leg.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.wingTexture = new CGFappearance(this.scene);
+    this.wingTexture.setAmbient(1.0, 1.0, 1.0, 0.05);
+    this.wingTexture.setDiffuse(1.0, 1.0, 1.0, 0.0);
+    this.wingTexture.setSpecular(1.0, 1.0, 1.0, 0.0);
+    this.wingTexture.setEmission(0.0, 0.0, 0.0, 0.0);
+    this.wingTexture.setTexture(new CGFtexture(this.scene, "images/wing.jpeg"));
   }
 
   display() {
 
     this.scene.pushMatrix();
-        this.gold.apply();
+        this.thoraxTexture.apply();
         this.scene.translate(1.8, 0, 0);
 
         this.scene.rotate(Math.PI / 2, 0, 0, 1);
@@ -77,10 +86,12 @@ export class MyThorax extends CGFobject {
 
 
     this.scene.pushMatrix();
+        this.wingTexture.apply();
         this.scene.translate(1.3, 0, 0);
         this.scene.pushMatrix();
-            this.scene.rotate(Math.PI / 2.5, 1, 0, 0);
-            this.scene.translate(0, 0.6, 0);
+            this.scene.rotate(- Math.PI +  Math.PI / 2.5, 1, 0, 0);
+            this.scene.translate(0, -0.6, 0);
+            this.scene.scale(1, -1, 1);
             this.wing.display();
         this.scene.popMatrix();
         this.scene.pushMatrix();

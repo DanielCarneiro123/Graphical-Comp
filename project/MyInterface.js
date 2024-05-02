@@ -27,10 +27,13 @@ export class MyInterface extends CGFinterface {
         var displayGroup = this.gui.addFolder("Display object");
 
         displayGroup.add(this.scene, 'displayInfinitePanorama').name("Display infinite panorama");
-        displayGroup.add(this.scene, 'displayFlower').name("Display flower");
+        displayGroup.add(this.scene, 'displaySunFlower').name("Display sunflower");
+        displayGroup.add(this.scene, 'displayPinkFlower').name("Display pink flower");
         displayGroup.add(this.scene, 'displayGarden').name("Display garden");
         displayGroup.add(this.scene, 'displayTerrain').name("Display terrain");
         displayGroup.add(this.scene, 'displayEarth').name("Display earth");
+        displayGroup.add(this.scene, 'displayBee').name("Display bee");
+
 
         var garden = this.gui.addFolder('Garden')
         garden.add(this.scene, 'gardenRows', 1, 8, 1).name('Garden Rows').onChange(this.scene.updateGarden.bind(this.scene));

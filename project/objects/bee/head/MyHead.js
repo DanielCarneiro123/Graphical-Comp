@@ -15,13 +15,12 @@ export class MyHead extends CGFobject {
     this.head = new CGFtexture(this.scene, "images/head.jpg");
 
     this.gold = new CGFappearance(this.scene);
-    this.gold.setAmbient(120/256, 80/256, 0, 1);
-    this.gold.setDiffuse(120/256, 80/256, 0, 1);
-    this.gold.setSpecular(120/256, 80/256, 0, 1); 
+    this.gold.setAmbient(1, 1, 0, 1);
+    this.gold.setDiffuse(1, 1, 0, 1);
+    this.gold.setSpecular(1, 1, 0, 1); 
     this.gold.setShininess(4); 
     this.gold.setTexture(this.head);
     this.gold.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
-
 
     this.white = new CGFappearance(this.scene);
     this.white.setTexture(this.eye);
