@@ -26,12 +26,12 @@ export class MyBee extends CGFobject {
 
   display() {
     this.scene.pushMatrix();
-    this.scene.translate(this.position.x, -this.position.y, this.position.z);
-    this.scene.rotate(this.orientation, 0, 1, 0);
-    this.scene.scale(this.scale, this.scale, this.scale);
-    this.head.display();
-    this.thorax.display(this.wingAngle);
-    this.abdomen.display();
+      this.scene.translate(this.position.x, -this.position.y, this.position.z);
+      this.scene.rotate(this.orientation, 0, 1, 0);
+      this.scene.scale(this.scale, this.scale, this.scale);
+      this.head.display();
+      this.abdomen.display();
+      this.thorax.display(this.wingAngle);
     this.scene.popMatrix();
   }
 
