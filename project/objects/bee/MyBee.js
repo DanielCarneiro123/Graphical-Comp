@@ -64,7 +64,7 @@ export class MyBee extends CGFobject {
     this.orientation += v
   }
 
-  move(v) {
+  accelerate(v) {
       this.speed = Math.max(this.speed + v, 0)
   }
 
@@ -75,19 +75,19 @@ export class MyBee extends CGFobject {
   }
 
   pressKeys(factor) {
-    if (this.scene.gui.keyPressed("KeyW")) {
-        this.move(factor)
+    if (this.scene.gui.isKeyPressed("KeyW")) {
+        this.accelerate(factor)
     }
-    if (this.scene.gui.keyPressed("KeyS")) {
-        this.move(-factor)
+    if (this.scene.gui.isKeyPressed("KeyS")) {
+        this.accelerate(-factor)
     }
-    if (this.scene.gui.keyPressed("KeyA")) {
+    if (this.scene.gui.isKeyPressed("KeyA")) {
         this.turn(factor)
     }
-    if (this.scene.gui.keyPressed("KeyD")) {
+    if (this.scene.gui.isKeyPressed("KeyD")) {
         this.turn(-factor)
     }
-    if (this.scene.gui.keyPressed("KeyR")) {
+    if (this.scene.gui.isKeyPressed("KeyR")) {
         this.reset()
     }
   }

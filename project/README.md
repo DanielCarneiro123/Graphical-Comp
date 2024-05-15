@@ -64,3 +64,14 @@ Nesta etapa do projeto, modelamos uma abelha, utilizando uma combinações dos d
 
 ![Bee](screenshots/project-t11g09-4.1.png)
 <p align="center">Figura 7: Bee</p>
+
+### 4.2 Animação da abelha
+
+No segundo passo do ponto 4, é controlado pelo `elapsed time` do programa. As asas, como previsto, têm uma velocidade dez vezes superior ao restante corpo da abelha.
+
+### 4.3 Controlo da abelha
+
+No último passo do ponto 4, implementamos o controlo da abelha utilizando o código base já fornecido e uma classe nova `MyMovement.js`, que calcula e atualiza a velocidadeda abelha em qualquer momento da trajetória.
+
+![Bee Animation](screenshots/project-t11g09-4.3.gif)
+<p align="center">Figura 8: Bee Animation</p>
