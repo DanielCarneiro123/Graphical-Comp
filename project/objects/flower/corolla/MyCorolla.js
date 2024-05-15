@@ -1,4 +1,5 @@
 import { CGFobject } from '../../../../lib/CGF.js';
+import { MyPollen } from './MyPollen.js';
 import { MyPetal } from "./MyPetal.js";
 import { MyCircle } from "../../../polygons/MyCircle.js";
 import { MyCone } from '../../../polygons/MyCone.js';
@@ -16,7 +17,8 @@ export class MyCorolla extends CGFobject {
         this.petal = new MyPetal(this.scene, corollaRadius - receptacleRadius, petalAngle, maxAngle, minAngle)
         this.receptacle = new MyCircle(this.scene, this.receptacleRadius, 20)
         this.cone = new MyCone(this.scene, 10);
-        
+        this.pollen = new MyPollen(this.scene);
+
         this.randomsAngles = [];
         for (let i = 0; i < nrPetals; i++) {
             this.randomsAngles.push((Math.random() * (maxAngle - minAngle) + minAngle) * Math.PI / 180);        
@@ -66,7 +68,13 @@ export class MyCorolla extends CGFobject {
             this.scene.rotate(-Math.PI/2, 1, 0, 0);
             this.scene.translate(0, 0, 0.62);
             this.receptacle.display();
-
         this.scene.popMatrix()
+
+        this.scene.pushMatrix()
+            this.scene.rotate(-Math.PI/2, 1, 0, 0);
+            this.scene.translate(0, 0, 0.8);
+            this.pollen.display();
+        this.scene.popMatrix()
+
     }
 }
