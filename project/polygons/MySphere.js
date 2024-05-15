@@ -18,6 +18,8 @@ export class MySphere extends CGFobject {
 
         let polarStep = (Math.PI / 2) / this.stacks;
         let azumithStep = (2 * Math.PI) / this.slices;
+
+
         
         /* Vertices, normals and texCoords */
         for (let i = 0; i <= this.slices; i++) {
@@ -92,3 +94,5 @@ export class MySphere extends CGFobject {
         this.initGLBuffers();
     }
 }
+
+

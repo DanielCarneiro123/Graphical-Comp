@@ -5,6 +5,9 @@ import { MyPanorama } from "./objects/MyPanorama.js";
 import { MyFlower } from "./objects/flower/MyFlower.js";
 import { MyGarden } from "./objects/MyGarden.js";
 import { MyBee } from "./objects/bee/MyBee.js";
+import { MyRock } from "./objects/MyRock.js";
+import { MyRockSet } from "./objects/MyRockSet.js";
+import { MyHive } from "./objects/MyHive.js";
 
 /**
  * MyScene
@@ -35,7 +38,9 @@ export class MyScene extends CGFscene {
     this.panoramaImage = new CGFtexture(this, "images/panorama1.jpg");
     this.stem = new CGFtexture(this, "images/stem.jpg");
     this.leaf = new CGFtexture(this, "images/leaf.jpg");
-    
+    this.rock = new CGFtexture(this, "images/rock.png");
+    this.hive = new CGFtexture(this, "images/hive.jpg");
+
     this.initPetalTextures();
     this.initRecetacleTextures();
 
@@ -55,6 +60,13 @@ export class MyScene extends CGFscene {
     this.leafAppearance.setTexture(this.leaf);
     this.leafAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
+    this.rockAppearance  = new CGFappearance(this);
+    this.rockAppearance.setTexture(this.rock);
+    this.rockAppearance.setTextureWrap('REPEAT', 'REPEAT');
+
+    this.hiveAppearance  = new CGFappearance(this);
+    this.hiveAppearance.setTexture(this.hive);
+    this.hiveAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
@@ -65,6 +77,9 @@ export class MyScene extends CGFscene {
     this.sunflower = new MyFlower(this, 12, 4, 2.5, 0.8, 0.15, 4, 40, 40, 20, this.leafAppearance, this.stemAppearance, this.receptacleAppearances[0], this.petalAppearances[3]);
     this.pinkflower = new MyFlower(this, 12, 4, 2.5, 0.8, 0.15, 4, 20, 40, 20, this.leafAppearance, this.stemAppearance, this.receptacleAppearances[1], this.petalAppearances[0]);
     this.bee = new MyBee(this);
+    this.rock = new MyRock(this, 5, 5, 0.5);
+    this.rockSet = new MyRockSet(this, 5, 10);
+    this.hive = new MyHive(this, this.hiveAppearance);
 
     this.garden = new MyGarden(this, 5, 5, this.leafAppearance, this.stemAppearance, this.petalAppearances, this.receptacleAppearances);
     
@@ -83,12 +98,14 @@ export class MyScene extends CGFscene {
     this.displayEarth = false;
     this.displayBee = false;
 
+    this.displayHive = false;
 
     // garden
     this.gardenRows = 5;
     this.gardenCols = 5;
     this.displayFlower = false;
-
+    this.displayRock = false;
+    this.displayRockSet = false;
 
     this.enableTextures(true);
 
@@ -254,11 +271,16 @@ export class MyScene extends CGFscene {
       this.garden.display();
     }
     
-    //if (this.displayBee) {
+    if (this.displayBee) {
       this.bee.display();
-    //}
+    }
     // ---- END Primitive drawing section
+
+    if (this.displayHive) {
+      this.pushMatrix();
+      this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+      this.hive.display();
+      this.popMatrix();
+    }
   }
 }
-
-
