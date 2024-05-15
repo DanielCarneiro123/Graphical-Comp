@@ -321,4 +321,11 @@ export class MyScene extends CGFscene {
       this.sphere.disableNormalViz();
     // ---- END Primitive drawing section
   }
+
+  update(time) {
+    let timeSinceAppStart = (time - this.appStartTime) / 1000.0;
+    this.bee.update(timeSinceAppStart, this.scaleFactor, this.speedFactor);
+    this.turf.update(timeSinceAppStart, this.scaleFactor, this.speedFactor);
+  }
+
 }

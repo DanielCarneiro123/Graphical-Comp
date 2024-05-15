@@ -7,12 +7,18 @@ export class MyMovement extends MyAnimation {
         this.y = 0;
         this.z = 0;
         this.wingAngle = 0;
+        this.grassAngle = 0;
     }
 
     updatePositionObj(elapsedTime, vector) {
-        const staticSpeed = this.calculateStaticSpeed(vector.speed);
-        this.updateCoordinates(elapsedTime, vector, staticSpeed);
-        this.updateWingAngle(staticSpeed, elapsedTime);
+        const objSpeed = this.calculateStaticSpeed(vector.speed);
+        this.updateCoordinates(elapsedTime, vector, objSpeed);
+        this.updateWingAngle(objSpeed, elapsedTime);
+    }
+
+    updatePositionGrass(elapsedTime, vector) {
+        const grassSpeed = this.calculateStaticSpeed(vector.speed);
+        this.updateGrassAngle(grassSpeed, elapsedTime);
     }
 
     calculateStaticSpeed(speed) {
@@ -33,6 +39,10 @@ export class MyMovement extends MyAnimation {
 
     updateWingAngle(staticSpeed, elapsedTime) {
         this.wingAngle = (Math.PI / 4) * Math.sin(10 * staticSpeed * elapsedTime);
+    }
+
+    updateGrassAngle(staticSpeed, elapsedTime) {
+        this.grassAngle = (Math.PI / 10) * Math.sin(1.5*staticSpeed * elapsedTime);
     }
 
     movementFunction(elapsedTime) {
