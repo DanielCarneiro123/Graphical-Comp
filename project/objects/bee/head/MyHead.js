@@ -11,13 +11,18 @@ export class MyHead extends CGFobject {
     this.sphere = new MySphere(this.scene, 50, 50);
     this.triangle = new MyTriangle(this.scene);
 
-    this.eye = new CGFtexture(this.scene, "images/eye.jpg");
-    this.head = new CGFtexture(this.scene, "images/head.jpg");
+    this.eye = new CGFtexture(this.scene, "images/bee/eye.jpg");
+    this.head = new CGFtexture(this.scene, "images/bee/head.jpg");
 
+    this.initMaterials();
+    
+  }
+
+  initMaterials() {
     this.gold = new CGFappearance(this.scene);
-    this.gold.setAmbient(0.8, 0.45, 0, 1);
-    this.gold.setDiffuse(0.8, 0.5, 0, 1);
-    this.gold.setSpecular(0.8, 0.5, 0, 1); 
+    this.gold.setAmbient(0.65, 0.4, 0, 1);
+    this.gold.setDiffuse(0.65, 0.4, 0, 1);
+    this.gold.setSpecular(0.7, 0.4, 0, 1); 
     this.gold.setTexture(this.head);
     this.gold.setTextureWrap('CLAMP_TO_EDGE', 'CLAMP_TO_EDGE');
 
@@ -35,7 +40,7 @@ export class MyHead extends CGFobject {
     this.black.setSpecular(0.0, 0.0, 0.0, 1);
     this.black.setShininess(10.0);
 
-  }
+}
 
   display() {
     
@@ -49,6 +54,7 @@ export class MyHead extends CGFobject {
             
             this.scene.pushMatrix();
                 this.scene.translate(-0.5, 0, 1.8);
+                this.scene.rotate(Math.PI, 0, 1, 0);
                 this.sphere.display();
             this.scene.popMatrix();
 
