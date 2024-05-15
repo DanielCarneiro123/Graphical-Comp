@@ -21,13 +21,13 @@ export class MyThorax extends CGFobject {
 
   initMaterials() {
     this.thoraxTexture = new CGFappearance(this.scene);
-    this.thoraxTexture.setTexture(new CGFtexture(this.scene, "images/bee.jpg"));
+    this.thoraxTexture.setTexture(new CGFtexture(this.scene, "images/bee/bee.jpg"));
     this.thoraxTexture.setAmbient(1, 1, 0, 1);
     this.thoraxTexture.setDiffuse(1, 1, 0, 1);
     this.thoraxTexture.setSpecular(1, 1, 0, 1);
     this.thoraxTexture.setTextureWrap("REPEAT", "REPEAT");
 
-    this.legTexture = new CGFtexture(this.scene, "images/leg.png");
+    this.legTexture = new CGFtexture(this.scene, "images/bee/leg.png");
     this.leg = new CGFappearance(this.scene);
     this.leg.setTexture(this.legTexture);
     this.leg.setTextureWrap("REPEAT", "REPEAT");
@@ -37,7 +37,7 @@ export class MyThorax extends CGFobject {
     this.wingTexture.setDiffuse(1.0, 1.0, 1.0, 0.0);
     this.wingTexture.setSpecular(1.0, 1.0, 1.0, 0.0);
     this.wingTexture.setEmission(0.0, 0.0, 0.0, 0.0);
-    this.wingTexture.setTexture(new CGFtexture(this.scene, "images/wing.jpeg"));
+    this.wingTexture.setTexture(new CGFtexture(this.scene, "images/bee/wing.jpeg"));
   }
 
   display(angle) {

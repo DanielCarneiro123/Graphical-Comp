@@ -8,7 +8,7 @@ export class MyAbdomen extends CGFobject {
     this.sphere = new MySphere(this.scene, 50, 50);
 
     this.abdomenTexture = new CGFappearance(this.scene);
-    this.abdomenTexture.setTexture(new CGFtexture(this.scene, "images/bee.jpg"));
+    this.abdomenTexture.setTexture(new CGFtexture(this.scene, "images/bee/bee.jpg"));
     this.abdomenTexture.setTextureWrap('REPEAT', 'REPEAT');
     this.abdomenTexture.setAmbient(1, 1, 0, 1);
     this.abdomenTexture.setDiffuse(1, 1, 0, 1);

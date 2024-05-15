@@ -11,8 +11,8 @@ export class MyHead extends CGFobject {
     this.sphere = new MySphere(this.scene, 50, 50);
     this.triangle = new MyTriangle(this.scene);
 
-    this.eye = new CGFtexture(this.scene, "images/eye.jpg");
-    this.head = new CGFtexture(this.scene, "images/head.jpg");
+    this.eye = new CGFtexture(this.scene, "images/bee/eye.jpg");
+    this.head = new CGFtexture(this.scene, "images/bee/head.jpg");
 
     this.initMaterials();
     
