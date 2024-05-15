@@ -40,11 +40,11 @@ export class MyInterface extends CGFinterface {
         var garden = this.gui.addFolder('Garden')
         garden.add(this.scene, 'gardenRows', 1, 8, 1).name('Garden Rows').onChange(this.scene.updateGarden.bind(this.scene));
         garden.add(this.scene, 'gardenCols', 1, 8, 1).name('Garden Cols').onChange(this.scene.updateGarden.bind(this.scene));
-        this.pressedKeys();
+        this.initKeys();
         return true;
     }
     
-    pressedKeys() {
+    initKeys() {
         this.scene.gui = this;
         this.processKeyboard = function () {};
         this.activeKeys = {};
@@ -58,7 +58,7 @@ export class MyInterface extends CGFinterface {
         this.activeKeys[event.code] = false;
     }
 
-    keyPressed(keycode) {
+    isKeyPressed(keycode) {
         return this.activeKeys[keycode] || false;
     }
 }
