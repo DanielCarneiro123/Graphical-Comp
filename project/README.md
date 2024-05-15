@@ -13,7 +13,7 @@ A esfera tem um número variável de slices e de stacks, este último correspond
 Na função `initBuffers()`, começamos por criar todos os vértices (assim como as respetivas normal e coordenadas de textura), seguida da criação dos índices, tendo em consideração o pormenor de que ao redor dos pólos, a stack é formada por triângulos em vez de quadriláteros. 
 
 ![Earth](screenshots/project-t11g09-1.1.png)
-<p align="center">Figure 1: Sphere with Earth texture</p>
+<p align="center">Figura 1: Sphere with Earth texture</p>
 
 ### 1.2. Adição de Panoramas
 
@@ -24,7 +24,7 @@ Desta forma, na classe `MyPanorama`, o construtor recebe uma CGFtexture, e é re
 Por fim, para criar a ilusão de que a superfície esférica se encontra sempre posicionada no infinito, aplicamos um movimento de translação ao panorama de modo a que ficasse sempre centrada com a câmara.
 
 ![Panorama](screenshots/project-t11g09-1.2.png)
-<p align="center">Figure 2: Earth and Panorama</p>
+<p align="center">Figura 2: Earth and Panorama</p>
 
 
 ## 2. Flores
@@ -34,11 +34,24 @@ No exercício dois, desenvolvemos um modelo simplificado de uma flor, utilizando
 Além disso, os cilindros que compõem o caule da flor têm comprimentos variados, controlados aleatoriamente, resultando num desalinhamento entre eles.
 
 ![Flower](screenshots/project-t11g09-2.1.png)
-<p align="center">Figure 3: Flower</p>
+<p align="center">Figura 3: Flower</p>
 
 Por fim, criamos uma zona  `MyGarden` no mundo virtual, que consiste numa matriz de flores com um número específico de linhas e colunas definido na interface UI/UX.
 
 Cada flor na matriz é gerada com valores aleatórios nos seus parâmetros, tais como o número de pétalas, os ângulos de curvatura das pétalas, o raio do círculo central da flor, o raio do círculo representando o caule, assim como os comprimentos e ângulos entre os cilindros que formam o caule.
 
 ![Garden](screenshots/project-t11g09-2.2.png)
-<p align="center">Figure 4: Garden</p>
+<p align="center">Figura 4: Garden</p>
+
+
+## 3. Pedras e penedos
+
+No exercício três, desenvolvemos um modelo simplificado de uma rocha, adaptando o modelo usado `MySphere`,  pela qual mantivemos inalteradas as coordenadas dos vértices, fazendo alterar ligeiramente a inclinação das respectivas normais (seguindo a sugestão dada no enunciado).
+
+![Rock](screenshots/project-t11g09-3.1.png)
+<p align="center">Figura 5: Rock</p>
+
+Para construir o penedo, apenas criamos várias pedras com coordenadas próximas entre si, de forma a sobrepostas.
+
+![RockSet](screenshots/project-t11g09-3.2.png)
+<p align="center">Figura 6: Rock Set</p>
