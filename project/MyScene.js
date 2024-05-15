@@ -33,7 +33,7 @@ export class MyScene extends CGFscene {
     this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
     this.gl.enable(this.gl.BLEND);
     
-    this.terrain = new CGFtexture(this, "images/terrain.jpg");
+    this.terrain = new CGFtexture(this, "images/grass.jpg");
     this.earth = new CGFtexture(this, "images/earth.jpg");
     this.panoramaImage = new CGFtexture(this, "images/panorama1.jpg");
     this.stem = new CGFtexture(this, "images/stem.jpg");
@@ -76,12 +76,11 @@ export class MyScene extends CGFscene {
     this.panorama = new MyPanorama(this, this.panoramaImage);
     this.sunflower = new MyFlower(this, 12, 4, 2.5, 0.8, 0.15, 4, 40, 40, 20, this.leafAppearance, this.stemAppearance, this.receptacleAppearances[0], this.petalAppearances[3]);
     this.pinkflower = new MyFlower(this, 12, 4, 2.5, 0.8, 0.15, 4, 20, 40, 20, this.leafAppearance, this.stemAppearance, this.receptacleAppearances[1], this.petalAppearances[0]);
-    this.bee = new MyBee(this);
+    this.bee = new MyBee(this, 0, 0, 0);
     this.rock = new MyRock(this, 5, 5, 0.5);
     this.rockSet = new MyRockSet(this, 5, 10);
     this.hive = new MyHive(this, this.hiveAppearance);
-
-    this.garden = new MyGarden(this, 5, 5, this.leafAppearance, this.stemAppearance, this.petalAppearances, this.receptacleAppearances);
+    this.garden = new MyGarden(this, 8, 8, this.leafAppearance, this.stemAppearance, this.petalAppearances, this.receptacleAppearances);
     
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -102,8 +101,8 @@ export class MyScene extends CGFscene {
     this.displayRockSet = false;
 
     // garden
-    this.gardenRows = 5;
-    this.gardenCols = 5;
+    this.gardenRows = 8;
+    this.gardenCols = 8;
   
     this.speedFactor = 1;
 
@@ -130,7 +129,7 @@ export class MyScene extends CGFscene {
       1.5,
       0.1,
       1000,
-      vec3.fromValues(5, 5, 5),
+      vec3.fromValues(10, 10, 10),
       vec3.fromValues(0, 0, 0)
     );
   }
@@ -207,7 +206,6 @@ export class MyScene extends CGFscene {
   initRecetacleTextures() {
     this.sunflower = new CGFtexture(this, "images/receptacles/sunflower.png");
     this.pinkFlower = new CGFtexture(this, "images/receptacles/pink.png");
-    this.orangeFlower = new CGFtexture(this, "images/receptacles/white.jpg");
 
     this.sunflowerAppearance = new CGFappearance(this);
     this.sunflowerAppearance.setTexture(this.sunflower);
@@ -244,18 +242,18 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
+
+
+
+    this.pushMatrix();
+    this.translate(0, 70, 0)
     this.panorama.display();
-
-
-    if (this.displayTerrain) {
-      this.pushMatrix();
-      this.terrainAppearance.apply();
-      this.translate(0,-50,0);
-      this.scale(400,400,400);
-      this.rotate(-Math.PI/2.0,1,0,0);
-      this.plane.display();
-      this.popMatrix();
-    }
+    this.terrainAppearance.apply();
+    this.translate(0,-100,0);
+    this.scale(400,400,400);
+    this.rotate(-Math.PI/2.0,1,0,0);
+    this.plane.display();
+    this.popMatrix();
     
 
     if (this.displayEarth) {
@@ -282,27 +280,30 @@ export class MyScene extends CGFscene {
     }
   
 
-    if (this.displayGarden) {
-      this.pushMatrix();
-        this.terrainAppearance.apply();
-        this.scale(this.gardenRows * 5, 1, this.gardenCols * 5);
-        this.translate(0.4,0,0.4);
-        this.rotate(-Math.PI/2.0,1,0,0);
-        this.plane.display();
-      this.popMatrix();
+    this.pushMatrix();
+      this.translate(-15,-10,-30);
       this.garden.display();
-    }
+    this.popMatrix();
     
-    if (this.displayBee) {
+    this.pushMatrix();
+      this.translate(0, 0, 0);
+      this.scale(0.25, 0.25, 0.25);
       this.bee.display();
-    }
-    // ---- END Primitive drawing section
+    this.popMatrix();
 
-    if (this.displayHive) {
-      this.pushMatrix();
-      this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+    this.pushMatrix();
+      this.rockAppearance.apply();
+      this.translate(-15,-10,30);
+      this.scale(5, 5, 5);
+      this.rockSet.display();
+    this.popMatrix();
+
+
+    this.pushMatrix();
+      this.translate(-5,-2, 40);
+      this.scale(2, 2, 2);
       this.hive.display();
-      this.popMatrix();
-    }
+    this.popMatrix();
+    
   }
 }
