@@ -1,5 +1,4 @@
-import { CGFobject, CGFappearance } from "../../../lib/CGF.js";
-import { MySphere } from "../../polygons/MySphere.js";
+import { CGFobject } from "../../../lib/CGF.js";
 import { MyHead } from "./head/MyHead.js";
 import { MyThorax } from "./thorax/MyThorax.js";
 import { MyAbdomen } from "./MyAbdomen.js";

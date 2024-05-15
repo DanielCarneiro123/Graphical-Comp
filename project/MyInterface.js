@@ -28,7 +28,8 @@ export class MyInterface extends CGFinterface {
         var displayGroup = this.gui.addFolder("Display object");
 
         displayGroup.add(this.scene, 'displayInfinitePanorama').name("Display infinite panorama");
-        displayGroup.add(this.scene, 'displayFlower').name("Display flower");
+        displayGroup.add(this.scene, 'displaySunFlower').name("Display sunflower");
+        displayGroup.add(this.scene, 'displayPinkFlower').name("Display pink flower");
         displayGroup.add(this.scene, 'displayGarden').name("Display garden");
         displayGroup.add(this.scene, 'displayTerrain').name("Display terrain");
         displayGroup.add(this.scene, 'displayEarth').name("Display earth");

@@ -75,7 +75,9 @@ export class MyScene extends CGFscene {
     this.scaleFactor = 1;
 
     // display
-    this.displayFlower = true;
+    this.displaySunFlower = false;
+    this.displayPinkFlower = false;
+
     this.displayGarden = false;
     this.displayTerrain = false;
     this.displayEarth = false;
@@ -129,7 +131,6 @@ export class MyScene extends CGFscene {
 
   initPetalTextures() {
     this.pinkPetal = new CGFtexture(this, "images/petals/pink.jpg");
-    this.whitePetal = new CGFtexture(this, "images/petals/white.jpg");
     this.orangePetal = new CGFtexture(this, "images/petals/orange.jpg");
     this.redPetal = new CGFtexture(this, "images/petals/red.jpg");
     this.yellowPetal = new CGFtexture(this, "images/petals/yellow.jpg");
@@ -232,11 +233,17 @@ export class MyScene extends CGFscene {
     }
 
 
-    if (this.displayFlower) {
+    if (this.displaySunFlower) {
       this.pushMatrix();
-      this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
-      this.sunflower.display();
-      //this.pinkflower.display();
+        this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+        this.sunflower.display();
+      this.popMatrix();
+    }
+
+    if (this.displayPinkFlower) {
+      this.pushMatrix();
+        this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+        this.pinkflower.display();
       this.popMatrix();
     }
   

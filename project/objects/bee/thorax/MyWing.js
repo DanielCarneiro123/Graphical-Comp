@@ -4,7 +4,6 @@ import { MyCircle } from "../../../polygons/MyCircle.js";
 export class MyWing extends CGFobject {
   constructor(scene) {
     super(scene);
-
     this.circle = new MyCircle(this.scene, 1, 50);
     this.transparent = new CGFappearance(this.scene);
     this.transparent.setAmbient(0.0, 0.0, 0.0, 0.2);
@@ -17,8 +16,6 @@ export class MyWing extends CGFobject {
   display() {
 
     this.scene.pushMatrix();
-        this.transparent.apply();
-
         this.scene.pushMatrix();
             this.scene.translate(0, 2, 0);
             this.scene.scale(0.6, 2, 1);
