@@ -6,11 +6,12 @@ import { MyMiddleLeg } from "./legs/MyMiddleLeg.js";
 import { MyHindLeg } from "./legs/MyHindLeg.js";
 
 export class MyThorax extends CGFobject {
-  constructor(scene) {
+  constructor(scene, wingAngle) {
     super(scene);
-
+    this.wingAngle = wingAngle;
+    
     this.sphere = new MySphere(this.scene, 50, 50);
-    this.wing = new MyWing(this.scene);
+    this.wing = new MyWing(this.scene, this.wingAngle);
     this.frontleg = new MyFrontLeg(this.scene);
     this.middleleg = new MyMiddleLeg(this.scene);
     this.hindleg = new MyHindLeg(this.scene);
@@ -35,8 +36,8 @@ export class MyThorax extends CGFobject {
     this.wingTexture.setTexture(new CGFtexture(this.scene, "images/wing.jpeg"));
   }
 
-  display() {
-
+  display(angle) {
+    
     this.scene.pushMatrix();
         this.thoraxTexture.apply();
         this.scene.translate(1.8, 0, 0);
@@ -89,14 +90,15 @@ export class MyThorax extends CGFobject {
         this.wingTexture.apply();
         this.scene.translate(1.3, 0, 0);
         this.scene.pushMatrix();
-            this.scene.rotate(- Math.PI +  Math.PI / 2.5, 1, 0, 0);
-            this.scene.translate(0, -0.6, 0);
-            this.scene.scale(1, -1, 1);
+            this.scene.rotate(angle, 1, 0, 0);
+            this.scene.rotate(Math.PI / 2.5, 1, 0, 0);
+            this.scene.translate(0, 0.5, 0);
             this.wing.display();
         this.scene.popMatrix();
         this.scene.pushMatrix();
-            this.scene.rotate(- Math.PI / 2.5, 1, 0, 0);
-            this.scene.translate(0, 0.6, 0);
+            this.scene.rotate(-angle, 1, 0, 0);
+            this.scene.rotate(-Math.PI / 2.5, 1, 0, 0);
+            this.scene.translate(0, 0.5, 0);
             this.wing.display();
         this.scene.popMatrix();
     this.scene.popMatrix();

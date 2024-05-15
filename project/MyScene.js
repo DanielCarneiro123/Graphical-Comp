@@ -64,7 +64,7 @@ export class MyScene extends CGFscene {
     this.panorama = new MyPanorama(this, this.panoramaImage);
     this.sunflower = new MyFlower(this, 12, 4, 2.5, 0.8, 0.15, 4, 40, 40, 20, this.leafAppearance, this.stemAppearance, this.receptacleAppearances[0], this.petalAppearances[3]);
     this.pinkflower = new MyFlower(this, 12, 4, 2.5, 0.8, 0.15, 4, 20, 40, 20, this.leafAppearance, this.stemAppearance, this.receptacleAppearances[1], this.petalAppearances[0]);
-    this.bee = new MyBee(this);
+    this.bee = new MyBee(this,0,20,0);
 
     this.garden = new MyGarden(this, 5, 5, this.leafAppearance, this.stemAppearance, this.petalAppearances, this.receptacleAppearances);
     
@@ -89,6 +89,11 @@ export class MyScene extends CGFscene {
     this.gardenCols = 5;
     this.displayFlower = false;
 
+    this.speedFactor = 1;
+
+    this.setUpdatePeriod(50);
+
+    this.appStartTime = Date.now();
 
     this.enableTextures(true);
 
@@ -254,10 +259,14 @@ export class MyScene extends CGFscene {
       this.garden.display();
     }
     
-    //if (this.displayBee) {
+    if (this.displayBee){
       this.bee.display();
-    //}
-    // ---- END Primitive drawing section
+    }
+    
+  }
+  update(time) {
+    let timeSinceAppStart = (time - this.appStartTime) / 1000.0;
+    this.bee.update(timeSinceAppStart, this.scaleFactor, this.speedFactor);
   }
 }
 
