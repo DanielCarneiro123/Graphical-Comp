@@ -29,9 +29,7 @@ export class MyFlower extends CGFobject {
             this.scene.popMatrix()
         this.scene.popMatrix()
         
-        this.scene.pushMatrix()
-            this.stem.display();
-        this.scene.popMatrix()
+        this.stem.display();
 
         this.scene.popMatrix()
     }

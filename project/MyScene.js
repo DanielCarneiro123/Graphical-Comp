@@ -6,6 +6,7 @@ import { MyFlower } from "./objects/flower/MyFlower.js";
 import { MyGarden } from "./objects/MyGarden.js";
 import { MyRock } from "./objects/MyRock.js";
 import { MyRockSet } from "./objects/MyRockSet.js";
+import { MyBee } from "./objects/bee/MyBee.js";
 
 /**
  * MyScene
@@ -71,6 +72,7 @@ export class MyScene extends CGFscene {
     this.pinkflower = new MyFlower(this, 12, 4, 2.5, 0.8, 0.15, 4, 20, 40, 20, this.leafAppearance, this.stemAppearance, this.receptacleAppearances[1], this.petalAppearances[0]);
     this.rock = new MyRock(this, 5, 5, 0.5);
     this.rockSet = new MyRockSet(this, 5, 10);
+    this.bee = new MyBee(this,0,20,0);
 
     this.garden = new MyGarden(this, 5, 5, this.leafAppearance, this.stemAppearance, this.petalAppearances, this.receptacleAppearances);
     
@@ -81,10 +83,14 @@ export class MyScene extends CGFscene {
     this.scaleFactor = 1;
 
     // display
-    this.displayFlower = true;
+    this.displaySunFlower = false;
+    this.displayPinkFlower = false;
+
     this.displayGarden = false;
     this.displayTerrain = false;
     this.displayEarth = false;
+    this.displayBee = false;
+
 
     // garden
     this.gardenRows = 5;
@@ -92,6 +98,12 @@ export class MyScene extends CGFscene {
     this.displayFlower = false;
     this.displayRock = false;
     this.displayRockSet = false;
+
+    this.speedFactor = 1;
+
+    this.setUpdatePeriod(50);
+
+    this.appStartTime = Date.now();
 
     this.enableTextures(true);
 
@@ -231,11 +243,17 @@ export class MyScene extends CGFscene {
     }
 
 
-    if (this.displayFlower) {
+    if (this.displaySunFlower) {
       this.pushMatrix();
-      this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
-      this.sunflower.display();
-      //this.pinkflower.display();
+        this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+        this.sunflower.display();
+      this.popMatrix();
+    }
+
+    if (this.displayPinkFlower) {
+      this.pushMatrix();
+        this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+        this.pinkflower.display();
       this.popMatrix();
     }
   
@@ -273,5 +291,13 @@ export class MyScene extends CGFscene {
     else
       this.sphere.disableNormalViz();
     // ---- END Primitive drawing section
+    if (this.displayBee){
+      this.bee.display();
+    }
+    
+  }
+  update(time) {
+    let timeSinceAppStart = (time - this.appStartTime) / 1000.0;
+    this.bee.update(timeSinceAppStart, this.scaleFactor, this.speedFactor);
   }
 }
