@@ -6,6 +6,7 @@ import { MyFlower } from "./objects/flower/MyFlower.js";
 import { MyGarden } from "./objects/MyGarden.js";
 import { MyRock } from "./objects/MyRock.js";
 import { MyRockSet } from "./objects/MyRockSet.js";
+import { MyTurf } from "./objects/MyTurf.js";
 
 /**
  * MyScene
@@ -73,7 +74,7 @@ export class MyScene extends CGFscene {
     this.rockSet = new MyRockSet(this, 5, 10);
 
     this.garden = new MyGarden(this, 5, 5, this.leafAppearance, this.stemAppearance, this.petalAppearances, this.receptacleAppearances);
-    
+    this.turf = new MyTurf(this, 2500);
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayNormals = false;
@@ -92,6 +93,7 @@ export class MyScene extends CGFscene {
     this.displayFlower = false;
     this.displayRock = false;
     this.displayRockSet = false;
+    this.displayTurf = false;
 
     this.enableTextures(true);
 
@@ -265,6 +267,14 @@ export class MyScene extends CGFscene {
       this.rockAppearance.apply();
       this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
       this.rockSet.display();
+      this.popMatrix();
+    }
+
+    if (this.displayTurf){
+      this.pushMatrix();
+      this.stemAppearance.apply();
+      this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+      this.turf.display();
       this.popMatrix();
     }
 
