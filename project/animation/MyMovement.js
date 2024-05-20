@@ -10,11 +10,27 @@ export class MyMovement extends MyAnimation {
         this.grassAngle = 0;
     }
 
-    updatePositionObj(elapsedTime, vector) {
+    calculateParabolicPosition(start, end, t) {
+        const x = start.x + t * (end.x - start.x);
+        const z = start.z + t * (end.z - start.z);
+    
+        const y = start.y + t * (end.y - start.y) - 4 * t * (1 - t);
+    
+        return { x, y, z };
+    }
+    
+
+    updatePositionObj(elapsedTime, vector, movingY, closestFlower) {
         const objSpeed = this.calculateStaticSpeed(vector.speed);
-        this.updateCoordinates(elapsedTime, vector, objSpeed);
+        if (movingY) {
+            this.updatePositionDrop(elapsedTime, vector,closestFlower);
+        } else {
+            this.updateCoordinates(elapsedTime, vector, objSpeed);
+        }
+    
         this.updateWingAngle(objSpeed, elapsedTime);
     }
+    
 
     updatePositionGrass(elapsedTime, vector) {
         const grassSpeed = this.calculateStaticSpeed(vector.speed);
@@ -45,6 +61,27 @@ export class MyMovement extends MyAnimation {
         this.grassAngle = (Math.PI / 10) * Math.sin(1.5*staticSpeed * elapsedTime);
     }
 
+    updatePositionDrop(elapsedTime, vector, closestFlower) {
+        const t = elapsedTime / this.animDurationSecs;
+    
+        const start = { x: vector.x, y: vector.y, z: vector.z };
+        const end = closestFlower;
+    
+        const x = start.x + vector.speed*t * (end.x - start.x);
+        const z = start.z + vector.speed*t * (end.z - start.z);
+    
+        const y = start.y + vector.speed*t * (end.y - start.y) - 4 * t * (1 - t);
+    
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        print(this.x);
+        print(this.y);
+        print(this.z);
+
+    }
+    
+    
     movementFunction(elapsedTime) {
         return Math.sin(elapsedTime / this.startVal);
     }

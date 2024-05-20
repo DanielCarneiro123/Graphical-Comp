@@ -23,7 +23,7 @@ export class MyGarden extends CGFobject{
             for (let j = 0; j < this.numCols; j++) {
                 let x = (i * 4) + Math.random() * 3; 
                 let z = (j * 4) + Math.random() * 3;
-                this.flowerPositions.push({x: x, z: z});
+                this.flowerPositions.push({x: x, y: 0, z: z});
             }
         }
         
@@ -67,6 +67,7 @@ export class MyGarden extends CGFobject{
                     petalAppearance
                 ));
 
+                this.flowerPositions[i * this.numCols + j].y = stemHeight - 10 ;
                 this.shadow[i].push(new MyCircle(this.scene, receptacleRadius * 1.5, 20));
             }
         }

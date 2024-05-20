@@ -20,6 +20,10 @@ export class MyAnimation {
         throw new Error('Subclass must implement abstract method');
     }
 
+    updatePositionDrop(){
+        throw new Error('Subclass must implement abstract method');
+    }
+
     updatePositionGrass(){
         throw new Error('Subclass must implement abstract method');
     }
@@ -34,18 +38,18 @@ export class MyAnimation {
         this.active = false;
     }
 
-    update(elapsedTimeSecs, vector) {
+    update(elapsedTimeSecs, vector, movingY, closestFlower) {
         
         if (this.active) {
             let timeSinceAnimationStart = elapsedTimeSecs - this.last;
             if (this.loop || (timeSinceAnimationStart >= 0 && !this.lastIteration)) {
                 if(!(timeSinceAnimationStart <= this.animDurationSecs) && !this.loop){
                     this.animVal = this.startVal + this.movementFunction(1) * this.length;
-                    this.updatePositionObj(timeSinceAnimationStart, vector);
+                    this.updatePositionObj(timeSinceAnimationStart, vector, movingY, closestFlower);
                     this.lastIteration = true
                 }else{
                     this.animVal = this.startVal + this.movementFunction(timeSinceAnimationStart / this.animDurationSecs) * this.length;
-                    this.updatePositionObj(timeSinceAnimationStart, vector);
+                    this.updatePositionObj(timeSinceAnimationStart, vector, movingY, closestFlower);
                 }
             }
         }

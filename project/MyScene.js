@@ -5,7 +5,6 @@ import { MyPanorama } from "./objects/MyPanorama.js";
 import { MyFlower } from "./objects/flower/MyFlower.js";
 import { MyGarden } from "./objects/MyGarden.js";
 import { MyBee } from "./objects/bee/MyBee.js";
-import { MyBee } from "./objects/bee/MyBee.js";
 import { MyRock } from "./objects/MyRock.js";
 import { MyRockSet } from "./objects/MyRockSet.js";
 import { MyHive } from "./objects/MyHive.js";
