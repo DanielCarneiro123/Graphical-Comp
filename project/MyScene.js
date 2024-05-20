@@ -5,7 +5,6 @@ import { MyPanorama } from "./objects/MyPanorama.js";
 import { MyFlower } from "./objects/flower/MyFlower.js";
 import { MyGarden } from "./objects/MyGarden.js";
 import { MyBee } from "./objects/bee/MyBee.js";
-import { MyBee } from "./objects/bee/MyBee.js";
 import { MyRock } from "./objects/MyRock.js";
 import { MyRockSet } from "./objects/MyRockSet.js";
 import { MyHive } from "./objects/MyHive.js";
@@ -35,9 +34,9 @@ export class MyScene extends CGFscene {
     this.gl.blendFunc(this.gl.SRC_ALPHA, this.gl.ONE_MINUS_SRC_ALPHA);
     this.gl.enable(this.gl.BLEND);
     
-    this.terrain = new CGFtexture(this, "images/grass.jpg");
+    this.terrain = new CGFtexture(this, "images/terrain.jpg");
     this.earth = new CGFtexture(this, "images/earth.jpg");
-    this.panoramaImage = new CGFtexture(this, "images/panorama1.jpg");
+    this.panoramaImage = new CGFtexture(this, "images/panorama.jpg");
     this.stem = new CGFtexture(this, "images/stem.jpg");
     this.leaf = new CGFtexture(this, "images/leaf.jpg");
     this.rock = new CGFtexture(this, "images/rock.png");
@@ -50,6 +49,7 @@ export class MyScene extends CGFscene {
     this.terrainAppearance = new CGFappearance(this);
     this.terrainAppearance.setTexture(this.terrain);
     this.terrainAppearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.terrainAppearance.setEmission(1, 1, 1, 1);
 
     this.earthAppearance = new CGFappearance(this);
     this.earthAppearance.setTexture(this.earth);
@@ -136,7 +136,7 @@ export class MyScene extends CGFscene {
       1.5,
       0.1,
       1000,
-      vec3.fromValues(10, 10, 10),
+      vec3.fromValues(90, 90, 90),
       vec3.fromValues(0, 0, 0)
     );
   }
@@ -250,19 +250,15 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
-
-
-
     this.pushMatrix();
-    this.translate(0, 70, 0)
+    this.translate(0, 70, 0);
     this.panorama.display();
     this.terrainAppearance.apply();
-    this.translate(0,-100,0);
+    this.translate(0,-90,0);
     this.scale(400,400,400);
     this.rotate(-Math.PI/2.0,1,0,0);
     this.plane.display();
     this.popMatrix();
-    
 
     if (this.displayEarth) {
       this.pushMatrix();
@@ -289,38 +285,43 @@ export class MyScene extends CGFscene {
     
 
     this.pushMatrix();
-      this.translate(-15,-10,-30);
+      this.translate(-80,-20,-120);
+      this.scale(6, 6, 6);
       this.garden.display();
     this.popMatrix();
     
     this.pushMatrix();
-      this.translate(0, 0, 0);
-      this.scale(0.25, 0.25, 0.25);
+      this.translate(-20, 50, 120);
+      this.scale(2, 2, 2);
+      this.rotate(-Math.PI/2, 0, 1, 0);
       this.bee.display();
     this.popMatrix();
 
     this.pushMatrix();
       this.rockAppearance.apply();
-      this.translate(-15,-10,30);
-      this.scale(5, 5, 5);
+      this.translate(-45, -15, 100);
+      this.scale(12, 12, 12);
       this.rockSet.display();
     this.popMatrix();
 
 
     this.pushMatrix();
-      this.translate(-5,-2, 40);
-      this.scale(2, 2, 2);
+      this.translate(-20, 10, 125);
+      this.scale(15, 15, 15);
       this.hive.display();
     this.popMatrix();
     
-    if (this.displayTurf){
+    //if (this.displayTurf){
       this.pushMatrix();
       this.stemAppearance.apply();
       this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
       this.turf.display();
       this.popMatrix();
-    }
+    //}
+
+
   }
+
 
   update(time) {
     let timeSinceAppStart = (time - this.appStartTime) / 1000.0;
