@@ -40,8 +40,8 @@ export class MyScene extends CGFscene {
     this.stem = new CGFtexture(this, "images/stem.jpg");
     this.leaf = new CGFtexture(this, "images/leaf.jpg");
     this.rock = new CGFtexture(this, "images/rock.png");
-    this.hive = new CGFtexture(this, "images/hive.jpg");
-    this.hive = new CGFtexture(this, "images/hive.jpg");
+    this.hive = new CGFtexture(this, "images/hive.png");
+    this.hiveTop = new CGFtexture(this, "images/hiveTop.png");
 
     this.initPetalTextures();
     this.initRecetacleTextures();
@@ -70,6 +70,16 @@ export class MyScene extends CGFscene {
     this.hiveAppearance  = new CGFappearance(this);
     this.hiveAppearance.setTexture(this.hive);
     this.hiveAppearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.hiveAppearance.setAmbient(0.6, 0.6, 0.5, 1);
+    this.hiveAppearance.setDiffuse(0.6, 0.6, 0.5, 1);
+    this.hiveAppearance.setSpecular(0.6, 0.6, 0.5, 1);
+
+    this.hiveTopAppearance  = new CGFappearance(this);
+    this.hiveTopAppearance.setTexture(this.hiveTop);
+    this.hiveTopAppearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.hiveTopAppearance.setAmbient(0.6, 0.6, 0.5, 1);
+    this.hiveTopAppearance.setDiffuse(0.6, 0.6, 0.5, 1);
+    this.hiveTopAppearance.setSpecular(0.6, 0.6, 0.5, 1);
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
@@ -82,8 +92,8 @@ export class MyScene extends CGFscene {
     this.bee = new MyBee(this, 0, 0, 0);
     this.rock = new MyRock(this, 5, 5, 0.5);
     this.rockSet = new MyRockSet(this, 5, 10);
-    this.hive = new MyHive(this, this.hiveAppearance);
-    this.garden = new MyGarden(this, 8, 8, this.leafAppearance, this.stemAppearance, this.petalAppearances, this.receptacleAppearances);
+    this.hive = new MyHive(this, this.hiveAppearance, this.hiveTopAppearance);
+    this.garden = new MyGarden(this, 6, 6, this.leafAppearance, this.stemAppearance, this.petalAppearances, this.receptacleAppearances);
     this.turf = new MyTurf(this, 2500);
     //Objects connected to MyInterface
     this.displayAxis = true;
@@ -213,7 +223,6 @@ export class MyScene extends CGFscene {
   initRecetacleTextures() {
     this.sunflower = new CGFtexture(this, "images/receptacles/sunflower.png");
     this.pinkFlower = new CGFtexture(this, "images/receptacles/pink.png");
-    this.orangeFlower = new CGFtexture(this, "images/receptacles/white.jpg");
 
     this.sunflowerAppearance = new CGFappearance(this);
     this.sunflowerAppearance.setTexture(this.sunflower);

@@ -13,6 +13,7 @@ export class MyAbdomen extends CGFobject {
     this.abdomenTexture.setAmbient(1, 1, 0, 1);
     this.abdomenTexture.setDiffuse(1, 1, 0, 1);
     this.abdomenTexture.setSpecular(1, 1, 0, 1); 
+    this.abdomenTexture.setEmission(1, 1, 1, 1);
 
   }
 
