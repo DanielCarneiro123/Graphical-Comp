@@ -259,7 +259,6 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
-
     if (this.displayEarth) {
       this.pushMatrix();
       this.earthAppearance.apply();
