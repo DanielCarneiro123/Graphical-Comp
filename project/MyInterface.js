@@ -19,30 +19,19 @@ export class MyInterface extends CGFinterface {
 
         //Checkbox element in GUI
         this.gui.add(this.scene, 'displayAxis').name('Display Axis');
-        this.gui.add(this.scene, 'displayNormals').name("Display normals");
         
         //Slider element in GUI
-        this.gui.add(this.scene, 'scaleFactor', 0.5, 3).name('Scale Factor');
-        this.gui.add(this.scene, 'speedFactor', 0.1, 3).name('Speed Factor');
-        this.gui.add(this.scene, 'scaleFactor', 0.5, 3).name('Scale Factor');
-        this.gui.add(this.scene, 'speedFactor', 0.1, 3).name('Speed Factor');
+        this.gui.add(this.scene, 'scaleFactor', 0.5, 3).onChange(this.scene.updateScaleFactor.bind(this.scene)).name('Scale Factor');
+        this.gui.add(this.scene, 'speedFactor', 0.1, 3).onChange(this.scene.updateSpeedFactor.bind(this.scene)).name('Speed Factor');
 
-        var displayGroup = this.gui.addFolder("Display object");
-
-        displayGroup.add(this.scene, 'displayInfinitePanorama').name("Display infinite panorama");
-        displayGroup.add(this.scene, 'displaySunFlower').name("Display sunflower");
-        displayGroup.add(this.scene, 'displayPinkFlower').name("Display pink flower");
-        displayGroup.add(this.scene, 'displaySunFlower').name("Display sunflower");
-        displayGroup.add(this.scene, 'displayPinkFlower').name("Display pink flower");
-        displayGroup.add(this.scene, 'displayGarden').name("Display garden");
-        displayGroup.add(this.scene, 'displayTerrain').name("Display terrain");
-        displayGroup.add(this.scene, 'displayEarth').name("Display earth");
-        displayGroup.add(this.scene, 'displayBee').name("Display bee");
-        displayGroup.add(this.scene, 'displayBee').name("Display bee");
-        displayGroup.add(this.scene, 'displayRock').name("Display Rock");
-        displayGroup.add(this.scene, 'displayRockSet').name("Display Rock Set");
-        displayGroup.add(this.scene, 'displayTurf').name("Display Turf");
-        displayGroup.add(this.scene, 'displayHive').name("Display Hive");
+        this.gui.add(this.scene, 'displayTerrain').name("Terrain");
+        this.gui.add(this.scene, 'displayEarth').name("Earth");
+        this.gui.add(this.scene, 'displayGarden').name("Garden");
+        this.gui.add(this.scene, 'displayRock').name("Rock");
+        this.gui.add(this.scene, 'displayRockSet').name("Rock Set");
+        this.gui.add(this.scene, 'displayBee').name("Bee");
+        this.gui.add(this.scene, 'displayTurf').name("Turf");
+        this.gui.add(this.scene, 'displayHive').name("Hive");
 
         var garden = this.gui.addFolder('Garden')
         garden.add(this.scene, 'gardenRows', 1, 8, 1).name('Garden Rows').onChange(this.scene.updateGarden.bind(this.scene));
