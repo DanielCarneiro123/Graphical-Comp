@@ -64,26 +64,36 @@ export class MyBee extends CGFobject {
         wingAngle: this.wingAngle
       }, this.movingY);
 
-      this.updateParameters();
+      
       
       if (this.goingDown) {
-        if (this.position.y >= this.targetY){
+        console.log(this.position.y);
+        console.log(this.targetY);
+        if (this.position.y > this.targetY){
           this.descendingSpeed = 0;
           this.speed = 0;
           this.goingDown = false;
+          console.log("fds");
           this.targetY = null;
           console.log(this.goingDown);
-
         }
+        else {
+          this.updateParameters();
+        }
+        
       }
       else if (this.goingUp){
+        console.log(this.position.y);
+        console.log(this.targetY);
         if (this.position.y <= this.targetY) {
           this.descendingSpeed = 0;
           this.speed = 0;
           this.movingY = false;
           this.goingUp= false;
           this.targetY = null;
-          this.closestFlower = null;
+        }
+        else {
+          this.updateParameters();
         }
       }
     }
@@ -117,6 +127,7 @@ export class MyBee extends CGFobject {
     this.closestFlower = this.findClosestFlower();
     if (this.closestFlower) {
       this.targetY = this.closestFlower.y;
+      console.log(`Target Y: ${this.targetY}`)
       console.log(`Moving to flower at Y: ${this.closestFlower.y}`);
     }
   }
@@ -124,19 +135,17 @@ export class MyBee extends CGFobject {
 
   findClosestFlower() {
     let minDistance = Infinity;
-
+    console.log(this.flowers);
     for (let flower of this.flowers) {
-      let dx = flower.x - this.position.x;
-      let dz = flower.z - this.position.z;
-      if (Math.abs(dx) <= 1 && Math.abs(dz) <= 1) {
-        let distance = Math.sqrt(dx * dx + dz * dz);
 
-        if (distance < minDistance) {
-          minDistance = distance;
-          this.closestFlower = flower;
-        }
+      let dx = Math.abs(flower.x - this.position.x);
+      let dz = Math.abs(flower.z - this.position.z);
+      if (Math.abs(dx) <= 10 && Math.abs(dz) <= 10) {
+        this.closestFlower = flower;
+        console.log(this.closestFlower);
       }
     }
+    
     return this.closestFlower;
   }
   

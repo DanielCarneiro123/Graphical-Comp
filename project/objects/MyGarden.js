@@ -67,7 +67,7 @@ export class MyGarden extends CGFobject{
                     petalAppearance
                 ));
 
-                this.flowerPositions[i * this.numCols + j].y = stemHeight ;
+                this.flowerPositions[i * this.numCols + j].y = stemHeight +9.5;
                 this.shadow[i].push(new MyCircle(this.scene, receptacleRadius * 1.5, 20));
             }
         }
