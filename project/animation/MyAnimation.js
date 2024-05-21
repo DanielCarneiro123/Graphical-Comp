@@ -70,7 +70,7 @@ export class MyAnimation {
         if (this.active) {
             let timeSinceAnimationStart = elapsedTimeSecs - this.last;
             if (this.loop || (timeSinceAnimationStart >= 0 && !this.lastIteration)) {
-                if(!(timeSinceAnimationStart <= this.animDurationSecs) && !this.loop){
+                if((timeSinceAnimationStart > this.animDurationSecs) && !this.loop){
                     this.grassVal = this.startVal + this.movementFunction(1) * this.length;
                     this.updatePositionGrass(timeSinceAnimationStart, vector);
                     this.lastIteration = true

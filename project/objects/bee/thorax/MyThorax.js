@@ -25,6 +25,7 @@ export class MyThorax extends CGFobject {
     this.thoraxTexture.setAmbient(1, 1, 0, 1);
     this.thoraxTexture.setDiffuse(1, 1, 0, 1);
     this.thoraxTexture.setSpecular(1, 1, 0, 1);
+    this.thoraxTexture.setEmission(1, 1, 1, 1);
     this.thoraxTexture.setTextureWrap("REPEAT", "REPEAT");
 
     this.legTexture = new CGFtexture(this.scene, "images/bee/leg.png");
