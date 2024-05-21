@@ -289,7 +289,7 @@ export class MyScene extends CGFscene {
     // display garden
     if (this.displayGarden) {
       this.pushMatrix();
-      this.translate(-20,0,-60);
+      this.translate(-80,0, -120);
       this.scale(6, 6, 6);
       this.garden.display();
       this.popMatrix();

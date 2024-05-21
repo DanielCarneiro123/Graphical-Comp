@@ -167,7 +167,7 @@ export class MyBee extends CGFobject {
   reset() {
     this.movingY  = false;
     this.speed = 0
-    this.orientation = 0;
+    this.orientation = -Math.PI/2;
     this.position = {x: this.defaultPosition.x, y: this.defaultPosition.y, z: this.defaultPosition.z}
   }
 
