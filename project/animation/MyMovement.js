@@ -13,9 +13,12 @@ export class MyMovement extends MyAnimation {
     updatePositionObj(elapsedTime, vector, movingY) {
         const objSpeed = this.calculateStaticSpeed(vector.speed);
         if (movingY){
-            this.updateCoordinatesDown(elapsedTime, vector, objSpeed);
+            this.updateCoordinatesDown(elapsedTime, vector);
         }
-        else{this.updateCoordinates(elapsedTime, vector, objSpeed);}
+        else{
+            
+            this.updateCoordinates(elapsedTime, vector, objSpeed);
+        }
         
         this.updateWingAngle(objSpeed, elapsedTime);
     }
@@ -42,12 +45,13 @@ export class MyMovement extends MyAnimation {
         this.z = vector.z + vector.speed * (-Math.sin(-vector.orientation));
     }
 
-    updateCoordinatesDown(elapsedTime, vector, staticSpeed) {
+    updateCoordinatesDown(elapsedTime, vector) {
         this.x = vector.x;
         this.y = vector.y + vector.speed;
         this.z = vector.z;
-        console.log(this.y);
+        console.log(`Updating Y in updateCoordinatesDown: ${this.y}`);
     }
+      
 
     updateWingAngle(staticSpeed, elapsedTime) {
         this.wingAngle = (Math.PI / 4) * Math.sin(10 * staticSpeed * elapsedTime);

@@ -44,11 +44,21 @@ export class MyAnimation {
             let timeSinceAnimationStart = elapsedTimeSecs - this.last;
             if (this.loop || (timeSinceAnimationStart >= 0 && !this.lastIteration)) {
                 if(!(timeSinceAnimationStart <= this.animDurationSecs) && !this.loop){
-                    this.animVal = this.startVal + this.movementFunction(1) * this.length;
+                    if (movingY) {
+                        this.animVal = this.movementFunction(1) * this.length;
+                    }
+                    else {
+                        this.animVal = this.startVal + this.movementFunction(1) * this.length;
+                    }
                     this.updatePositionObj(timeSinceAnimationStart, vector, movingY);
                     this.lastIteration = true
                 }else{
-                    this.animVal = this.startVal + this.movementFunction(timeSinceAnimationStart / this.animDurationSecs) * this.length;
+                    if (movingY) {
+                        this.animVal = this.movementFunction(timeSinceAnimationStart / this.animDurationSecs) * this.length;
+                    }
+                    else {
+                        this.animVal = this.startVal + this.movementFunction(timeSinceAnimationStart / this.animDurationSecs) * this.length;
+                    }
                     this.updatePositionObj(timeSinceAnimationStart, vector, movingY);
                 }
             }
