@@ -30,7 +30,12 @@ export class MyGarden extends CGFobject{
 
         this.absolutePositions = [];
         for (let i = 0; i < this.flowerPositions.length; i++) { 
-            this.absolutePositions.push({x: this.flowerPositions[i].x * 6 - 80, y: this.flowerPositions[i].y * 6, z: this.flowerPositions[i].z * 6 - 120});
+            this.absolutePositions.push({
+                x: this.flowerPositions[i].x * 6 - 80, 
+                y: this.flowerPositions[i].y * 6, 
+                z: this.flowerPositions[i].z * 6 - 120,
+                flower : this.flowers[Math.floor(this.flowerPositions[i].x / 4)][Math.floor(this.flowerPositions[i].z / 4)]
+            });
         }
         
     }

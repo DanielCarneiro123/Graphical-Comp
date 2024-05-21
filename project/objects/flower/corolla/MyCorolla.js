@@ -70,11 +70,13 @@ export class MyCorolla extends CGFobject {
             this.receptacle.display();
         this.scene.popMatrix()
 
-        this.scene.pushMatrix()
+        if (this.pollen != null) {
+            this.scene.pushMatrix()
             this.scene.rotate(-Math.PI/2, 1, 0, 0);
             this.scene.translate(0, 0, 0.8);
             this.pollen.display();
-        this.scene.popMatrix()
+            this.scene.popMatrix();
+        }
 
     }
 }

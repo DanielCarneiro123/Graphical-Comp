@@ -4,6 +4,7 @@ import { MyWing } from "./MyWing.js";
 import { MyFrontLeg } from "./legs/MyFrontLeg.js";
 import { MyMiddleLeg } from "./legs/MyMiddleLeg.js";
 import { MyHindLeg } from "./legs/MyHindLeg.js";
+import { MyPollen } from "../../flower/corolla/MyPollen.js";
 
 export class MyThorax extends CGFobject {
   constructor(scene, wingAngle) {
@@ -15,6 +16,8 @@ export class MyThorax extends CGFobject {
     this.frontleg = new MyFrontLeg(this.scene);
     this.middleleg = new MyMiddleLeg(this.scene);
     this.hindleg = new MyHindLeg(this.scene);
+    this.pollen = new MyPollen(this.scene);
+    this.carryingPollen = false;
 
     this.initMaterials();
   }
@@ -109,6 +112,16 @@ export class MyThorax extends CGFobject {
             this.scene.translate(0, 0.5, 0);
             this.wing.display();
         this.scene.popMatrix();
+
+        if (this.carryingPollen) {
+            this.scene.pushMatrix();
+            this.scene.scale(4, 4, 4);
+            this.scene.translate(-0.25, -0.5, 0);
+            this.pollen.display();
+            this.scene.popMatrix();
+        }
+
+
     this.scene.popMatrix();
   }
 }

@@ -45,7 +45,7 @@ export class MyBee extends CGFobject {
 
   update(elapsedTime, scaleFactor, speedFactor) {
     this.scale = scaleFactor;
-    this.pressKeys(speedFactor / 5, elapsedTime);
+    this.pressKeys(speedFactor / 5);
 
     if (speedFactor !== this.lastSpeedFactor && this.speed !== 0) {
         this.speed += (speedFactor - this.lastSpeedFactor);
@@ -71,9 +71,10 @@ export class MyBee extends CGFobject {
           this.descendingSpeed = 0;
           this.speed = 0;
           this.goingDown = false;
-          console.log("REACHED FLOWER!");
           this.targetY = null;
-          console.log(this.goingDown);
+
+          console.log("REACHED FLOWER!");
+          this.catchPollen(this.closestFlower);
         }
         else {
           this.updateParameters();
@@ -137,11 +138,8 @@ export class MyBee extends CGFobject {
 
       let dx = Math.abs((flower.x)  - this.position.x);
       let dz = Math.abs((flower.z) - this.position.z);
-      console.log(dx);
-      console.log(dz);
       if (Math.abs(dx) <= 10 && Math.abs(dz) <= 10) {
         this.closestFlower = flower;
-        console.log(this.closestFlower);
         return this.closestFlower;
       }
     }
@@ -151,6 +149,11 @@ export class MyBee extends CGFobject {
     return null;
   }
   
+
+  catchPollen(obj) {
+    obj.flower.removePollen();
+    this.thorax.carryingPollen = true;
+  }
 
   updateParameters() {
     this.position.y = this.movement.y
@@ -176,6 +179,15 @@ export class MyBee extends CGFobject {
     this.position = {x: this.defaultPosition.x, y: this.defaultPosition.y, z: this.defaultPosition.z}
   }
 
+  transportPollen() {
+    this.moveToNormalHeight();
+    let angle = Math.atan2(this.defaultPosition.z - this.position.z, this.defaultPosition.x - this.position.x);
+    console.log("Angle: " + angle * 180 / Math.PI);
+    this.orientation = Math.PI - angle ;
+
+
+  }
+
   pressKeys(factor) {
     if (this.scene.gui.isKeyPressed("KeyW")) {
         this.accelerate(factor)
@@ -198,5 +210,8 @@ export class MyBee extends CGFobject {
     if (this.scene.gui.isKeyPressed("KeyP")){
         this.moveToNormalHeight();
     }
+    if (this.scene.gui.isKeyPressed("KeyO")){
+        this.transportPollen();
+    } 
   }
 }
