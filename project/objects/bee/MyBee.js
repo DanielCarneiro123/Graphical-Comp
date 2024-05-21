@@ -63,16 +63,15 @@ export class MyBee extends CGFobject {
         wingAngle: this.wingAngle
       }, this.movingY);
 
-      
-      
-      if (this.goingDown) {
+      this.findClosestFlower();
+      if (this.goingDown && this.closestFlower != null) {
         console.log("BEE position: " + this.position.x + " ", this.position.y + " " + this.position.z);
         console.log(this.targetY);
-        if (this.position.y < this.targetY){
+        if (this.position.y <= this.targetY){
           this.descendingSpeed = 0;
           this.speed = 0;
           this.goingDown = false;
-          console.log("fds");
+          console.log("REACHED FLOWER!");
           this.targetY = null;
           console.log(this.goingDown);
         }
@@ -111,9 +110,9 @@ export class MyBee extends CGFobject {
   }
 
   moveToNormalHeight() {
-    this.descendingSpeed = 0.5;  
-    this.targetY = 0;
-    this.movingY = true;
+    this.descendingSpeed = 0.5;       
+    this.targetY = this.defaultPosition.y;     
+    this.movingY = true;     
     this.goingUp = true;
   }
   
@@ -137,13 +136,16 @@ export class MyBee extends CGFobject {
 
       let dx = Math.abs((flower.x)  - this.position.x);
       let dz = Math.abs((flower.z) - this.position.z);
-      if (Math.abs(dx) <= 1 && Math.abs(dz) <= 1) {
+      if (Math.abs(dx) <= 3 && Math.abs(dz) <= 3) {
         this.closestFlower = flower;
         console.log(this.closestFlower);
+        return this.closestFlower;
       }
     }
-    
-    return this.closestFlower;
+    console.log("Did not find any flower")
+
+    this.closestFlower = null;
+    return null;
   }
   
 
