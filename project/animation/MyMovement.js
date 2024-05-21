@@ -15,8 +15,7 @@ export class MyMovement extends MyAnimation {
         if (movingY){
             this.updateCoordinatesDown(elapsedTime, vector);
         }
-        else{
-            
+        else{ 
             this.updateCoordinates(elapsedTime, vector, objSpeed);
         }
         
@@ -32,6 +31,7 @@ export class MyMovement extends MyAnimation {
             return 10;
         }
     }
+    
 
     updateCoordinates(elapsedTime, vector, staticSpeed) {
         this.x = vector.x + vector.speed * (-Math.cos(vector.orientation));
@@ -50,11 +50,6 @@ export class MyMovement extends MyAnimation {
     updateWingAngle(staticSpeed, elapsedTime) {
         this.wingAngle = (Math.PI / 4) * Math.sin(10 * staticSpeed * elapsedTime);
     }
-
-    updateGrassAngle(staticSpeed, elapsedTime) {
-        this.grassAngle = (Math.PI / 10) * Math.sin(1.5*staticSpeed * elapsedTime);
-    }
-    
     movementFunction(elapsedTime) {
         return Math.sin(elapsedTime / this.startVal);
     }

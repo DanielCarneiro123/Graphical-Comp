@@ -44,6 +44,10 @@ export class MyBee extends CGFobject {
   
 
   update(elapsedTime, scaleFactor, speedFactor) {
+    if (this.carryingPollen && Math.abs(this.position.x - this.defaultPosition.x) < 3 && Math.abs(this.position.z - 95) < 3) {
+      this.dropPollen();
+      return;
+    }
     this.scale = scaleFactor;
     this.pressKeys(speedFactor / 5);
 
@@ -180,12 +184,17 @@ export class MyBee extends CGFobject {
   }
 
   transportPollen() {
-    this.moveToNormalHeight();
     let angle = Math.atan2(this.defaultPosition.z - this.position.z, this.defaultPosition.x - this.position.x);
-    console.log("Angle: " + angle * 180 / Math.PI);
-    this.orientation = Math.PI - angle ;
+    this.orientation = Math.PI - angle;
+    this.carryingPollen = true;
+    this.speed = 2;
+  }
 
-
+  dropPollen() {
+    this.speed = 0;
+    this.carryingPollen = false;
+    this.thorax.carryingPollen = false;
+    this.scene.hive.addPollen();
   }
 
   pressKeys(factor) {

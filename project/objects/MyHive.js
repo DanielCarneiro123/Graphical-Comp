@@ -7,6 +7,11 @@ export class MyHive extends CGFobject {
         this.sphere = new MySphere(scene, 20, 20);
         this.hiveAppearance = hiveAppearance;
         this.topAppearance = topAppearance;
+        this.pollens = 0;
+    }
+
+    addPollen() {
+        this.pollens++;
     }
 
     display() {
