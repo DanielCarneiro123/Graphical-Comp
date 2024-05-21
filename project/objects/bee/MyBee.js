@@ -52,7 +52,7 @@ export class MyBee extends CGFobject {
         this.lastSpeedFactor = speedFactor;
     }
 
-    if (this.movingY){
+    if (this.movingY && this.closestFlower != null){
       this.speed = this.descendingSpeed;
       this.movement.update(elapsedTime, {
         x: this.position.x,
@@ -64,7 +64,7 @@ export class MyBee extends CGFobject {
       }, this.movingY);
 
       this.findClosestFlower();
-      if (this.goingDown && this.closestFlower != null) {
+      if (this.goingDown) {
         console.log("BEE position: " + this.position.x + " ", this.position.y + " " + this.position.z);
         console.log(this.targetY);
         if (this.position.y <= this.targetY){
@@ -96,6 +96,7 @@ export class MyBee extends CGFobject {
       }
     }
     else {
+      this.movingY = false;
       this.movement.update(elapsedTime, {
         x: this.position.x,
         y: this.position.y,
@@ -136,7 +137,9 @@ export class MyBee extends CGFobject {
 
       let dx = Math.abs((flower.x)  - this.position.x);
       let dz = Math.abs((flower.z) - this.position.z);
-      if (Math.abs(dx) <= 3 && Math.abs(dz) <= 3) {
+      console.log(dx);
+      console.log(dz);
+      if (Math.abs(dx) <= 10 && Math.abs(dz) <= 10) {
         this.closestFlower = flower;
         console.log(this.closestFlower);
         return this.closestFlower;
