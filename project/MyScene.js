@@ -88,7 +88,7 @@ export class MyScene extends CGFscene {
     this.sunflower = new MyFlower(this, 12, 4, 2.5, 0.8, 0.15, 4, 40, 40, 20, this.leafAppearance, this.stemAppearance, this.receptacleAppearances[0], this.petalAppearances[3]);
     this.pinkflower = new MyFlower(this, 12, 4, 2.5, 0.8, 0.15, 4, 20, 40, 20, this.leafAppearance, this.stemAppearance, this.receptacleAppearances[1], this.petalAppearances[0]);
     this.garden = new MyGarden(this, 6, 6, this.leafAppearance, this.stemAppearance, this.petalAppearances, this.receptacleAppearances);
-    this.bee = new MyBee(this, 0, 0, 0, this.garden.flowerPositions);
+    this.bee = new MyBee(this, -20, 60, 90, this.garden.absolutePositions);
     this.rock = new MyRock(this, 5, 5, 0.5);
     this.rockSet = new MyRockSet(this, 5, 10);
     this.hive = new MyHive(this, this.hiveAppearance, this.hiveTopAppearance);
@@ -123,6 +123,7 @@ export class MyScene extends CGFscene {
     this.appStartTime = Date.now();
     this.enableTextures(true);
 
+    console.log(this.garden.absolutePositions)
   }
   initLights() {
     this.lights[0].setPosition(15, 5, 5, 1);
@@ -288,7 +289,7 @@ export class MyScene extends CGFscene {
     // display garden
     if (this.displayGarden) {
       this.pushMatrix();
-      this.translate(-80,0,-120);
+      this.translate(-20,0,-60);
       this.scale(6, 6, 6);
       this.garden.display();
       this.popMatrix();
@@ -327,11 +328,8 @@ export class MyScene extends CGFscene {
     // display bee
     if (this.displayBee) {
       this.pushMatrix();
-      this.translate(-20, 60, 90);
-      this.scale(2, 2, 2);
-      this.rotate(-Math.PI/2, 0, 1, 0);
       this.bee.display();
-    this.popMatrix();
+      this.popMatrix();
     }
 
     this.popMatrix();

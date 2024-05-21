@@ -22,12 +22,6 @@ export class MyMovement extends MyAnimation {
         
         this.updateWingAngle(objSpeed, elapsedTime);
     }
-    
-
-    updatePositionGrass(elapsedTime, vector) {
-        const grassSpeed = this.calculateStaticSpeed(vector.speed);
-        this.updateGrassAngle(grassSpeed, elapsedTime);
-    }
 
     calculateStaticSpeed(speed) {
         if (speed < 0.1) {
@@ -41,7 +35,7 @@ export class MyMovement extends MyAnimation {
 
     updateCoordinates(elapsedTime, vector, staticSpeed) {
         this.x = vector.x + vector.speed * (-Math.cos(vector.orientation));
-        this.y = this.animVal;
+        this.y = this.animVal + 60;
         this.z = vector.z + vector.speed * (-Math.sin(-vector.orientation));
     }
 

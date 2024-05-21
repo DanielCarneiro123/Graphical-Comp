@@ -26,6 +26,10 @@ export class MyGarden extends CGFobject{
                 this.flowerPositions.push({x: x, y: 0, z: z});
             }
         }
+        this.absolutePositions = [];
+        for (let i = 0; i < this.flowerPositions.length; i++) { 
+            this.absolutePositions.push({x: this.flowerPositions[i].x - 80/6, y: 0, z: this.flowerPositions[i].z - 20});
+        }
         
         this.createFlowers();
         
@@ -67,7 +71,7 @@ export class MyGarden extends CGFobject{
                     petalAppearance
                 ));
 
-                this.flowerPositions[i * this.numCols + j].y = stemHeight +9.5;
+                this.flowerPositions[i * this.numCols + j].y = stemHeight + 12.5;
                 this.shadow[i].push(new MyCircle(this.scene, receptacleRadius * 1.5, 20));
             }
         }

@@ -9,13 +9,12 @@ import { MyMovement } from "../../animation/MyMovement.js";
 export class MyBee extends CGFobject {
   constructor(scene, x, y, z, flowers) {
     super(scene);
-    this.scale = 1;
     this.wingAngle = Math.PI / 8;
     this.thorax = new MyThorax(this.scene, this.wingAngle);
     this.head = new MyHead(this.scene);
     this.abdomen = new MyAbdomen(this.scene);
     this.speed = 0;
-    this.orientation = 0;
+    this.orientation = -Math.PI/2;
     this.position = {x: x, y: y, z: z};
     this.defaultPosition = {x: x, y: y, z: z};
     this.targetY = 0;
@@ -33,9 +32,9 @@ export class MyBee extends CGFobject {
 
   display() {
     this.scene.pushMatrix();
-      this.scene.translate(this.position.x, -this.position.y, this.position.z);
+      this.scene.translate(this.position.x, this.position.y, this.position.z);
       this.scene.rotate(this.orientation, 0, 1, 0);
-      this.scene.scale(this.scale, this.scale, this.scale);
+      this.scene.scale(2, 2, 2);
       this.head.display();
       this.abdomen.display();
       this.thorax.display(this.wingAngle);
@@ -67,9 +66,9 @@ export class MyBee extends CGFobject {
       
       
       if (this.goingDown) {
-        console.log(this.position.y);
+        console.log("BEE position: " + this.position.x + " ", this.position.y + " " + this.position.z);
         console.log(this.targetY);
-        if (this.position.y > this.targetY){
+        if (this.position.y < this.targetY){
           this.descendingSpeed = 0;
           this.speed = 0;
           this.goingDown = false;
@@ -85,7 +84,7 @@ export class MyBee extends CGFobject {
       else if (this.goingUp){
         console.log(this.position.y);
         console.log(this.targetY);
-        if (this.position.y <= this.targetY) {
+        if (this.position.y >= this.targetY) {
           this.descendingSpeed = 0;
           this.speed = 0;
           this.movingY = false;
@@ -109,19 +108,17 @@ export class MyBee extends CGFobject {
 
     this.updateParameters();
     }
-
-    
   }
 
   moveToNormalHeight() {
-    this.descendingSpeed = -0.5;  
+    this.descendingSpeed = 0.5;  
     this.targetY = 0;
     this.movingY = true;
     this.goingUp = true;
   }
   
   moveToFlowerHeight() {
-    this.descendingSpeed = 0.5; 
+    this.descendingSpeed = -0.5; 
     this.movingY = true;
     this.goingDown = true;
     this.closestFlower = this.findClosestFlower();
@@ -138,9 +135,9 @@ export class MyBee extends CGFobject {
     console.log(this.flowers);
     for (let flower of this.flowers) {
 
-      let dx = Math.abs(flower.x - this.position.x);
-      let dz = Math.abs(flower.z - this.position.z);
-      if (Math.abs(dx) <= 10 && Math.abs(dz) <= 10) {
+      let dx = Math.abs((flower.x)  - this.position.x);
+      let dz = Math.abs((flower.z) - this.position.z);
+      if (Math.abs(dx) <= 1 && Math.abs(dz) <= 1) {
         this.closestFlower = flower;
         console.log(this.closestFlower);
       }
