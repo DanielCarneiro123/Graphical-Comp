@@ -9,25 +9,14 @@ export class MyMovement extends MyAnimation {
         this.wingAngle = 0;
         this.grassAngle = 0;
     }
-
-    calculateParabolicPosition(start, end, t) {
-        const x = start.x + t * (end.x - start.x);
-        const z = start.z + t * (end.z - start.z);
     
-        const y = start.y + t * (end.y - start.y) - 4 * t * (1 - t);
-    
-        return { x, y, z };
-    }
-    
-
-    updatePositionObj(elapsedTime, vector, movingY, closestFlower) {
+    updatePositionObj(elapsedTime, vector, movingY) {
         const objSpeed = this.calculateStaticSpeed(vector.speed);
-        if (movingY) {
-            this.updatePositionDrop(elapsedTime, vector,closestFlower);
-        } else {
-            this.updateCoordinates(elapsedTime, vector, objSpeed);
+        if (movingY){
+            this.updateCoordinatesDown(elapsedTime, vector, objSpeed);
         }
-    
+        else{this.updateCoordinates(elapsedTime, vector, objSpeed);}
+        
         this.updateWingAngle(objSpeed, elapsedTime);
     }
     
@@ -53,6 +42,13 @@ export class MyMovement extends MyAnimation {
         this.z = vector.z + vector.speed * (-Math.sin(-vector.orientation));
     }
 
+    updateCoordinatesDown(elapsedTime, vector, staticSpeed) {
+        this.x = vector.x;
+        this.y = vector.y + vector.speed;
+        this.z = vector.z;
+        console.log(this.y);
+    }
+
     updateWingAngle(staticSpeed, elapsedTime) {
         this.wingAngle = (Math.PI / 4) * Math.sin(10 * staticSpeed * elapsedTime);
     }
@@ -60,27 +56,6 @@ export class MyMovement extends MyAnimation {
     updateGrassAngle(staticSpeed, elapsedTime) {
         this.grassAngle = (Math.PI / 10) * Math.sin(1.5*staticSpeed * elapsedTime);
     }
-
-    updatePositionDrop(elapsedTime, vector, closestFlower) {
-        const t = elapsedTime / this.animDurationSecs;
-    
-        const start = { x: vector.x, y: vector.y, z: vector.z };
-        const end = closestFlower;
-    
-        const x = start.x + vector.speed*t * (end.x - start.x);
-        const z = start.z + vector.speed*t * (end.z - start.z);
-    
-        const y = start.y + vector.speed*t * (end.y - start.y) - 4 * t * (1 - t);
-    
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        print(this.x);
-        print(this.y);
-        print(this.z);
-
-    }
-    
     
     movementFunction(elapsedTime) {
         return Math.sin(elapsedTime / this.startVal);

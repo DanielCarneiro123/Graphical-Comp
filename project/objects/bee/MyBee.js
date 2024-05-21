@@ -7,7 +7,7 @@ import { MyMovement } from "../../animation/MyMovement.js";
 
 
 export class MyBee extends CGFobject {
-  constructor(scene, x, y, z) {
+  constructor(scene, x, y, z, flowers) {
     super(scene);
     this.scale = 1;
     this.wingAngle = Math.PI / 8;
@@ -21,8 +21,10 @@ export class MyBee extends CGFobject {
     this.movement = new MyMovement(-0.5, 0.5, 0.5, true, true);
     this.slack = 10;
     this.lastSpeedFactor = 1;
-    this.movingY = false; 
-    this.closestFlower = null;
+    this.flowers = flowers;
+    this.targetY = null;
+    this.movingY = false;
+    this.descendingSpeed = 0.5;
   }
 
   display() {
@@ -38,7 +40,7 @@ export class MyBee extends CGFobject {
 
   
 
-  update(elapsedTime, scaleFactor, speedFactor, movingY) {
+  update(elapsedTime, scaleFactor, speedFactor) {
     this.scale = scaleFactor;
     this.pressKeys(speedFactor / 5, elapsedTime);
 
@@ -46,20 +48,6 @@ export class MyBee extends CGFobject {
         this.speed += (speedFactor - this.lastSpeedFactor);
         this.lastSpeedFactor = speedFactor;
     }
-
-    if (this.closestFlower) {
-        const distanceToFlower = Math.sqrt(
-            Math.pow(this.position.x - this.closestFlower.x, 2) +
-            Math.pow(this.position.y - this.closestFlower.y, 2) +
-            Math.pow(this.position.z - this.closestFlower.z, 2)
-        );
-
-        if (distanceToFlower < 0.1) {
-            this.closestFlower = null;
-            this.movingY = false;
-        }
-    }
-
     this.movement.update(elapsedTime, {
         x: this.position.x,
         y: this.position.y,
@@ -67,32 +55,49 @@ export class MyBee extends CGFobject {
         speed: this.speed,
         orientation: this.orientation,
         wingAngle: this.wingAngle
-    }, this.movingY, this.closestFlower);
+    }, this.movingY);
 
     this.updateParameters();
+    if (this.targetY !== null) {
+      if (this.position.y > this.targetY) {
+        this.position.y -= this.descendingSpeed;
+        if (this.position.y <= this.targetY) {
+          this.position.y = this.targetY;
+          this.targetY = null; 
+        }
+      }
+    }
   }
 
-
-
-  findClosestFlower(flowerPositions) {
-    let minDistance = Infinity;
+  moveToFlowerHeight() {
     this.movingY = true;
-    this.speed = 0.3;
 
-    flowerPositions.forEach((flower) => {
-      const distance = Math.sqrt(
-        Math.pow(this.position.x - flower.x, 2) +
-        Math.pow(this.position.y - flower.y, 2) +
-        Math.pow(this.position.z - flower.z, 2)
-      );
+    let closestFlower = this.findClosestFlower();
+
+    if (closestFlower) {
+      this.targetY = closestFlower.y;
+      
+    }
+  }
+
+  findClosestFlower() {
+    let minDistance = Infinity;
+    let closestFlower = null;
+
+    for (let flower of this.flowers) {
+      let dx = flower.x - this.position.x;
+      let dz = flower.z - this.position.z;
+      let distance = Math.sqrt(dx * dx + dz * dz);
 
       if (distance < minDistance) {
         minDistance = distance;
-        this.closestFlower = flower;
-        
+        closestFlower = flower;
       }
-    });
+    }
+
+    return closestFlower;
   }
+  
 
   updateParameters() {
     this.position.y = this.movement.y
@@ -102,17 +107,14 @@ export class MyBee extends CGFobject {
   }
 
   turn(v) {
-    this.movingY = false;
     this.orientation += v
   }
 
   accelerate(v) {
-      this.movingY = false;
       this.speed = Math.max(this.speed + v, 0)
   }
 
   reset() {
-    this.movingY = false;
     this.speed = 0
     this.orientation = 0;
     this.position = {x: this.defaultPosition.x, y: this.defaultPosition.y, z: this.defaultPosition.z}
@@ -135,7 +137,7 @@ export class MyBee extends CGFobject {
         this.reset()
     }
     if (this.scene.gui.isKeyPressed("KeyP")) {
-        this.findClosestFlower(this.scene.garden.flowerPositions);
+        this.moveToFlowerHeight();
     }
   }
 }

@@ -38,18 +38,18 @@ export class MyAnimation {
         this.active = false;
     }
 
-    update(elapsedTimeSecs, vector, movingY, closestFlower) {
+    update(elapsedTimeSecs, vector, movingY) {
         
         if (this.active) {
             let timeSinceAnimationStart = elapsedTimeSecs - this.last;
             if (this.loop || (timeSinceAnimationStart >= 0 && !this.lastIteration)) {
                 if(!(timeSinceAnimationStart <= this.animDurationSecs) && !this.loop){
                     this.animVal = this.startVal + this.movementFunction(1) * this.length;
-                    this.updatePositionObj(timeSinceAnimationStart, vector, movingY, closestFlower);
+                    this.updatePositionObj(timeSinceAnimationStart, vector, movingY);
                     this.lastIteration = true
                 }else{
                     this.animVal = this.startVal + this.movementFunction(timeSinceAnimationStart / this.animDurationSecs) * this.length;
-                    this.updatePositionObj(timeSinceAnimationStart, vector, movingY, closestFlower);
+                    this.updatePositionObj(timeSinceAnimationStart, vector, movingY);
                 }
             }
         }
