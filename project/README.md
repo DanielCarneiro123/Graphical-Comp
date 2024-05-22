@@ -103,3 +103,15 @@ De seguida, criamos uma nova class `MyHive.js`, que representará a colmeia da a
 ![Hive](screenshots/project-t11g09-5.3.png)
 <p align="center">Figura 11: Catching pollen</p>
 
+
+## 6. Shaders e animação
+
+Nesta etapa de desenvolvimento, modelamos a relva, anteriormente simulada apenas por meio de texturas, dando-lhe mais realismo.
+
+Desta forma, através da manipulação de shaders, fizemos com que cada fita da relva se curvasse sob o efeito do vento dando a ilusão, no conjunto, de ondulação com o vento. 
+
+![Turf](screenshots/project-t11g09-6.1.gif)
+<p align="center">Figura 12: Turf</p>
+
+
+

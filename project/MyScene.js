@@ -2,11 +2,14 @@ import { CGFscene, CGFcamera, CGFaxis, CGFappearance, CGFshader, CGFtexture } fr
 import { MyPlane } from "./polygons/MyPlane.js";
 import { MySphere } from "./polygons/MySphere.js";
 import { MyPanorama } from "./objects/MyPanorama.js";
+import { MyFlower } from "./objects/flower/MyFlower.js";
 import { MyGarden } from "./objects/MyGarden.js";
 import { MyBee } from "./objects/bee/MyBee.js";
 import { MyRock } from "./objects/MyRock.js";
 import { MyRockSet } from "./objects/MyRockSet.js";
 import { MyHive } from "./objects/MyHive.js";
+import { MyTurf } from "./objects/MyTurf.js";
+import { MySingleGrass } from "./objects/MySingleGrass.js";
 
 /**
  * MyScene
@@ -89,7 +92,9 @@ export class MyScene extends CGFscene {
     this.rock = new MyRock(this, 5, 5, 0.5);
     this.rockSet = new MyRockSet(this, 5, 10);
     this.hive = new MyHive(this, this.hiveAppearance, this.hiveTopAppearance);
-   
+    this.turf = new MyTurf(this, 2500);
+    this.grass = new MySingleGrass(this);
+
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayNormals = false;
@@ -284,6 +289,16 @@ export class MyScene extends CGFscene {
       this.popMatrix();
     }
     
+    // display turf
+    if (this.displayTurf) {
+      this.pushMatrix();
+      this.setActiveShader(this.grassShader);
+      this.translate(-80,0,-120);
+      this.stemAppearance.apply();
+      this.turf.display();
+      this.setActiveShader(this.defaultShader);
+      this.popMatrix();
+    }
 
     // display rock set
     if (this.displayRockSet) {
