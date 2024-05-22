@@ -100,4 +100,6 @@ De seguida, criamos uma nova class `MyHive.js`, que representará a colmeia da a
 
 - Se a abelha estiver em vôo, a transportar um grão de pólen e se for pressionada a tecla “O”, ela dirige-se à entrada da colmeia onde o larga
 
+![Hive](screenshots/project-t11g09-5.3.png)
+<p align="center">Figura 11: Catching pollen</p>
 
