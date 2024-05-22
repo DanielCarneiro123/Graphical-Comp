@@ -114,3 +114,11 @@ Desta forma, através da manipulação de shaders, fizemos com que cada fita da 
 <p align="center">Figura 12: Turf</p>
 
 
+---
+
+## Video Demo
+
+<video width="1200" height="800" controls>
+  <source src="demo/demo.mp4" type="video/mp4">
+  Your browser does not support the video tag.
+</video>

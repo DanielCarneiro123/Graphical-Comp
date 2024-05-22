@@ -103,11 +103,11 @@ export class MyScene extends CGFscene {
     // display
     this.displayInfinite = false;
     this.displayEarth = false;
-    this.displayGarden = false;
+    this.displayGarden = true;
     this.displayTerrain = true;
-    this.displayBee = false;
-    this.displayHive = false;
-    this.displayRockSet = false;
+    this.displayHive = true;
+    this.displayBee = true;
+    this.displayRockSet = true;
     this.displayTurf = true;
 
     // garden
