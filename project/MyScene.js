@@ -96,16 +96,15 @@ export class MyScene extends CGFscene {
     this.grass = new MySingleGrass(this);
 
     //Objects connected to MyInterface
-    this.displayAxis = true;
+    this.displayAxis = false;
     this.displayNormals = false;
     this.scaleFactor = 1;
 
     // display
-    this.displayInfinite = true;
+    this.displayInfinite = false;
     this.displayEarth = false;
     this.displayGarden = true;
     this.displayTerrain = true;
-    this.displayBee = true;
     this.displayHive = true;
     this.displayBee = true;
     this.displayRockSet = true;
