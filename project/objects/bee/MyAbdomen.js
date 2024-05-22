@@ -4,9 +4,7 @@ import { MySphere } from "../../polygons/MySphere.js";
 export class MyAbdomen extends CGFobject {
   constructor(scene) {
     super(scene);
-
     this.sphere = new MySphere(this.scene, 20, 20);
-
     this.abdomenTexture = new CGFappearance(this.scene);
     this.abdomenTexture.setTexture(new CGFtexture(this.scene, "images/bee/bee.jpg"));
     this.abdomenTexture.setTextureWrap('REPEAT', 'REPEAT');
@@ -14,16 +12,15 @@ export class MyAbdomen extends CGFobject {
     this.abdomenTexture.setDiffuse(1, 1, 0, 1);
     this.abdomenTexture.setSpecular(1, 1, 0, 1); 
     this.abdomenTexture.setEmission(1, 1, 1, 1);
-
   }
 
   display() {
     this.scene.pushMatrix();
-        this.abdomenTexture.apply();
-        this.scene.translate(4.6, -0.9, 0);
-        this.scene.rotate(Math.PI / 3, 0, 0, 1);
-        this.scene.scale(1, 2, 1.2);
-        this.sphere.display();
+    this.abdomenTexture.apply();
+    this.scene.translate(4.6, -0.9, 0);
+    this.scene.rotate(Math.PI / 3, 0, 0, 1);
+    this.scene.scale(1, 2, 1.2);
+    this.sphere.display();
     this.scene.popMatrix();
   }
 }

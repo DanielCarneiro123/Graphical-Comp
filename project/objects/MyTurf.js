@@ -32,7 +32,7 @@ export class MyTurf extends CGFobject {
             this.scene.pushMatrix();
                 this.scene.translate(this.grassPositions[i][0], this.grassPositions[i][1], this.grassPositions[i][2]);
                 this.scene.rotate(this.grassRotations[i], 0, 1, 0)
-                this.scene.scale(1, 1.2, 1)
+                this.scene.scale(1, 0.7 + Math.random() * 0.5 , 1)
                 this.grasses[i].display();
             this.scene.popMatrix();
         }

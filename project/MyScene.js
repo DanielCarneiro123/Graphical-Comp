@@ -75,10 +75,12 @@ export class MyScene extends CGFscene {
     this.hiveAppearance  = new CGFappearance(this);
     this.hiveAppearance.setTexture(this.hive);
     this.hiveAppearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.hiveAppearance.setEmission(0.5, 0.5, 0.5, 1);
 
     this.hiveTopAppearance  = new CGFappearance(this);
     this.hiveTopAppearance.setTexture(this.hiveTop);
     this.hiveTopAppearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.hiveTopAppearance.setEmission(1, 1, 1, 1);
 
     //Initialize scene objects
     this.axis = new CGFaxis(this);
@@ -99,19 +101,19 @@ export class MyScene extends CGFscene {
     this.scaleFactor = 1;
 
     // display
+    this.displayInfinite = true;
+    this.displayEarth = false;
     this.displayGarden = true;
     this.displayTerrain = true;
-    this.displayEarth = false;
     this.displayBee = true;
     this.displayHive = true;
     this.displayBee = true;
-    this.displayRock = true;
     this.displayRockSet = true;
     this.displayTurf = true;
 
     // garden
-    this.gardenRows = 8;
-    this.gardenCols = 8;
+    this.gardenRows = 6;
+    this.gardenCols = 6;
   
     this.speedFactor = 1;
 
@@ -120,7 +122,6 @@ export class MyScene extends CGFscene {
     this.appStartTime = Date.now();
     this.enableTextures(true);
 
-    console.log(this.garden.absolutePositions)
   }
   initLights() {
     this.lights[0].setPosition(15, 5, 5, 1);
@@ -234,10 +235,6 @@ export class MyScene extends CGFscene {
 
     this.receptacleAppearances = [this.sunflowerAppearance, this.pinkflowerAppearance];
   }
-
-  updateScaleFactor(scaleFactor) {
-		this.grassShader.setUniformsValues({ normScale: scaleFactor });
-	}
 
   updateSpeedFactor(speedFactor) {
 		this.grassShader.setUniformsValues({ speedFactor: speedFactor });

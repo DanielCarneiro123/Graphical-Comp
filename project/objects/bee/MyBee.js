@@ -2,9 +2,7 @@ import { CGFobject } from "../../../lib/CGF.js";
 import { MyHead } from "./head/MyHead.js";
 import { MyThorax } from "./thorax/MyThorax.js";
 import { MyAbdomen } from "./MyAbdomen.js";
-import { MyAnimation } from "../../animation/MyAnimation.js";
 import { MyMovement } from "../../animation/MyMovement.js";
-
 
 export class MyBee extends CGFobject {
   constructor(scene, x, y, z, flowers) {
@@ -14,9 +12,9 @@ export class MyBee extends CGFobject {
     this.head = new MyHead(this.scene);
     this.abdomen = new MyAbdomen(this.scene);
     this.speed = 0;
-    this.orientation = -Math.PI/2;
-    this.position = {x: x, y: y, z: z};
-    this.defaultPosition = {x: x, y: y, z: z};
+    this.orientation = -Math.PI / 2;
+    this.position = { x: x, y: y, z: z };
+    this.defaultPosition = { x: x, y: y, z: z };
     this.targetY = 0;
     this.movement = new MyMovement(-0.5, 0.5, 0.5, true, true);
     this.slack = 10;
@@ -32,19 +30,21 @@ export class MyBee extends CGFobject {
 
   display() {
     this.scene.pushMatrix();
-      this.scene.translate(this.position.x, this.position.y, this.position.z);
-      this.scene.rotate(this.orientation, 0, 1, 0);
-      this.scene.scale(2, 2, 2);
-      this.head.display();
-      this.abdomen.display();
-      this.thorax.display(this.wingAngle);
+    this.scene.translate(this.position.x, this.position.y, this.position.z);
+    this.scene.rotate(this.orientation, 0, 1, 0);
+    this.scene.scale(2, 2, 2);
+    this.head.display();
+    this.abdomen.display();
+    this.thorax.display(this.wingAngle);
     this.scene.popMatrix();
   }
 
-  
-
   update(elapsedTime, scaleFactor, speedFactor) {
-    if (this.carryingPollen && Math.abs(this.position.x - this.defaultPosition.x) < 3 && Math.abs(this.position.z - 95) < 3) {
+    if (
+      this.carryingPollen &&
+      Math.abs(this.position.x - this.defaultPosition.x) < 3 &&
+      Math.abs(this.position.z - 95) < 3
+    ) {
       this.dropPollen();
       return;
     }
@@ -52,107 +52,97 @@ export class MyBee extends CGFobject {
     this.pressKeys(speedFactor / 5);
 
     if (speedFactor !== this.lastSpeedFactor && this.speed !== 0) {
-        this.speed += (speedFactor - this.lastSpeedFactor);
-        this.lastSpeedFactor = speedFactor;
+      this.speed += speedFactor - this.lastSpeedFactor;
+      this.lastSpeedFactor = speedFactor;
     }
 
-    if (this.movingY && this.closestFlower != null){
+    if (this.movingY && this.closestFlower != null) {
       this.speed = this.descendingSpeed;
-      this.movement.update(elapsedTime, {
-        x: this.position.x,
-        y: this.position.y,
-        z: this.position.z,
-        speed: this.speed,
-        orientation: this.orientation,
-        wingAngle: this.wingAngle
-      }, this.movingY);
+      this.movement.update(
+        elapsedTime,
+        {
+          x: this.position.x,
+          y: this.position.y,
+          z: this.position.z,
+          speed: this.speed,
+          orientation: this.orientation,
+          wingAngle: this.wingAngle,
+        },
+        this.movingY
+      );
 
       this.findClosestFlower();
       if (this.goingDown) {
-        console.log("BEE position: " + this.position.x + " ", this.position.y + " " + this.position.z);
-        console.log(this.targetY);
-        if (this.position.y <= this.targetY){
+        if (this.position.y <= this.targetY) {
           this.descendingSpeed = 0;
           this.speed = 0;
           this.goingDown = false;
           this.targetY = null;
 
-          console.log("REACHED FLOWER!");
           this.catchPollen(this.closestFlower);
-        }
-        else {
+        } else {
           this.updateParameters();
         }
-        
-      }
-      else if (this.goingUp){
-        console.log(this.position.y);
-        console.log(this.targetY);
+      } else if (this.goingUp) {
         if (this.position.y >= this.targetY) {
           this.descendingSpeed = 0;
           this.speed = 0;
           this.movingY = false;
-          this.goingUp= false;
+          this.goingUp = false;
           this.targetY = null;
-        }
-        else {
+        } else {
           this.updateParameters();
         }
       }
-    }
-    else {
+    } else {
       this.movingY = false;
-      this.movement.update(elapsedTime, {
-        x: this.position.x,
-        y: this.position.y,
-        z: this.position.z,
-        speed: this.speed,
-        orientation: this.orientation,
-        wingAngle: this.wingAngle
-    }, this.movingY);
+      this.movement.update(
+        elapsedTime,
+        {
+          x: this.position.x,
+          y: this.position.y,
+          z: this.position.z,
+          speed: this.speed,
+          orientation: this.orientation,
+          wingAngle: this.wingAngle,
+        },
+        this.movingY
+      );
 
-    this.updateParameters();
+      this.updateParameters();
     }
   }
 
   moveToNormalHeight() {
-    this.descendingSpeed = 0.5;       
-    this.targetY = this.defaultPosition.y;     
-    this.movingY = true;     
+    this.descendingSpeed = 0.5;
+    this.targetY = this.defaultPosition.y;
+    this.movingY = true;
     this.goingUp = true;
   }
-  
+
   moveToFlowerHeight() {
-    this.descendingSpeed = -0.5; 
+    this.descendingSpeed = -0.5;
     this.movingY = true;
     this.goingDown = true;
     this.closestFlower = this.findClosestFlower();
     if (this.closestFlower) {
       this.targetY = this.closestFlower.y;
-      console.log(`Target Y: ${this.targetY}`)
-      console.log(`Moving to flower at Y: ${this.closestFlower.y}`);
     }
   }
-  
 
   findClosestFlower() {
-    let minDistance = Infinity;
-    console.log(this.flowers);
     for (let flower of this.flowers) {
-
-      let dx = Math.abs((flower.x)  - this.position.x);
-      let dz = Math.abs((flower.z) - this.position.z);
+      let dx = Math.abs(flower.x - this.position.x);
+      let dz = Math.abs(flower.z - this.position.z);
       if (Math.abs(dx) <= 10 && Math.abs(dz) <= 10) {
         this.closestFlower = flower;
         return this.closestFlower;
       }
     }
-    console.log("Did not find any flower")
 
     this.closestFlower = null;
     return null;
   }
-  
 
   catchPollen(obj) {
     obj.flower.removePollen();
@@ -160,31 +150,38 @@ export class MyBee extends CGFobject {
   }
 
   updateParameters() {
-    this.position.y = this.movement.y
-    this.position.x = this.movement.x
-    this.position.z = this.movement.z
-    this.wingAngle = this.movement.wingAngle
+    this.position.y = this.movement.y;
+    this.position.x = this.movement.x;
+    this.position.z = this.movement.z;
+    this.wingAngle = this.movement.wingAngle;
   }
 
   turn(v) {
-    this.movingY  = false;
-    this.orientation += v
+    this.movingY = false;
+    this.orientation += v;
   }
 
   accelerate(v) {
-    this.movingY  = false;
-    this.speed = Math.max(this.speed + v, 0)
+    this.movingY = false;
+    this.speed = Math.max(this.speed + v, 0);
   }
 
   reset() {
-    this.movingY  = false;
-    this.speed = 0
-    this.orientation = -Math.PI/2;
-    this.position = {x: this.defaultPosition.x, y: this.defaultPosition.y, z: this.defaultPosition.z}
+    this.movingY = false;
+    this.speed = 0;
+    this.orientation = -Math.PI / 2;
+    this.position = {
+      x: this.defaultPosition.x,
+      y: this.defaultPosition.y,
+      z: this.defaultPosition.z,
+    };
   }
 
   transportPollen() {
-    let angle = Math.atan2(this.defaultPosition.z - this.position.z, this.defaultPosition.x - this.position.x);
+    let angle = Math.atan2(
+      this.defaultPosition.z - this.position.z,
+      this.defaultPosition.x - this.position.x
+    );
     this.orientation = Math.PI - angle;
     this.carryingPollen = true;
     this.speed = 1;
@@ -199,28 +196,28 @@ export class MyBee extends CGFobject {
 
   pressKeys(factor) {
     if (this.scene.gui.isKeyPressed("KeyW")) {
-        this.accelerate(factor)
+      this.accelerate(factor);
     }
     if (this.scene.gui.isKeyPressed("KeyS")) {
-        this.accelerate(-factor)
+      this.accelerate(-factor);
     }
     if (this.scene.gui.isKeyPressed("KeyA")) {
-        this.turn(factor)
+      this.turn(factor);
     }
     if (this.scene.gui.isKeyPressed("KeyD")) {
-        this.turn(-factor)
+      this.turn(-factor);
     }
     if (this.scene.gui.isKeyPressed("KeyR")) {
-        this.reset()
+      this.reset();
     }
     if (this.scene.gui.isKeyPressed("KeyF")) {
-        this.moveToFlowerHeight();
+      this.moveToFlowerHeight();
     }
-    if (this.scene.gui.isKeyPressed("KeyP")){
-        this.moveToNormalHeight();
+    if (this.scene.gui.isKeyPressed("KeyP")) {
+      this.moveToNormalHeight();
     }
-    if (this.scene.gui.isKeyPressed("KeyO")){
-        this.transportPollen();
-    } 
+    if (this.scene.gui.isKeyPressed("KeyO")) {
+      this.transportPollen();
+    }
   }
 }
