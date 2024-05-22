@@ -14,7 +14,7 @@ export class MyPanorama extends CGFobject {
         this.scene.pushMatrix()
         this.material.apply()
 
-        if (this.scene.displayInfinitePanorama)
+        if (this.scene.displayInfinite)
             this.scene.translate(this.scene.camera.position[0], this.scene.camera.position[1], this.scene.camera.position[2])
 
         this.sphere.display()

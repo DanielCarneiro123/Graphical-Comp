@@ -114,4 +114,3 @@ Desta forma, através da manipulação de shaders, fizemos com que cada fita da 
 <p align="center">Figura 12: Turf</p>
 
 
-
