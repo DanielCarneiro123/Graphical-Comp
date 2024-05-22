@@ -21,7 +21,7 @@ export class MyPollen extends CGFobject {
         this.scene.pushMatrix();
             this.appearance.apply();
             this.scene.rotate(-Math.PI/2, 1, 0, 0);
-            this.scene.scale(0.15, 0.2, 0.15);
+            this.scene.scale(0.2, 0.3, 0.2);
             this.sphere.display();
         this.scene.popMatrix();
 	}

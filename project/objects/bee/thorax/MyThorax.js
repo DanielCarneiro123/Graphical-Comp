@@ -11,7 +11,7 @@ export class MyThorax extends CGFobject {
     super(scene);
     this.wingAngle = wingAngle;
 
-    this.sphere = new MySphere(this.scene, 50, 50);
+    this.sphere = new MySphere(this.scene, 20, 20);
     this.wing = new MyWing(this.scene, this.wingAngle);
     this.frontleg = new MyFrontLeg(this.scene);
     this.middleleg = new MyMiddleLeg(this.scene);
@@ -95,6 +95,14 @@ export class MyThorax extends CGFobject {
         this.hindleg.display();
     this.scene.popMatrix();
 
+    if (this.carryingPollen) {
+        this.scene.pushMatrix();
+        this.scene.scale(2.5, 2.5, 2.5);
+        this.scene.translate(0.15, -0.7, 0);
+        this.pollen.display();
+        this.scene.popMatrix();
+    }
+
     // Wings
     this.scene.pushMatrix();
         this.wingTexture.apply();
@@ -112,15 +120,6 @@ export class MyThorax extends CGFobject {
             this.scene.translate(0, 0.5, 0);
             this.wing.display();
         this.scene.popMatrix();
-
-        if (this.carryingPollen) {
-            this.scene.pushMatrix();
-            this.scene.scale(4, 4, 4);
-            this.scene.translate(-0.25, -0.5, 0);
-            this.pollen.display();
-            this.scene.popMatrix();
-        }
-
 
     this.scene.popMatrix();
   }

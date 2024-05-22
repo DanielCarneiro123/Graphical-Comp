@@ -8,7 +8,7 @@ export class MyHead extends CGFobject {
     super(scene);
 
     this.antenna = new MyAntenna(this.scene);
-    this.sphere = new MySphere(this.scene, 50, 50);
+    this.sphere = new MySphere(this.scene, 20, 20);
     this.triangle = new MyTriangle(this.scene);
 
     this.eye = new CGFtexture(this.scene, "images/bee/eye.jpg");

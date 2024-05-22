@@ -5,7 +5,7 @@ export class MyMiddleLeg extends CGFobject {
   constructor(scene) {
     super(scene);
 
-    this.sphere = new MySphere(this.scene, 10, 10);
+    this.sphere = new MySphere(this.scene, 5, 5);
   }
 
   display() {

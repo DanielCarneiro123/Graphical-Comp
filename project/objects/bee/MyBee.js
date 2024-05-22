@@ -187,7 +187,7 @@ export class MyBee extends CGFobject {
     let angle = Math.atan2(this.defaultPosition.z - this.position.z, this.defaultPosition.x - this.position.x);
     this.orientation = Math.PI - angle;
     this.carryingPollen = true;
-    this.speed = 2;
+    this.speed = 1;
   }
 
   dropPollen() {

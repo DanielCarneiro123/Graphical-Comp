@@ -4,7 +4,7 @@ import { MyCircle } from "../../../polygons/MyCircle.js";
 export class MyWing extends CGFobject {
   constructor(scene) {
     super(scene);
-    this.circle = new MyCircle(this.scene, 1, 50);
+    this.circle = new MyCircle(this.scene, 1, 20);
   }
 
   display() {

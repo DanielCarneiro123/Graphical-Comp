@@ -85,26 +85,23 @@ export class MyScene extends CGFscene {
     this.plane = new MyPlane(this, 30);
     this.sphere = new MySphere(this, 50, 50);
     this.panorama = new MyPanorama(this, this.panoramaImage);
-    this.sunflower = new MyFlower(this, 12, 4, 2.5, 0.8, 0.15, 4, 40, 40, 20, this.leafAppearance, this.stemAppearance, this.receptacleAppearances[0], this.petalAppearances[3]);
-    this.pinkflower = new MyFlower(this, 12, 4, 2.5, 0.8, 0.15, 4, 20, 40, 20, this.leafAppearance, this.stemAppearance, this.receptacleAppearances[1], this.petalAppearances[0]);
     this.garden = new MyGarden(this, 6, 6, this.leafAppearance, this.stemAppearance, this.petalAppearances, this.receptacleAppearances);
     this.bee = new MyBee(this, -20, 60, 90, this.garden.absolutePositions);
     this.rock = new MyRock(this, 5, 5, 0.5);
     this.rockSet = new MyRockSet(this, 5, 10);
     this.hive = new MyHive(this, this.hiveAppearance, this.hiveTopAppearance);
-    this.turf = new MyTurf(this, 4000);
+    this.turf = new MyTurf(this, 2500);
     this.grass = new MySingleGrass(this);
 
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayNormals = false;
-    this.displayInfinitePanorama = false;
     this.scaleFactor = 1;
 
     // display
     this.displayGarden = true;
     this.displayTerrain = true;
-    this.displayEarth = true;
+    this.displayEarth = false;
     this.displayBee = true;
     this.displayHive = true;
     this.displayBee = true;
