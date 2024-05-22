@@ -57,14 +57,15 @@ export class MyBee extends CGFobject {
     }
 
     if (this.movingY && this.closestFlower != null){
-      this.speed = this.descendingSpeed;
+      
       this.movement.update(elapsedTime, {
         x: this.position.x,
         y: this.position.y,
         z: this.position.z,
-        speed: this.speed,
+        speed: this.descendingSpeed,
+        speedX: this.speed,
         orientation: this.orientation,
-        wingAngle: this.wingAngle
+        wingAngle: this.wingAngle,
       }, this.movingY);
 
       this.findClosestFlower();
@@ -129,28 +130,30 @@ export class MyBee extends CGFobject {
     this.closestFlower = this.findClosestFlower();
     if (this.closestFlower) {
       this.targetY = this.closestFlower.y;
-      console.log(`Target Y: ${this.targetY}`)
-      console.log(`Moving to flower at Y: ${this.closestFlower.y}`);
     }
   }
   
 
   findClosestFlower() {
     let minDistance = Infinity;
-    console.log(this.flowers);
+    this.closestFlower = null;
+
     for (let flower of this.flowers) {
 
-      let dx = Math.abs((flower.x)  - this.position.x);
-      let dz = Math.abs((flower.z) - this.position.z);
-      if (Math.abs(dx) <= 10 && Math.abs(dz) <= 10) {
+      let dx = Math.abs(flower.x  - this.position.x);
+      let dz = Math.abs(flower.z - this.position.z);
+      let dy = Math.abs(flower.y - this.position.y);
+
+      // bee position when reaching flower.y height with 0.5 speed
+      let beeX =
+      let beeZ =
+      if (Math.abs(beeX - flower.x) <= 10 && Math.abs(beeZ - flower.z) <= 10) {
+        minDistance = distance;
         this.closestFlower = flower;
-        return this.closestFlower;
       }
     }
-    console.log("Did not find any flower")
 
-    this.closestFlower = null;
-    return null;
+    return this.closestFlower;
   }
   
 

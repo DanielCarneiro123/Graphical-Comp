@@ -40,9 +40,9 @@ export class MyMovement extends MyAnimation {
     }
 
     updateCoordinatesDown(elapsedTime, vector) {
-        this.x = vector.x;
+        this.x = vector.x + vector.speedX * (-Math.cos(vector.orientation));
         this.y = vector.y + vector.speed;
-        this.z = vector.z;
+        this.z = vector.z + vector.speedX * (-Math.sin(-vector.orientation));
         console.log(`Updating Y in updateCoordinatesDown: ${this.y}`);
     }
       
