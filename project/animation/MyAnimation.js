@@ -19,10 +19,6 @@ export class MyAnimation {
         throw new Error('Subclass must implement abstract method');
     }
 
-    updatePositionDrop(){
-        throw new Error('Subclass must implement abstract method');
-    }
-
     enable(timeSinceAppStart) {
         this.active = true;
         this.last = timeSinceAppStart

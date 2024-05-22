@@ -1,4 +1,4 @@
-import { CGFobject, CGFappearance } from "../../../../../lib/CGF.js";
+import { CGFobject } from "../../../../../lib/CGF.js";
 import { MySphere } from "../../../../polygons/MySphere.js";
 
 export class MyFrontLeg extends CGFobject {
