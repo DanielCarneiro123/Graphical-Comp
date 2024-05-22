@@ -4,9 +4,12 @@ import { MySphere } from "./polygons/MySphere.js";
 import { MyPanorama } from "./objects/MyPanorama.js";
 import { MyFlower } from "./objects/flower/MyFlower.js";
 import { MyGarden } from "./objects/MyGarden.js";
+import { MyBee } from "./objects/bee/MyBee.js";
 import { MyRock } from "./objects/MyRock.js";
 import { MyRockSet } from "./objects/MyRockSet.js";
-import { MyBee } from "./objects/bee/MyBee.js";
+import { MyHive } from "./objects/MyHive.js";
+import { MyTurf } from "./objects/MyTurf.js";
+import { MySingleGrass } from "./objects/MySingleGrass.js";
 
 /**
  * MyScene
@@ -34,17 +37,23 @@ export class MyScene extends CGFscene {
     
     this.terrain = new CGFtexture(this, "images/terrain.jpg");
     this.earth = new CGFtexture(this, "images/earth.jpg");
-    this.panoramaImage = new CGFtexture(this, "images/panorama1.jpg");
+    this.panoramaImage = new CGFtexture(this, "images/panorama.jpg");
     this.stem = new CGFtexture(this, "images/stem.jpg");
     this.leaf = new CGFtexture(this, "images/leaf.jpg");
     this.rock = new CGFtexture(this, "images/rock.png");
+    this.hive = new CGFtexture(this, "images/hive.png");
+    this.hiveTop = new CGFtexture(this, "images/hiveTop.png");
 
     this.initPetalTextures();
     this.initRecetacleTextures();
 
+    this.grassShader = new CGFshader(this.gl, "shaders/grass.vert", "shaders/grass.frag"),
+    this.grassShader.setUniformsValues({ factor: 0, normScale: 0.5, speedFactor: 1 });
+
     this.terrainAppearance = new CGFappearance(this);
     this.terrainAppearance.setTexture(this.terrain);
     this.terrainAppearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.terrainAppearance.setEmission(1, 1, 1, 1);
 
     this.earthAppearance = new CGFappearance(this);
     this.earthAppearance.setTexture(this.earth);
@@ -53,6 +62,7 @@ export class MyScene extends CGFscene {
     this.stemAppearance = new CGFappearance(this);
     this.stemAppearance.setTexture(this.stem);
     this.stemAppearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.stemAppearance.setEmission(1, 1, 1, 1);
 
     this.leafAppearance = new CGFappearance(this);
     this.leafAppearance.setTexture(this.leaf);
@@ -62,48 +72,54 @@ export class MyScene extends CGFscene {
     this.rockAppearance.setTexture(this.rock);
     this.rockAppearance.setTextureWrap('REPEAT', 'REPEAT');
 
+    this.hiveAppearance  = new CGFappearance(this);
+    this.hiveAppearance.setTexture(this.hive);
+    this.hiveAppearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.hiveAppearance.setEmission(0.5, 0.5, 0.5, 1);
+
+    this.hiveTopAppearance  = new CGFappearance(this);
+    this.hiveTopAppearance.setTexture(this.hiveTop);
+    this.hiveTopAppearance.setTextureWrap('REPEAT', 'REPEAT');
+    this.hiveTopAppearance.setEmission(1, 1, 1, 1);
+
     //Initialize scene objects
     this.axis = new CGFaxis(this);
-
     this.plane = new MyPlane(this, 30);
     this.sphere = new MySphere(this, 50, 50);
     this.panorama = new MyPanorama(this, this.panoramaImage);
-    this.sunflower = new MyFlower(this, 12, 4, 2.5, 0.8, 0.15, 4, 40, 40, 20, this.leafAppearance, this.stemAppearance, this.receptacleAppearances[0], this.petalAppearances[3]);
-    this.pinkflower = new MyFlower(this, 12, 4, 2.5, 0.8, 0.15, 4, 20, 40, 20, this.leafAppearance, this.stemAppearance, this.receptacleAppearances[1], this.petalAppearances[0]);
+    this.garden = new MyGarden(this, 6, 6, this.leafAppearance, this.stemAppearance, this.petalAppearances, this.receptacleAppearances);
+    this.bee = new MyBee(this, -20, 60, 90, this.garden.absolutePositions);
     this.rock = new MyRock(this, 5, 5, 0.5);
     this.rockSet = new MyRockSet(this, 5, 10);
-    this.bee = new MyBee(this,0,20,0);
+    this.hive = new MyHive(this, this.hiveAppearance, this.hiveTopAppearance);
+    this.turf = new MyTurf(this, 2500);
+    this.grass = new MySingleGrass(this);
 
-    this.garden = new MyGarden(this, 5, 5, this.leafAppearance, this.stemAppearance, this.petalAppearances, this.receptacleAppearances);
-    
     //Objects connected to MyInterface
     this.displayAxis = true;
     this.displayNormals = false;
-    this.displayInfinitePanorama = false;
     this.scaleFactor = 1;
 
     // display
-    this.displaySunFlower = false;
-    this.displayPinkFlower = false;
-
-    this.displayGarden = false;
-    this.displayTerrain = false;
+    this.displayInfinite = true;
     this.displayEarth = false;
-    this.displayBee = false;
+    this.displayGarden = true;
+    this.displayTerrain = true;
+    this.displayBee = true;
+    this.displayHive = true;
+    this.displayBee = true;
+    this.displayRockSet = true;
+    this.displayTurf = true;
 
     // garden
-    this.gardenRows = 5;
-    this.gardenCols = 5;
-    this.displayFlower = false;
-    this.displayRock = false;
-    this.displayRockSet = false;
-
+    this.gardenRows = 6;
+    this.gardenCols = 6;
+  
     this.speedFactor = 1;
 
     this.setUpdatePeriod(50);
 
     this.appStartTime = Date.now();
-
     this.enableTextures(true);
 
   }
@@ -123,7 +139,7 @@ export class MyScene extends CGFscene {
       1.5,
       0.1,
       1000,
-      vec3.fromValues(5, 5, 5),
+      vec3.fromValues(70, 70, 70),
       vec3.fromValues(0, 0, 0)
     );
   }
@@ -200,7 +216,6 @@ export class MyScene extends CGFscene {
   initRecetacleTextures() {
     this.sunflower = new CGFtexture(this, "images/receptacles/sunflower.png");
     this.pinkFlower = new CGFtexture(this, "images/receptacles/pink.png");
-    this.orangeFlower = new CGFtexture(this, "images/receptacles/white.jpg");
 
     this.sunflowerAppearance = new CGFappearance(this);
     this.sunflowerAppearance.setTexture(this.sunflower);
@@ -221,6 +236,10 @@ export class MyScene extends CGFscene {
     this.receptacleAppearances = [this.sunflowerAppearance, this.pinkflowerAppearance];
   }
 
+  updateSpeedFactor(speedFactor) {
+		this.grassShader.setUniformsValues({ speedFactor: speedFactor });
+	}
+
   display() {
     // ---- BEGIN Background, camera and axis setup
     // Clear image and depth buffer everytime we update the scene
@@ -237,20 +256,6 @@ export class MyScene extends CGFscene {
 
     // ---- BEGIN Primitive drawing section
 
-    this.panorama.display();
-
-
-    if (this.displayTerrain) {
-      this.pushMatrix();
-      this.terrainAppearance.apply();
-      this.translate(0,-50,0);
-      this.scale(400,400,400);
-      this.rotate(-Math.PI/2.0,1,0,0);
-      this.plane.display();
-      this.popMatrix();
-    }
-    
-
     if (this.displayEarth) {
       this.pushMatrix();
       this.earthAppearance.apply();
@@ -259,62 +264,78 @@ export class MyScene extends CGFscene {
       this.popMatrix();
     }
 
+    this.pushMatrix();
 
-    if (this.displaySunFlower) {
+    this.translate(0, 70, 0);
+    this.panorama.display();
+    this.translate(0, -90, 0);
+
+    // display plane 
+    if (this.displayTerrain) {
       this.pushMatrix();
-        this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
-        this.sunflower.display();
+      this.terrainAppearance.apply();
+      this.scale(400,400,400);
+      this.rotate(-Math.PI/2.0,1,0,0);
+      this.plane.display();
       this.popMatrix();
     }
-
-    if (this.displayPinkFlower) {
-      this.pushMatrix();
-        this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
-        this.pinkflower.display();
-      this.popMatrix();
-    }
-  
-
+ 
+    // display garden
     if (this.displayGarden) {
       this.pushMatrix();
-        this.terrainAppearance.apply();
-        this.scale(this.gardenRows * 5, 1, this.gardenCols * 5);
-        this.translate(0.4,0,0.4);
-        this.rotate(-Math.PI/2.0,1,0,0);
-        this.plane.display();
-      this.popMatrix();
+      this.translate(-80,0, -120);
+      this.scale(6, 6, 6);
       this.garden.display();
-    }
-    
-
-    if (this.displayRock) {
-      this.pushMatrix();
-      this.rockAppearance.apply();
-      this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
-      this.rock.display();
       this.popMatrix();
     }
     
-    if (this.displayRockSet){
+    // display turf
+    if (this.displayTurf) {
+      this.pushMatrix();
+      this.setActiveShader(this.grassShader);
+      this.translate(-80,0,-120);
+      this.stemAppearance.apply();
+      this.turf.display();
+      this.setActiveShader(this.defaultShader);
+      this.popMatrix();
+    }
+
+    // display rock set
+    if (this.displayRockSet) {
       this.pushMatrix();
       this.rockAppearance.apply();
-      this.scale(this.scaleFactor, this.scaleFactor, this.scaleFactor);
+      this.translate(-45, 0, 70);
+      this.scale(12, 12, 12);
       this.rockSet.display();
       this.popMatrix();
     }
 
-    if (this.displayNormals)
-      this.sphere.enableNormalViz();
-    else
-      this.sphere.disableNormalViz();
-    // ---- END Primitive drawing section
-    if (this.displayBee){
-      this.bee.display();
+    // display hive
+    if (this.displayHive) {
+      this.pushMatrix();
+      this.translate(-20, 20, 95);
+      this.scale(15, 15, 15);
+      this.hive.display();
+      this.popMatrix();
     }
-    
+
+    // display bee
+    if (this.displayBee) {
+      this.pushMatrix();
+      this.bee.display();
+      this.popMatrix();
+    }
+
+    this.popMatrix();
+
   }
+
+
   update(time) {
     let timeSinceAppStart = (time - this.appStartTime) / 1000.0;
     this.bee.update(timeSinceAppStart, this.scaleFactor, this.speedFactor);
+    this.grassShader.setUniformsValues({ factor: time / 100 % 100 });
+
   }
+
 }

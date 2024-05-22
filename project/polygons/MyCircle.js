@@ -1,9 +1,5 @@
 import {CGFobject} from '../../lib/CGF.js';
-/**
- * MyTriangle
- * @constructor
- * @param scene - Reference to MyScene object
- */
+
 export class MyCircle extends CGFobject {
 	constructor(scene, radius, slices) {
 		super(scene);

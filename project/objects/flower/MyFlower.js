@@ -14,6 +14,10 @@ export class MyFlower extends CGFobject {
         this.stemRadius = stemRadius
     }
 
+    removePollen() {
+        this.corolla.pollen = null;
+    }
+
     display() {
         
         this.scene.pushMatrix()
