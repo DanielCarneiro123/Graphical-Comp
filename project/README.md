@@ -75,3 +75,29 @@ No último passo do ponto 4, implementamos o controlo da abelha utilizando o có
 
 ![Bee Animation](screenshots/project-t11g09-4.3.gif)
 <p align="center">Figura 8: Bee Animation</p>
+
+## 5. Pólen e colmeia
+
+### 5.1. Pólen
+
+De forma a que a abelha apanhe os grãos de pólen, foi adicionada uma instância da classe `MyPollen.js` a cada uma das flores do jardim. 
+
+![Pollen](screenshots/project-t11g09-5.1.png)
+<p align="center">Figura 9: Flower with pollen</p>
+
+### 5.2. Colmeia
+
+De seguida, criamos uma nova class `MyHive.js`, que representará a colmeia da abelha, colocada sobre o monte de pedras/penedos descrito anteriormente.
+
+![Hive](screenshots/project-t11g09-5.2.png)
+<p align="center">Figura 10: Hive</p>
+
+## 5.3. Movimentação
+
+- Ao pressionar a tecla **F** a abelha desce até tocar a flor, onde fica parada
+
+- Pressionando **P**, a abelha volta a subir à altura inicial, agora transportando o grão de pólen
+
+- Se a abelha estiver em vôo, a transportar um grão de pólen e se for pressionada a tecla “O”, ela dirige-se à entrada da colmeia onde o larga
+
+
