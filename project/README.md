@@ -118,7 +118,4 @@ Desta forma, através da manipulação de shaders, fizemos com que cada fita da 
 
 ## Video Demo
 
-<video width="1200" height="800" controls>
-  <source src="demo/demo.mp4" type="video/mp4">
-  Your browser does not support the video tag.
-</video>
+![Video demo](demo/demo.mp4)
