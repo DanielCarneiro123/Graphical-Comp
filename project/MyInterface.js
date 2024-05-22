@@ -29,7 +29,6 @@ export class MyInterface extends CGFinterface {
         this.gui.add(this.scene, 'displayGarden').name("Garden");
         this.gui.add(this.scene, 'displayRockSet').name("Rock Set");
         this.gui.add(this.scene, 'displayBee').name("Bee");
-        this.gui.add(this.scene, 'displayTurf').name("Turf");
         this.gui.add(this.scene, 'displayHive').name("Hive");
 
         var garden = this.gui.addFolder('Garden')
